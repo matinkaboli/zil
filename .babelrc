@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "env",
+    "es2015"
+  ],
+  "plugins": [
+    ["transform-runtime", {
+      "regenerator": true
+    }],
+    "add-module-exports",
+    "transform-regenerator",
+    "transform-class-properties",
+    "transform-decorators-legacy",
+    "transform-object-rest-spread",
+    "transform-async-to-generator"
+  ]
+}
