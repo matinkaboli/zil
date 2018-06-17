@@ -20,12 +20,12 @@ gulp.task('clean', () =>
   ]));
 
 gulp.task('dev:server', () =>
-  gulp.src('src/server/app.js')
+  gulp.src('src/app.js')
     .pipe(webpack(webpackDev))
     .pipe(gulp.dest('build/')));
 
 gulp.task('prod:server', () =>
-  gulp.src('src/server/app.js')
+  gulp.src('src/app.js')
     .pipe(webpack(webpackProd))
     .pipe(gulp.dest('build/')));
 
