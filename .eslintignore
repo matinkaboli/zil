@@ -8,4 +8,3 @@
 /tests/performance/**
 /tmp/**
 test.js
-!.eslintrc.js
