@@ -11,7 +11,7 @@ import connectMongo from 'connect-mongo';
 
 import schema from './graphql';
 import routers from './routers';
-import { port, db } from './config';
+import { sessionKey, port, db } from './config';
 
 
 // DB
@@ -46,7 +46,7 @@ app.use(cookieParser());
 const MongoStore = connectMongo(session);
 
 app.use(session({
-  secret: process.env.SECRET_KEY || 'QIFE564%?sKb]JTqeN0Az.9vH4ahjM1l~',
+  secret: sessionKey,
   resave: true,
   cookie: {
     maxAge: 60 * 60 * 1000 * 24,
