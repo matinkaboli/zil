@@ -9,8 +9,9 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import connectMongo from 'connect-mongo';
 
-import { port, db } from './config';
 import schema from './graphql';
+import routers from './routers';
+import { port, db } from './config';
 
 
 // DB
@@ -56,13 +57,18 @@ app.use(session({
   }),
 }));
 
-// GraphQL
+// GraphQL API
 app.use('/graphql', (req, res) =>
   graphql({
     schema,
     graphiql: true,
     context: { req, res },
   })(req, res));
+
+// REST API
+for (const router of routers) {
+  app.use(router);
+}
 
 // Port
 app.listen(port);
