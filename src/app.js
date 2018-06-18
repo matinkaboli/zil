@@ -45,7 +45,7 @@ app.use(cookieParser());
 const MongoStore = connectMongo(session);
 
 app.use(session({
-  secret: process.env.SECRET_KEY || 'QIFE564%?sKb]JTqeN0Uz.9vH4ahjM1l~',
+  secret: process.env.SECRET_KEY || 'QIFE564%?sKb]JTqeN0Az.9vH4ahjM1l~',
   resave: true,
   cookie: {
     maxAge: 60 * 60 * 1000 * 24,

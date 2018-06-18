@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import email from 'Root/utils/validate/email';
+
 export default mongoose.model('User', mongoose.Schema({
   name: {
     trim: true,
@@ -14,6 +16,12 @@ export default mongoose.model('User', mongoose.Schema({
     required: true,
     maxlength: 200,
     lowercase: true,
+    validate: {
+      validator(v) {
+        return email(v);
+      },
+      message: 'email is invalid',
+    },
   },
   password: {
     trim: true,
