@@ -9,7 +9,7 @@ export default (...requirements) => (req, res, next) => {
         req.body[requirement] = JSON.stringify(req.body[requirement]);
       }
     } else {
-      return res.json({ type: 4 });
+      return res.json({ type: 20 });
     }
   }
 

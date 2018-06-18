@@ -3,6 +3,8 @@ import { Router } from 'express';
 import User from 'Root/models/User';
 
 import requirements from 'Root/middlewares/requirements';
+import hash from 'Root/utils/hash';
+import { hashKey } from 'Root/config';
 
 const router = new Router();
 const reqs = requirements('name', 'email', 'password');
@@ -19,7 +21,7 @@ router.post('/signup', reqs, async (req, res) => {
   const newUser = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: hash(req.body.password, hashKey),
   });
 
   try {
