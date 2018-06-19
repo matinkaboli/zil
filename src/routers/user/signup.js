@@ -15,16 +15,19 @@ router.post('/signup', reqs, async (req, res) => {
   req.body.email = req.body.email.toLowerCase();
 
   if (!email(req.body.email)) {
+    // Email is invalid
     return res.json({ type: 2, text: 0 });
   }
 
   if (!password(req.body.password)) {
+    // Password is invalid
     return res.json({ type: 2, text: 1 });
   }
 
   const user = await User.findOne({ email: req.body.email });
 
   if (user) {
+    // Email has already taken
     return res.json({ type: 2, text: 2 });
   }
 
@@ -36,9 +39,10 @@ router.post('/signup', reqs, async (req, res) => {
 
   try {
     await newUser.save();
-
+    // Done
     return res.json({ type: 0 });
   } catch (e) {
+    // Unrecognizable error
     return res.json({ type: 2, text: 10 });
   }
 });
