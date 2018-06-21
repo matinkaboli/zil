@@ -40,4 +40,9 @@ export default mongoose.model('User', Schema({
     required: true,
     default: false,
   },
+  shops: [{
+    ref: 'Shop',
+    required: true,
+    type: Schema.Types.ObjectId,
+  }],
 }));
