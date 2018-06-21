@@ -2,7 +2,7 @@ FROM node:8-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json /app/
+COPY package.json package-lock.json gulpfile.js /app/
 
 RUN npm install
 
