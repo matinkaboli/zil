@@ -9,43 +9,29 @@ import { hashKey } from 'Root/config';
 import hash from 'Root/utils/hash';
 
 const router = new Router();
-const reqs = requirements('name', 'email', 'password');
+const reqs = requirements('email', 'password');
 
-
-router.post('/signup', reqs, async (req, res) => {
+router.post('/login', reqs, async (req, res) => {
   req.body.email = req.body.email.toLowerCase();
 
   if (!email(req.body.email)) {
-    // Email is invalid
     return res.json({ type: 2, text: 0 });
   }
 
   if (!password(req.body.password)) {
-    // Password is invalid
     return res.json({ type: 2, text: 1 });
   }
 
-  const user = await User.findOne({ email: req.body.email });
-
-  if (user) {
-    // Email has already taken
-    return res.json({ type: 2, text: 2 });
-  }
-
-  const newUser = new User({
-    name: req.body.name,
+  const user = await User.findOne({
     email: req.body.email,
     password: hash(req.body.password, hashKey),
   });
 
-  try {
-    await newUser.save();
-    // Done
-    return res.json({ type: 0 });
-  } catch (e) {
-    // Unrecognizable error
-    return res.json({ type: 2, text: 10 });
+  if (!user) {
+    return res.json({ type: 2, text: 2 });
   }
+
+  return res.json({ type: 0 });
 });
 
 export default router;
