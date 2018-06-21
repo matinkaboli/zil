@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 import email from 'Root/utils/validate/email';
 
-export default mongoose.model('User', mongoose.Schema({
+export default mongoose.model('User', Schema({
   name: {
     trim: true,
     type: String,

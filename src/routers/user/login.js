@@ -15,10 +15,12 @@ router.post('/login', reqs, async (req, res) => {
   req.body.email = req.body.email.toLowerCase();
 
   if (!email(req.body.email)) {
+    // Email is invalid
     return res.json({ type: 2, text: 0 });
   }
 
   if (!password(req.body.password)) {
+    // Password is invalid
     return res.json({ type: 2, text: 1 });
   }
 
@@ -28,9 +30,11 @@ router.post('/login', reqs, async (req, res) => {
   });
 
   if (!user) {
+    // User not found
     return res.json({ type: 2, text: 2 });
   }
 
+  // Correct Credentials
   return res.json({ type: 0 });
 });
 
