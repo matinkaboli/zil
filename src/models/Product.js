@@ -1,53 +1,49 @@
 import mongoose, { Schema } from 'mongoose';
 
-export default mongoose.model('Shop', Schema({
+export default mongoose.model('Product', Schema({
   name: {
     trim: true,
     type: String,
     required: true,
     maxlength: 100,
   },
-  description: {
+  weight: {
     trim: true,
     type: String,
     required: true,
-    maxlength: 500,
+    maxlength: 100,
   },
-  address: {
+  isbn: {
+    trim: true,
     type: String,
     required: true,
-    maxlength: 250,
+    maxlength: 50,
   },
-  lat: {
+  price: {
     trim: true,
     type: Number,
-    maxlength: 30,
     required: true,
+    maxlength: 30,
   },
-  lng: {
+  off: {
     trim: true,
+    default: 0,
     type: Number,
-    maxlength: 30,
     required: true,
-  },
-  avatar: {
-    trim: true,
-    type: String,
-    maxlength: 150,
   },
   photos: [{
     trim: true,
     type: String,
     maxlength: 150,
   }],
-  admin: {
-    ref: 'User',
+  shop: {
+    ref: 'Shop',
     required: true,
     type: Schema.Types.ObjectId,
   },
-  createdAt: {
-    type: Date,
+  expiration: {
+    type: String,
+    maxlength: 100,
     required: true,
-    defaullt: Date.now,
   },
 }));
