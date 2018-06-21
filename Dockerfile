@@ -4,16 +4,14 @@ WORKDIR /app
 
 COPY package.json package-lock.json /app/
 
-RUN npm i
+RUN npm install
 
 COPY src /app/src
 COPY webpack /app/webpack
 
-RUN npm run build && rm -rf /app/src /app/node_modules
+RUN npm run prod
 
 ENV NODE_ENV=production
-
-RUN npm i --production
 
 COPY build /app/build
 
