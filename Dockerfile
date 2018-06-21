@@ -1,5 +1,7 @@
 FROM node:8-alpine
 
+RUN apk update && apk add mongodb
+
 WORKDIR /app
 
 COPY package.json package-lock.json gulpfile.js /app/
