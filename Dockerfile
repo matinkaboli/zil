@@ -13,8 +13,6 @@ RUN npm run prod
 
 ENV NODE_ENV=production
 
-COPY build /app/build
-
 EXPOSE 8080
 
 CMD ["node", "build/app.js"]
