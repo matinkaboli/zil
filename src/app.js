@@ -71,4 +71,6 @@ for (const router of routers) {
 }
 
 // Port
-app.listen(port);
+app.listen(port, () => {
+  console.log('The server is running!!!');
+});
