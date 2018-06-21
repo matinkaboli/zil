@@ -5,5 +5,6 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-confusing-arrow': 0,
     'import/extensions': 0,
+    'no-console': 0,
   },
 };
