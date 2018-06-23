@@ -7,6 +7,11 @@ export default mongoose.model('User', Schema({
     maxlength: 10,
     required: true,
   },
+  name: {
+    trim: true,
+    type: String,
+    maxlength: 100,
+  },
   verified: {
     trim: true,
     type: Boolean,
