@@ -22,7 +22,6 @@ router.post('/resend', reqs, async (req, res) => {
     code.remove();
   }
 
-
   const newCode = new Code({
     user: user._id,
     code: randomNumber(),
