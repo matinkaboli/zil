@@ -34,7 +34,7 @@ jspm_packages
 .node_repl_history
 
 # Build directory
-build
+build/
 .DS_Store
 
 test
