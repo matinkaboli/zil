@@ -9,7 +9,7 @@ export default mongoose.model('Code', Schema({
   },
   code: {
     trim: true,
-    type: Number,
+    type: String,
     maxlength: 10,
     required: true,
   },
