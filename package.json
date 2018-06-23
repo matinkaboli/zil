@@ -2,11 +2,11 @@
   "name": "hyper",
   "version": "0.0.1",
   "description": "Hyper API",
-  "main": "src/app.js",
+  "main": "build/app.js",
   "scripts": {
     "dev": "gulp dev",
     "prod": "gulp prod",
-    "start": "node src/app.js",
+    "start": "node build/app.js",
     "compress": "tar -czvf app.tar.gz build package.json",
     "server": "cross-env NODE_ENV=development nodemon build/app.js -e js -w build/app.js"
   },
