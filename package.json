@@ -2,7 +2,7 @@
   "name": "hyper",
   "version": "0.0.1",
   "description": "Hyper API",
-  "main": "build/app.js",
+  "main": "src/app.js",
   "scripts": {
     "dev": "gulp dev",
     "prod": "gulp prod",
