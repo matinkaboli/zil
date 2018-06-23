@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import Attempt from 'Root/models/Attempt';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 
@@ -21,13 +22,31 @@ router.post('/login', reqs, async (req, res) => {
     return res.json({ type: 2, text: 1 });
   }
 
-  if (req.body.code !== code.phone) {
+  let attempt = await Attempt.findOne({ user: user._id });
+
+  if (!attempt) {
+    attempt = new Attempt({
+      user: user._id,
+    });
+
+    await attempt.save();
+  }
+
+  attempt.attempts += 1;
+
+  attempt.save();
+
+  if (attempt.attempts > 10) {
     return res.json({ type: 2, text: 2 });
   }
 
-  code.remove();
+  if (req.body.code === code.phone) {
+    code.remove();
 
-  return res.json({ type: 0 });
+    return res.json({ type: 0 });
+  }
+
+  return res.json({ type: 2, text: 3 });
 });
 
 export default router;
