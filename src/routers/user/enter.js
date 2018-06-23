@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import rn from 'random-number';
 
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 
 import requirements from 'Root/middlewares/requirements';
 import validatePhone from 'Root/utils/validate/phone';
+import randomNumber from 'Root/utils/randomNumber';
 
 const router = new Router();
 const reqs = requirements('phone');
@@ -20,11 +20,7 @@ router.post('/enter', reqs, async (req, res) => {
 
   let user = await User.findOne({ phone: req.body.phone });
 
-  const rand = rn({
-    integer: true,
-    min: 100000,
-    max: 999999,
-  });
+  const rand = randomNumber();
 
   if (!user) {
     isUserNew = true;
