@@ -13,7 +13,6 @@ import schema from './graphql';
 import routers from './routers';
 import { sessionKey, port, db } from './config';
 
-
 // DB
 mongoose.Promise = global.Promise;
 
