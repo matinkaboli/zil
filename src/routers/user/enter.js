@@ -8,12 +8,16 @@ import validatePhone from 'Root/utils/validate/phone';
 import randomNumber from 'Root/utils/randomNumber';
 
 const router = new Router();
-const reqs = requirements('phone');
+
+const reqs = requirements({
+  value: 'phone',
+  required: true,
+});
 
 
 router.post('/enter', reqs, async (req, res) => {
   if (!validatePhone(req.body.phone)) {
-    return res.json({ type: 2, text: 30 });
+    return res.json({ statusCode: 422, entity: 'phone' });
   }
 
   let isUserNew = false;
@@ -31,9 +35,8 @@ router.post('/enter', reqs, async (req, res) => {
 
     try {
       await user.save();
-    } catch (e) {
-      console.log(e);
-      return res.json({ type: 2, text: 0 });
+    } catch (error) {
+      return res.json({ statusCode: 520, error });
     }
   }
 
@@ -47,12 +50,12 @@ router.post('/enter', reqs, async (req, res) => {
 
     try {
       await code.save();
-    } catch (e) {
-      return res.json({ type: 2, text: 1 });
+    } catch (error) {
+      return res.json({ statusCode: 520, error });
     }
   }
 
-  return res.json({ type: 0, isUserNew });
+  return res.json({ statusCode: 200, isUserNew });
 });
 
 export default router;

@@ -41,7 +41,7 @@ router.post('/product/add', reqs, async (req, res) => {
 
     return res.json({ statusCode: 200 });
   } catch (error) {
-    return res.json({ type: 400, error });
+    return res.json({ statusCode: 520, error });
   }
 });
 
