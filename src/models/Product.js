@@ -27,4 +27,9 @@ export default mongoose.model('Product', Schema({
     type: String,
     maxlength: 150,
   },
+  description: {
+    trim: true,
+    type: String,
+    maxlength: 200,
+  },
 }));
