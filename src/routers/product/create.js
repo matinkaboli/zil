@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import Product from 'Root/models/Product';
-
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();

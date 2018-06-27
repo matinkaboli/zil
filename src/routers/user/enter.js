@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
-
 import randomNumber from 'Root/utils/randomNumber';
 import validatePhone from 'Root/utils/validate/phone';
 import requirements from 'Root/middlewares/requirements';
@@ -13,7 +12,6 @@ const reqs = requirements({
   value: 'phone',
   required: true,
 });
-
 
 router.post('/enter', reqs, async (req, res) => {
   if (!validatePhone(req.body.phone)) {

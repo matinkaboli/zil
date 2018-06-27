@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
-
 import randomNumber from 'Root/utils/randomNumber';
 import requirements from 'Root/middlewares/requirements';
 
