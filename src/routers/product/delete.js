@@ -11,7 +11,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/product/remove', reqs, async (req, res) => {
+router.post('/product/delete', reqs, async (req, res) => {
   try {
     const product = await Product.findById(req.body.id);
 

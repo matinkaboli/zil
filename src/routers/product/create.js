@@ -25,7 +25,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/product/add', reqs, async (req, res) => {
+router.post('/product/create', reqs, async (req, res) => {
   const productValues = {
     name: req.body.name,
   };

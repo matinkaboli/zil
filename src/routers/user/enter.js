@@ -44,8 +44,8 @@ router.post('/enter', reqs, async (req, res) => {
 
   if (!code) {
     code = new Code({
-      user: user._id,
       code: rand,
+      user: user._id,
     });
 
     try {

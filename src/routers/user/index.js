@@ -1,9 +1,9 @@
-import enter from './enter';
-import login from './login';
-import resend from './resend';
+import loginUser from './login';
+import enterPhone from './enter';
+import resendCode from './resend';
 
 export default [
-  enter,
-  login,
-  resend,
+  loginUser,
+  enterPhone,
+  resendCode,
 ];

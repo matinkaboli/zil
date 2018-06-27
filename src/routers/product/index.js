@@ -1,7 +1,9 @@
-import add from './add';
-import remove from './remove';
+import createProduct from './create';
+import deleteProduct from './delete';
+import updateProduct from './update';
 
 export default [
-  add,
-  remove,
+  createProduct,
+  deleteProduct,
+  updateProduct,
 ];
