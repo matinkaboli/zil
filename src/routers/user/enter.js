@@ -3,9 +3,9 @@ import { Router } from 'express';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 
-import requirements from 'Root/middlewares/requirements';
-import validatePhone from 'Root/utils/validate/phone';
 import randomNumber from 'Root/utils/randomNumber';
+import validatePhone from 'Root/utils/validate/phone';
+import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 

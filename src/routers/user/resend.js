@@ -3,8 +3,8 @@ import { Router } from 'express';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 
-import requirements from 'Root/middlewares/requirements';
 import randomNumber from 'Root/utils/randomNumber';
+import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 const reqs = requirements('phone');

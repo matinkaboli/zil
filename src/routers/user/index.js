@@ -1,9 +1,9 @@
-import resend from './resend';
 import enter from './enter';
 import login from './login';
+import resend from './resend';
 
 export default [
-  resend,
   enter,
   login,
+  resend,
 ];

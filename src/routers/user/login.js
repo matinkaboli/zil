@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import Attempt from 'Root/models/Attempt';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
+import Attempt from 'Root/models/Attempt';
 
 import requirements from 'Root/middlewares/requirements';
 
