@@ -2,14 +2,14 @@ import sanitize from 'mongo-sanitize';
 
 export default (...requirements) => (req, res, next) => {
   for (const requirement of requirements) {
-    if (requirement in req.body) {
-      req.body[requirement] = sanitize(req.body[requirement]);
+    if (requirement.required && !(requirement.value in req.body)) {
+      return res.json({ statusCode: 417, requirement: requirement.value });
+    }
 
-      if (typeof req.body[requirement] === 'object') {
-        req.body[requirement] = JSON.stringify(req.body[requirement]);
-      }
-    } else {
-      return res.json({ type: 20 });
+    const value = sanitize(req.body[requirement.value]);
+
+    if (typeof value === 'object') {
+      req.body[requirement.value] = JSON.stringify(value);
     }
   }
 
