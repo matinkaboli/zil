@@ -7,13 +7,17 @@ import randomNumber from 'Root/utils/randomNumber';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
-const reqs = requirements('phone');
+
+const reqs = requirements({
+  value: 'phone',
+  required: true,
+});
 
 router.post('/resend', reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {
-    return res.json({ type: 2, text: 0 });
+    return res.json({ statusCode: 404, entity: 'user' });
   }
 
   const code = await Code.findOne({ user: user._id });
@@ -27,9 +31,13 @@ router.post('/resend', reqs, async (req, res) => {
     code: randomNumber(),
   });
 
-  await newCode.save();
+  try {
+    await newCode.save();
 
-  return res.json({ type: 0 });
+    return res.json({ statusCode: 200 });
+  } catch (error) {
+    return res.json({ statusCode: 520, error });
+  }
 });
 
 export default router;
