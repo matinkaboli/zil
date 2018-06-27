@@ -19,6 +19,10 @@ const reqs = requirements(
     value: 'expiration',
     required: false,
   },
+  {
+    value: 'manufacturer',
+    required: false,
+  },
 );
 
 router.post('/product/add', reqs, async (req, res) => {
@@ -32,6 +36,10 @@ router.post('/product/add', reqs, async (req, res) => {
 
   if (req.body.expiration) {
     productValues.expiration = req.body.expiration;
+  }
+
+  if (req.body.manufacturer) {
+    productValues.manufacturer = req.body.manufacturer;
   }
 
   const product = new Product(productValues);
