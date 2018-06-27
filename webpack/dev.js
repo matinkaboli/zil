@@ -1,7 +1,7 @@
-const nodeExternals = require('webpack-node-externals');
-const babelConfig = require('./babel.config.json');
-const { resolve } = require('path');
 const webpack = require('webpack');
+const { resolve } = require('path');
+const babelConfig = require('./babel.config.json');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   output: {

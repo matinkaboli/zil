@@ -1,7 +1,7 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
-const babelConfig = require('./babel.config.json');
 const { resolve } = require('path');
+const babelConfig = require('./babel.config.json');
+const nodeExternals = require('webpack-node-externals');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   output: {

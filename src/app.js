@@ -11,12 +11,12 @@ import connectMongo from 'connect-mongo';
 
 import schema from './graphql';
 import routers from './routers';
-import { sessionKey, port, db } from './config';
+import { dbAddress, port, sessionKey } from './config';
 
 // DB
 mongoose.Promise = global.Promise;
 
-mongoose.connect(db);
+mongoose.connect(dbAddress);
 
 mongoose.connection.on('error', () => {
   process.exit(1);
@@ -52,7 +52,7 @@ app.use(session({
   },
   saveUninitialized: false,
   store: new MongoStore({
-    url: process.env.DB || db,
+    url: dbAddress,
   }),
 }));
 
@@ -70,6 +70,4 @@ for (const router of routers) {
 }
 
 // Port
-app.listen(port, () => {
-  console.log('The server is running!!!');
-});
+app.listen(port);
