@@ -18,7 +18,13 @@ export default mongoose.model('Product', Schema({
     maxlength: 150,
   }],
   expiration: {
+    trim: true,
     type: String,
     maxlength: 100,
+  },
+  manufacturer: {
+    trim: true,
+    type: String,
+    maxlength: 150,
   },
 }));
