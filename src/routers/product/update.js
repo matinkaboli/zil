@@ -7,7 +7,7 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'id',
+    value: '_id',
     required: true,
   },
   {
@@ -34,7 +34,7 @@ const reqs = requirements(
 
 router.post('/product/update', reqs, async (req, res) => {
   try {
-    const product = await Product.findById(req.body.id);
+    const product = await Product.findById(req.body._id);
 
     if (!product) {
       return res.json({ statusCode: 404, entity: 'product' });

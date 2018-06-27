@@ -6,13 +6,13 @@ import requirements from 'Root/middlewares/requirements';
 const router = new Router();
 
 const reqs = requirements({
-  type: 'id',
+  type: '_id',
   required: true,
 });
 
 router.post('/product/delete', reqs, async (req, res) => {
   try {
-    const product = await Product.findById(req.body.id);
+    const product = await Product.findById(req.body._id);
 
     if (!product) {
       return res.json({ statusCode: 404, entity: 'product' });
