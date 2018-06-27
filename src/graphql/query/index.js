@@ -1,10 +1,12 @@
 import { GraphQLObjectType } from 'graphql';
 
-import product from './product';
+import oneProduct from './product/one';
+import manyProducts from './product/many';
 
 export default new GraphQLObjectType({
   name: 'Query',
   fields: {
-    product,
+    product: oneProduct,
+    products: manyProducts,
   },
 });
