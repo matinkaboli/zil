@@ -1,17 +1,13 @@
 import Product from 'Root/models/Product';
 
 export default async (parent, args) => {
-  if (args.isbn) {
-    const products = await Product.find({ isbn: args.isbn });
-
-    return products;
-  }
+  const query = {};
 
   if (args.manufacturer) {
-    const products = await Product.find({ manufacturer: args.manufacturer });
-
-    return products;
+    query.manufacturer = args.manufacturer;
   }
 
-  return [];
+  const products = await Product.find(query);
+
+  return products;
 };

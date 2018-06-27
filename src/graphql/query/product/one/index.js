@@ -1,4 +1,4 @@
-import { GraphQLID } from 'graphql';
+import { GraphQLID, GraphQLString } from 'graphql';
 
 import ProductSchema from 'Root/graphql/types/Product';
 import resolve from './resolve';
@@ -8,6 +8,9 @@ export default {
   args: {
     _id: {
       type: GraphQLID,
+    },
+    isbn: {
+      type: GraphQLString,
     },
   },
   resolve,
