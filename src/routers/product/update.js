@@ -26,6 +26,10 @@ const reqs = requirements(
     value: 'manufacturer',
     required: false,
   },
+  {
+    value: 'description',
+    required: false,
+  },
 );
 
 router.post('/product/update', reqs, async (req, res) => {

@@ -22,6 +22,10 @@ const reqs = requirements(
     value: 'manufacturer',
     required: false,
   },
+  {
+    value: 'description',
+    required: false,
+  },
 );
 
 router.post('/product/create', reqs, async (req, res) => {
@@ -29,16 +33,12 @@ router.post('/product/create', reqs, async (req, res) => {
     name: req.body.name,
   };
 
-  if (req.body.isbn) {
-    productValues.isbn = req.body.isbn;
-  }
+  const optionalValues = ['isbn', 'expiration', 'manufacturer', 'description'];
 
-  if (req.body.expiration) {
-    productValues.expiration = req.body.expiration;
-  }
-
-  if (req.body.manufacturer) {
-    productValues.manufacturer = req.body.manufacturer;
+  for (const optionalValue of optionalValues) {
+    if (req.body[optionalValue]) {
+      productValues[optionalValue] = req.body[optionalValue];
+    }
   }
 
   const product = new Product(productValues);
