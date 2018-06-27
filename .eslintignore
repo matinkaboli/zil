@@ -1,10 +1,10 @@
-/build/**
-/coverage/**
+test.js
+/tmp/**
 /docs/**
 /jsdoc/**
+/build/**
+/coverage/**
 /templates/**
 /tests/bench/**
 /tests/fixtures/**
 /tests/performance/**
-/tmp/**
-test.js
