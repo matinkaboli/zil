@@ -3,11 +3,11 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import ProductSchema from 'Root/graphql/types/Product';
+import ProductType from 'Root/graphql/types/Product';
 import resolve from './resolve';
 
 export default {
-  type: new GraphQLList(ProductSchema),
+  type: new GraphQLList(ProductType),
   args: {
     manufacturer: {
       type: GraphQLString,
