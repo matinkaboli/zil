@@ -10,7 +10,6 @@ export default mongoose.model('Shop', Schema({
   description: {
     trim: true,
     type: String,
-    required: true,
     maxlength: 500,
   },
   address: {
