@@ -11,7 +11,7 @@ import connectMongo from 'connect-mongo';
 
 import schema from './graphql';
 import routers from './routers';
-import { dbAddress, port, sessionKey } from './config';
+import { port, dbAddress, sessionKey } from './config';
 
 // DB
 mongoose.Promise = global.Promise;
