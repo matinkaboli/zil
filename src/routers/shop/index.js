@@ -1,4 +1,4 @@
-import createShop from './cerate';
+import createShop from './create';
 import deleteShop from './delete';
 
 export default [
