@@ -30,8 +30,8 @@ router.post('/shop/product/update', reqs, async (req, res) => {
 
     const values = ['realPrice', 'discountedPrice'];
 
-    for (const key of Object.keys(values)) {
-      productInShop[key] = req.body[key] || productInShop[key] || '';
+    for (const value of values) {
+      productInShop[value] = req.body[value] || productInShop[value] || '';
     }
 
     await productInShop.save();

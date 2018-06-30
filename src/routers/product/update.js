@@ -40,8 +40,16 @@ router.post('/product/update', reqs, async (req, res) => {
       return res.json({ statusCode: 404, entity: 'product' });
     }
 
-    for (const key of Object.keys(product)) {
-      product[key] = req.body[key] || product[key] || '';
+    const values = [
+      'name',
+      'isbn',
+      'expiration',
+      'description',
+      'manufacturer',
+    ];
+
+    for (const value of values) {
+      product[value] = req.body[value] || values[value] || '';
     }
 
     await product.save();
