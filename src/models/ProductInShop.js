@@ -25,4 +25,10 @@ export default mongoose.model('ProductInShop', Schema({
     maxlength: 30,
     required: true,
   },
+  createdAt: {
+    trim: true,
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
 }));
