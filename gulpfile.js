@@ -15,19 +15,15 @@ gulp.task('lint', () =>
 
 gulp.task('clean', () =>
   del([
-    'build/**',
-    '!build',
+    'build/app.js',
   ]));
 
-gulp.task('dev:server', () =>
+gulp.task('dev', ['clean'], () =>
   gulp.src('src/app.js')
     .pipe(webpack(webpackDev))
     .pipe(gulp.dest('build/')));
 
-gulp.task('prod:server', () =>
+gulp.task('prod', ['clean'], () =>
   gulp.src('src/app.js')
     .pipe(webpack(webpackProd))
     .pipe(gulp.dest('build/')));
-
-gulp.task('dev', ['clean', 'dev:server']);
-gulp.task('prod', ['clean', 'prod:server']);
