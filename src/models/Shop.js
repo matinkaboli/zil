@@ -1,22 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
 export default mongoose.model('Shop', Schema({
-  name: {
-    trim: true,
-    type: String,
-    required: true,
-    maxlength: 100,
-  },
-  description: {
-    trim: true,
-    type: String,
-    maxlength: 500,
-  },
-  address: {
-    type: String,
-    required: true,
-    maxlength: 250,
-  },
   lat: {
     trim: true,
     type: Number,
@@ -29,6 +13,17 @@ export default mongoose.model('Shop', Schema({
     maxlength: 30,
     required: true,
   },
+  name: {
+    trim: true,
+    type: String,
+    required: true,
+    maxlength: 100,
+  },
+  admin: {
+    ref: 'User',
+    required: true,
+    type: Schema.Types.ObjectId,
+  },
   avatar: {
     trim: true,
     type: String,
@@ -39,14 +34,19 @@ export default mongoose.model('Shop', Schema({
     type: String,
     maxlength: 150,
   }],
-  admin: {
-    ref: 'User',
+  address: {
+    type: String,
     required: true,
-    type: Schema.Types.ObjectId,
+    maxlength: 250,
   },
   createdAt: {
     type: Date,
     required: true,
     defaullt: Date.now,
+  },
+  description: {
+    trim: true,
+    type: String,
+    maxlength: 500,
   },
 }));
