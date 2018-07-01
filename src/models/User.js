@@ -1,28 +1,28 @@
 import mongoose, { Schema } from 'mongoose';
 
 export default mongoose.model('User', Schema({
+  name: {
+    trim: true,
+    type: String,
+    maxlength: 100,
+  },
   phone: {
     trim: true,
     type: String,
     maxlength: 10,
     required: true,
   },
-  name: {
+  shops: [{
     trim: true,
-    type: String,
-    maxlength: 100,
-  },
+    ref: 'Shop',
+    type: Schema.Types.ObjectId,
+  }],
   verified: {
     trim: true,
     type: Boolean,
     required: true,
     default: false,
   },
-  shops: [{
-    trim: true,
-    ref: 'Shop',
-    type: Schema.Types.ObjectId,
-  }],
   createdAt: {
     type: Date,
     required: true,

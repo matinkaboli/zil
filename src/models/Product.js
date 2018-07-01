@@ -22,14 +22,14 @@ export default mongoose.model('Product', Schema({
     type: String,
     maxlength: 100,
   },
-  manufacturer: {
-    trim: true,
-    type: String,
-    maxlength: 150,
-  },
   description: {
     trim: true,
     type: String,
     maxlength: 200,
+  },
+  manufacturer: {
+    trim: true,
+    type: String,
+    maxlength: 150,
   },
 }));
