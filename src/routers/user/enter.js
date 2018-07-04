@@ -13,7 +13,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/enter', reqs, async (req, res) => {
+router.post('/user/enter', reqs, async (req, res) => {
   if (!validatePhone(req.body.phone)) {
     return res.json({ statusCode: 422, entity: 'phone' });
   }
