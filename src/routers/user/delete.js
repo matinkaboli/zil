@@ -10,7 +10,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/user/delete', async (req, res) => {
+router.post('/user/delete', reqs, async (req, res) => {
   try {
     const user = await User.findById(req.body._id);
 
