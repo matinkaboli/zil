@@ -18,7 +18,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/login', reqs, async (req, res) => {
+router.post('/user/login', reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {

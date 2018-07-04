@@ -27,15 +27,16 @@
     "crypto-js": "^3.1.9-1",
     "express": "^4.16.2",
     "express-graphql": "^0.6.12",
+    "express-jwt": "^5.3.1",
     "express-session": "^1.15.6",
     "graphql": "^0.13.2",
     "helmet": "^3.12.0",
     "mongo-sanitize": "^1.0.0",
     "mongoose": "^5.0.16",
     "morgan": "^1.9.0",
+    "random-number": "0.0.9",
     "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack-node-externals": "^1.7.2",
-    "random-number": "0.0.9"    
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

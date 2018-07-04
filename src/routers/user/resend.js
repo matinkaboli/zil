@@ -12,7 +12,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/resend', reqs, async (req, res) => {
+router.post('/user/resend', reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {
