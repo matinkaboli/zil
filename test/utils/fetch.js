@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-export default (url, data) => new Promise((resolve, reject) => {
+module.exports = (url, data) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8080${url}`, {
     method: 'POST',
     credentials: 'include',
