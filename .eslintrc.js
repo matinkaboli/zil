@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'plugin:jest/recommended'],
   rules: {
     'arrow-parens': 0,
     'import/extensions': 0,
