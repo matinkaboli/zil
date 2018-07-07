@@ -58,7 +58,9 @@
     "eslint-plugin-import": "^2.12.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.2",
+    "mocha": "^5.2.0",
     "nodemon": "^1.17.3",
+    "supertest": "^3.1.0",
     "webpack-stream": "^4.0.0"
   },
   "bugs": {
