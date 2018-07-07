@@ -12,7 +12,7 @@ describe('POST /user/resend', () => {
     fetch('/user/resend', {})
       .then(response => expect(response).toEqual({
         statusCode: 417,
-        requirements: 'phone',
+        requirement: 'phone',
       }));
   });
 
