@@ -2,6 +2,7 @@ const del = require('del');
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const webpack = require('webpack-stream');
+const { ensureDirSync } = require('fs-extra');
 
 const webpackDev = require('./webpack/dev');
 const webpackProd = require('./webpack/prod');
@@ -13,14 +14,17 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError()));
 
 
-gulp.task('clean', () =>
-  del([
+gulp.task('clean', () => {
+  ensureDirSync('build/static/uploads');
+
+  return del([
     'build/**',
     '!build',
     '!build/static',
     '!build/static/uploads',
     '!build/static/uploads/**',
-  ]));
+  ]);
+});
 
 gulp.task('dev', ['clean'], () =>
   gulp.src('src/app.js')
