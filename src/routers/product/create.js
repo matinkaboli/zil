@@ -1,9 +1,14 @@
+import multer from 'multer';
 import { Router } from 'express';
 
+import { uploadDir } from 'Root/config';
+import storage from 'Root/utils/storage';
 import Product from 'Root/models/Product';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
+
+const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
 const reqs = requirements(
   {
@@ -28,7 +33,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/product/create', reqs, async (req, res) => {
+router.post('/product/create', upload.single('photo'), reqs, async (req, res) => {
   const productValues = {
     name: req.body.name,
   };
@@ -39,6 +44,10 @@ router.post('/product/create', reqs, async (req, res) => {
     if (req.body[optionalValue]) {
       productValues[optionalValue] = req.body[optionalValue];
     }
+  }
+
+  if (req.file) {
+    productValues.photo = req.file.filename;
   }
 
   const product = new Product(productValues);

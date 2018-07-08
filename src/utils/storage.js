@@ -12,7 +12,7 @@ export default multer.diskStorage({
     const extension = file.mimetype.split('/')[1];
 
     if (extension === 'jpeg' || extension === 'png' || extension === 'jpg') {
-      return cb(null, `${rand}${Date.now}.${extension}`);
+      return cb(null, `${rand}${Date.now()}.${extension}`);
     }
 
     return cb(new Error('Not an image'));

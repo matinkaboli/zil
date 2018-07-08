@@ -1,6 +1,5 @@
 import {
   GraphQLID,
-  GraphQLList,
   GraphQLString,
   GraphQLObjectType,
 } from 'graphql';
@@ -26,8 +25,8 @@ export default new GraphQLObjectType({
     description: {
       type: GraphQLString,
     },
-    photos: {
-      type: new GraphQLList(GraphQLString),
+    photo: {
+      type: GraphQLString,
     },
   }),
 });

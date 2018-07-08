@@ -12,11 +12,11 @@ export default mongoose.model('Product', Schema({
     type: String,
     maxlength: 50,
   },
-  photos: [{
+  photo: {
     trim: true,
     type: String,
     maxlength: 150,
-  }],
+  },
   expiration: {
     trim: true,
     type: String,
