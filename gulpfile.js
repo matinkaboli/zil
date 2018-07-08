@@ -15,7 +15,11 @@ gulp.task('lint', () =>
 
 gulp.task('clean', () =>
   del([
-    'build/app.js',
+    'build/**',
+    '!build',
+    '!build/static',
+    '!build/static/uploads',
+    '!build/static/uploads/**',
   ]));
 
 gulp.task('dev', ['clean'], () =>

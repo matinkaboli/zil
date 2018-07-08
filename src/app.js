@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import { join } from 'path';
 import morgan from 'morgan';
 import process from 'process';
 import express from 'express';
@@ -27,6 +28,9 @@ mongoose.connection.on('disconnected', () => {
 });
 
 const app = express();
+
+// Static Files
+app.use('/static', express.static(join(__dirname, './static')));
 
 // Logger
 if (process.env.NODE_ENV === 'development') {
