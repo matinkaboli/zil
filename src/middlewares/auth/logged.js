@@ -11,5 +11,6 @@ export default (req, res, next) => {
 
   return res.json({
     statusCode: 401,
+    description: 'JWT token is missing or wrong.',
   });
 };
