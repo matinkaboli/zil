@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import User from 'Root/models/User';
+import logged from 'Root/middlewares/auth/logged';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -10,7 +11,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/user/delete', reqs, async (req, res) => {
+router.post('/user/delete', logged, reqs, async (req, res) => {
   try {
     const user = await User.findById(req.body._id);
 

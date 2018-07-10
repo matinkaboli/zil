@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import { jwtKey } from 'Root/config';
 
-export default class {
+class JWT {
   constructor(key) {
     this.key = key;
   }
@@ -17,3 +18,5 @@ export default class {
     }
   }
 }
+
+export default new JWT(jwtKey);

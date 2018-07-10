@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import jwt from 'Root/utils/jwt';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 import Attempt from 'Root/models/Attempt';
@@ -49,13 +50,16 @@ router.post('/user/login', reqs, async (req, res) => {
     return res.json({ statusCode: 429 });
   }
 
-  if (req.body.code === code.phone) {
-    code.remove();
-
-    return res.json({ statusCode: 200 });
+  if (req.body.code !== code.code) {
+    return res.json({ statusCode: 498, entity: 'code' });
   }
 
-  return res.json({ statusCode: 498, entity: 'code' });
+  code.remove();
+
+  return res.json({
+    statusCode: 200,
+    token: jwt.sign({ _id: user._id }),
+  });
 });
 
 export default router;
