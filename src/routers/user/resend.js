@@ -16,7 +16,11 @@ router.post('/user/resend', reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {
-    return res.json({ statusCode: 404, entity: 'user' });
+    return res.json({
+      entity: 'user',
+      statusCode: 404,
+      description: 'User not found.',
+    });
   }
 
   const code = await Code.findOne({ user: user._id });
@@ -33,9 +37,16 @@ router.post('/user/resend', reqs, async (req, res) => {
   try {
     await newCode.save();
 
-    return res.json({ statusCode: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'The verification link has been sent to user\'s email',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened',
+    });
   }
 });
 

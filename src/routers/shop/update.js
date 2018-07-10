@@ -37,7 +37,11 @@ router.post('/shop/update', reqs, async (req, res) => {
     const shop = await Shop.findById(req.body._id);
 
     if (!shop) {
-      return res.json({ statusCode: 404, entity: 'shop' });
+      return res.json({
+        entity: 'shop',
+        statusCode: 404,
+        description: 'Shop not found.',
+      });
     }
 
     const values = ['lng', 'lat', 'name', 'address', 'description'];
@@ -49,9 +53,16 @@ router.post('/shop/update', reqs, async (req, res) => {
 
     await shop.save();
 
-    return res.json({ statusCode: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'Shop updated successfully.',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened.',
+    });
   }
 });
 

@@ -55,9 +55,16 @@ router.post('/product/create', upload.single('photo'), reqs, async (req, res) =>
   try {
     await product.save();
 
-    return res.json({ statusCode: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'Product has been created successfully.',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened.',
+    });
   }
 });
 

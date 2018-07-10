@@ -15,7 +15,11 @@ const reqs = requirements({
 
 router.post('/user/enter', reqs, async (req, res) => {
   if (!validatePhone(req.body.phone)) {
-    return res.json({ statusCode: 422, entity: 'phone' });
+    return res.json({
+      entity: 'phone',
+      statusCode: 422,
+      description: 'Phone is not valid. It must be 10 digits.',
+    });
   }
 
   let isUserNew = false;
@@ -34,7 +38,11 @@ router.post('/user/enter', reqs, async (req, res) => {
     try {
       await user.save();
     } catch (error) {
-      return res.json({ statusCode: 520, error });
+      return res.json({
+        error,
+        statusCode: 520,
+        description: 'Unrecognizable error happened',
+      });
     }
   }
 
@@ -49,11 +57,23 @@ router.post('/user/enter', reqs, async (req, res) => {
     try {
       await code.save();
     } catch (error) {
-      return res.json({ statusCode: 520, error });
+      return res.json({
+        error,
+        statusCode: 520,
+        description: 'Unrecognizable error happened',
+      });
     }
   }
 
-  return res.json({ statusCode: 200, isUserNew });
+  const description = isUserNew ?
+    'User created and the verification code has been sent to his number' :
+    'The verification code has been sent to his number';
+
+  return res.json({
+    isUserNew,
+    description,
+    statusCode: 200,
+  });
 });
 
 export default router;

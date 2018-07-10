@@ -40,11 +40,17 @@ router.post('/shop/create', reqs, async (req, res) => {
   try {
     await shop.save();
 
-    return res.json({ statusCode: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'Shop has been created successfully.',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened.',
+    });
   }
 });
 
 export default router;
-

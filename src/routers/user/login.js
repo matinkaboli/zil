@@ -23,13 +23,21 @@ router.post('/user/login', reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {
-    return res.json({ statusCode: 404, entity: 'user' });
+    return res.json({
+      entity: 'user',
+      statusCode: 404,
+      description: 'User not found.',
+    });
   }
 
   const code = await Code.findOne({ user: user._id });
 
   if (!code) {
-    return res.json({ statusCode: 404, entity: 'code' });
+    return res.json({
+      entity: 'code',
+      statusCode: 404,
+      description: 'Code not found.',
+    });
   }
 
   let attempt = await Attempt.findOne({ user: user._id });
@@ -47,11 +55,18 @@ router.post('/user/login', reqs, async (req, res) => {
   attempt.save();
 
   if (attempt.attempts > 10) {
-    return res.json({ statusCode: 429 });
+    return res.json({
+      statusCode: 429,
+      description: 'Too many requests to log in. Wait for 1 hour.',
+    });
   }
 
   if (req.body.code !== code.code) {
-    return res.json({ statusCode: 498, entity: 'code' });
+    return res.json({
+      entity: 'code',
+      statusCode: 498,
+      description: 'Code is not valid.',
+    });
   }
 
   code.remove();
@@ -59,6 +74,7 @@ router.post('/user/login', reqs, async (req, res) => {
   return res.json({
     statusCode: 200,
     token: jwt.sign({ _id: user._id }),
+    description: 'User has been successfully logged in.',
   });
 });
 

@@ -37,7 +37,11 @@ router.post('/product/update', reqs, async (req, res) => {
     const product = await Product.findById(req.body._id);
 
     if (!product) {
-      return res.json({ statusCode: 404, entity: 'product' });
+      return res.json({
+        statusCode: 404,
+        entity: 'product',
+        description: 'Product not found.',
+      });
     }
 
     const values = [
@@ -54,9 +58,16 @@ router.post('/product/update', reqs, async (req, res) => {
 
     await product.save();
 
-    return res.json({ statusCode: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'Product has been updated successfully.',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened.',
+    });
   }
 });
 

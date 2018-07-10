@@ -15,14 +15,25 @@ router.post('/shop/delete', reqs, async (req, res) => {
     const shop = await Shop.findById(req.body._id);
 
     if (!shop) {
-      return res.json({ statusCode: 404, entity: 'shop' });
+      return res.json({
+        entity: 'shop',
+        statusCode: 404,
+        description: 'Shop not found',
+      });
     }
 
     await shop.remove();
 
-    return res.json({ type: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'Shop has been deleted successfully.',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened.',
+    });
   }
 });
 

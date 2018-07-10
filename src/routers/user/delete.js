@@ -2,28 +2,33 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements({
-  value: '_id',
-  required: true,
-});
-
-router.post('/user/delete', logged, reqs, async (req, res) => {
+router.post('/user/delete', logged, async (req, res) => {
   try {
     const user = await User.findById(req.body._id);
 
     if (!user) {
-      return res.json({ statusCode: 404, entity: 'user' });
+      return res.json({
+        entity: 'user',
+        statusCode: 404,
+        description: 'User not found',
+      });
     }
 
     await user.remove();
 
-    return res.json({ statusCode: 200 });
+    return res.json({
+      statusCode: 200,
+      description: 'User has been deleted successfully.',
+    });
   } catch (error) {
-    return res.json({ statusCode: 520, error });
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened',
+    });
   }
 });
 
