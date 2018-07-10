@@ -6,13 +6,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import graphql from 'express-graphql';
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
-import connectMongo from 'connect-mongo';
 
 import schema from './graphql';
 import routers from './routers';
-import { port, dbAddress, sessionKey } from './config';
+import { port, dbAddress } from './config';
 
 // DB
 mongoose.Promise = global.Promise;
@@ -41,24 +38,6 @@ if (process.env.NODE_ENV === 'development') {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: 10000000 }));
 
-
-// Cookie Parser
-app.use(cookieParser());
-
-// Session
-const MongoStore = connectMongo(session);
-
-app.use(session({
-  secret: sessionKey,
-  resave: true,
-  cookie: {
-    maxAge: 60 * 60 * 1000 * 24,
-  },
-  saveUninitialized: false,
-  store: new MongoStore({
-    url: dbAddress,
-  }),
-}));
 
 // GraphQL API
 app.use('/graphql', (req, res) =>
