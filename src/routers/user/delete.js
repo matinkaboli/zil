@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import User from 'Root/models/User';
+import Attempt from 'Root/models/Attempt';
 import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
@@ -15,6 +16,12 @@ router.post('/user/delete', logged, async (req, res) => {
         statusCode: 404,
         description: 'User not found',
       });
+    }
+
+    const attempt = await Attempt.findOne({ user: user._id });
+
+    if (attempt) {
+      attempt.remove();
     }
 
     await user.remove();
