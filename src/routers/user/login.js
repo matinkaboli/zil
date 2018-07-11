@@ -4,6 +4,7 @@ import jwt from 'Root/utils/jwt';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 import Attempt from 'Root/models/Attempt';
+import login from 'Root/middlewares/auth/login';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -19,7 +20,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/user/login', reqs, async (req, res) => {
+router.post('/user/login', login, reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {

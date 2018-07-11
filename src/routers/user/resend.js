@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
+import login from 'Root/middlewares/auth/login';
 import randomNumber from 'Root/utils/randomNumber';
 import requirements from 'Root/middlewares/requirements';
 
@@ -12,7 +13,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/user/resend', reqs, async (req, res) => {
+router.post('/user/resend', login, reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {

@@ -7,7 +7,7 @@ const router = new Router();
 
 router.post('/user/delete', logged, async (req, res) => {
   try {
-    const user = await User.findById(req.body._id);
+    const user = await User.findById(req.user);
 
     if (!user) {
       return res.json({

@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
+import login from 'Root/middlewares/auth/login';
 import randomNumber from 'Root/utils/randomNumber';
 import validatePhone from 'Root/utils/validate/phone';
 import requirements from 'Root/middlewares/requirements';
@@ -13,7 +14,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/user/enter', reqs, async (req, res) => {
+router.post('/user/enter', login, reqs, async (req, res) => {
   if (!validatePhone(req.body.phone)) {
     return res.json({
       entity: 'phone',
@@ -45,6 +46,8 @@ router.post('/user/enter', reqs, async (req, res) => {
       });
     }
   }
+
+  console.log(`User: ${user}`);
 
   let code = await Code.findOne({ user: user._id });
 
