@@ -47,8 +47,6 @@ router.post('/user/enter', login, reqs, async (req, res) => {
     }
   }
 
-  console.log(`User: ${user}`);
-
   let code = await Code.findOne({ user: user._id });
 
   if (!code) {
