@@ -63,8 +63,8 @@ router.post('/shop/product/create', reqs, async (req, res) => {
     await newProductInShop.save();
 
     return res.json({
-      statusCode: 200,
-      description: 'Product has been added to the shop successfully.',
+      statusCode: 201,
+      description: 'Product has been created in the shop successfully.',
     });
   } catch (error) {
     return res.json({

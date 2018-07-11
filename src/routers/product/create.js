@@ -56,7 +56,7 @@ router.post('/product/create', upload.single('photo'), reqs, async (req, res) =>
     await product.save();
 
     return res.json({
-      statusCode: 200,
+      statusCode: 201,
       description: 'Product has been created successfully.',
     });
   } catch (error) {
