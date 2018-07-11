@@ -23,6 +23,13 @@ export default mongoose.model('User', Schema({
     required: true,
     default: false,
   },
+  role: {
+    trim: true,
+    default: 0,
+    type: Number,
+    enum: [0, 1],
+    required: true,
+  },
   createdAt: {
     type: Date,
     required: true,
