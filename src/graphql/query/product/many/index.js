@@ -1,4 +1,5 @@
 import {
+  GraphQLInt,
   GraphQLList,
   GraphQLString,
 } from 'graphql';
@@ -11,6 +12,9 @@ export default {
   args: {
     manufacturer: {
       type: GraphQLString,
+    },
+    page: {
+      type: GraphQLInt,
     },
   },
   resolve,
