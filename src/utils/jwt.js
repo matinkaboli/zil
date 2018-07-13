@@ -7,7 +7,11 @@ class JWT {
   }
 
   sign(data) {
-    return jwt.sign(data, this.key);
+    try {
+      return jwt.sign(data, this.key);
+    } catch (error) {
+      return null;
+    }
   }
 
   verify(token) {
