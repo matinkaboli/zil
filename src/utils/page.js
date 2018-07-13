@@ -1,1 +1,5 @@
-export default page => [(page - 1) * 10, ((page - 1) * 10) + 10];
+export default page => {
+  const multi = (page - 1) * 10;
+
+  return [multi, multi + 10];
+};
