@@ -16,7 +16,7 @@ export default {
     page: {
       type: GraphQLInt,
     },
-    search: {
+    name: {
       type: GraphQLString,
     },
   },

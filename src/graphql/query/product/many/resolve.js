@@ -4,7 +4,7 @@ import Product from 'Root/models/Product';
 
 export default async (parent, args) => {
   const query = {
-    name: search(args.search),
+    name: search(args.name),
     manufacturer: search(args.manufacturer),
   };
 
