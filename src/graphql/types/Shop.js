@@ -1,5 +1,7 @@
 import {
   GraphQLID,
+  GraphQLInt,
+  GraphQLList,
   GraphQLFloat,
   GraphQLString,
   GraphQLObjectType,
@@ -7,20 +9,32 @@ import {
 
 import UserType from './User';
 
-export default new GraphQLObjectType({
-  name: 'Shop',
+const LocationType = new GraphQLObjectType({
+  name: 'Location',
   fields: () => ({
-    _id: {
-      type: GraphQLID,
-    },
     lat: {
       type: GraphQLFloat,
     },
     lng: {
       type: GraphQLFloat,
     },
+  }),
+});
+
+export default new GraphQLObjectType({
+  name: 'Shop',
+  fields: () => ({
+    _id: {
+      type: GraphQLID,
+    },
     name: {
       type: GraphQLString,
+    },
+    phone: {
+      type: GraphQLString,
+    },
+    photos: {
+      type: new GraphQLList(GraphQLString),
     },
     avatar: {
       type: GraphQLString,
@@ -31,11 +45,23 @@ export default new GraphQLObjectType({
     address: {
       type: GraphQLString,
     },
+    location: {
+      type: LocationType,
+    },
     createdAt: {
       type: GraphQLString,
     },
+    followers: {
+      type: new GraphQLList(GraphQLID),
+    },
     description: {
       type: GraphQLString,
+    },
+    minimumOrderPrice: {
+      type: GraphQLInt,
+    },
+    maximumDeliveryTime: {
+      type: GraphQLInt,
     },
   }),
 });
