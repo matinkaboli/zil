@@ -35,13 +35,13 @@ export default mongoose.model('Shop', Schema({
       trim: true,
       type: Number,
       maxlength: 30,
-      required: true,
+      required: false,
     },
     lng: {
       trim: true,
       type: Number,
       maxlength: 30,
-      required: true,
+      required: false,
     },
   },
   followers: [{
