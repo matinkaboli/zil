@@ -17,12 +17,12 @@ const reqs = requirements(
     required: true,
   },
   {
-    value: 'realPrice',
-    required: false,
+    value: 'price',
+    required: true,
   },
   {
     value: 'discountedPrice',
-    required: true,
+    required: false,
   },
 );
 
@@ -51,11 +51,11 @@ router.post('/shop/product/create', reqs, async (req, res) => {
     const values = {
       shop: req.body.shopID,
       product: req.body.productID,
-      discountedPrice: req.body.discountedPrice,
+      price: req.body.price,
     };
 
-    if (req.body.realPrice) {
-      values.realPrice = req.body.realPrice;
+    if (req.body.discountedPrice) {
+      values.discountedPrice = req.body.discountedPrice;
     }
 
     const newProductInShop = new ProductInShop(values);

@@ -24,7 +24,7 @@ const reqs = requirements(
   },
   {
     value: 'address',
-    required: true,
+    required: false,
   },
   {
     value: 'description',

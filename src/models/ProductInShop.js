@@ -7,6 +7,12 @@ export default mongoose.model('ProductInShop', Schema({
     required: true,
     type: Schema.Types.ObjectId,
   },
+  price: {
+    trim: true,
+    type: Number,
+    maxlength: 30,
+    required: true,
+  },
   product: {
     trim: true,
     ref: 'Product',
@@ -19,16 +25,9 @@ export default mongoose.model('ProductInShop', Schema({
     required: true,
     default: Date.now,
   },
-  realPrice: {
-    trim: true,
-    type: Number,
-    maxlength: 30,
-    required: true,
-  },
   discountedPrice: {
     trim: true,
     type: Number,
     maxlength: 30,
-    required: true,
   },
 }));

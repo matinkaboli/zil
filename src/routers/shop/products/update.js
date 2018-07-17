@@ -11,12 +11,12 @@ const reqs = requirements(
     required: true,
   },
   {
-    value: 'realPrice',
-    required: false,
+    value: 'price',
+    required: true,
   },
   {
     value: 'discountedPrice',
-    required: true,
+    required: false,
   },
 );
 
@@ -32,10 +32,12 @@ router.post('/shop/product/update', reqs, async (req, res) => {
       });
     }
 
-    const values = ['realPrice', 'discountedPrice'];
+    if (req.body.price) {
+      productInShop.price = req.body.price;
+    }
 
-    for (const value of values) {
-      productInShop[value] = req.body[value] || productInShop[value] || '';
+    if (req.body.discountedPrice) {
+      productInShop.discountedPrice = req.body.discountedPrice;
     }
 
     await productInShop.save();
