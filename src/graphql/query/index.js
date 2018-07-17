@@ -2,6 +2,7 @@ import { GraphQLObjectType } from 'graphql';
 
 import oneShop from './shop/one';
 import oneUser from './user/one';
+import myShops from './shop/mine';
 import manyUsers from './user/many';
 import oneProduct from './product/one';
 import manyProducts from './product/many';
@@ -14,5 +15,6 @@ export default new GraphQLObjectType({
     users: manyUsers,
     product: oneProduct,
     products: manyProducts,
+    myShops,
   },
 });
