@@ -1,7 +1,7 @@
 import jwt from 'Root/utils/jwt';
 
-export default (req, res, next) => {
-  if (!jwt.verify(req.headers['x-access-token'])) {
+export default async (req, res, next) => {
+  if (!await jwt.verify(req.headers['x-access-token'])) {
     return next();
   }
 
