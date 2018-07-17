@@ -10,13 +10,13 @@ export default mongoose.model('Shop', Schema({
   admin: {
     trim: true,
     ref: 'User',
-    required: true,
+    required: false,
     type: Schema.Types.ObjectId,
   },
   phone: {
     trim: true,
     ref: 'User',
-    required: true,
+    required: false,
     type: Schema.Types.String,
   },
   photos: [{
@@ -27,7 +27,7 @@ export default mongoose.model('Shop', Schema({
   address: {
     trim: true,
     type: String,
-    required: true,
+    required: false,
     maxlength: 250,
   },
   location: {
@@ -50,8 +50,8 @@ export default mongoose.model('Shop', Schema({
     type: Schema.Types.ObjectId,
   }],
   createdAt: {
+    trim: true,
     type: Date,
-    required: true,
     defaullt: Date.now,
   },
   description: {

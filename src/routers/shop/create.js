@@ -7,18 +7,6 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'name',
-    required: true,
-  },
-  {
-    value: 'description',
-    required: false,
-  },
-  {
-    value: 'address',
-    required: true,
-  },
-  {
     value: 'lat',
     required: true,
   },
@@ -26,16 +14,51 @@ const reqs = requirements(
     value: 'lng',
     required: true,
   },
+  {
+    value: 'name',
+    required: true,
+  },
+  {
+    value: 'address',
+    required: false,
+  },
+  {
+    value: 'description',
+    required: false,
+  },
+  {
+    value: 'minimumOrderPrice',
+    required: true,
+  },
+  {
+    value: 'maximumDeliveryTime',
+    required: true,
+  },
 );
 
 router.post('/shop/create', reqs, async (req, res) => {
-  const shop = new Shop({
-    lat: req.body.lat,
-    lng: req.body.lng,
+  const values = {
     name: req.body.name,
-    address: req.body.address,
-    description: req.body.description,
-  });
+    minimumOrderPrice: req.body.minimumOrderPrice,
+    maximumDeliveryTime: req.body.maximumDeliveryTime,
+  };
+
+  if (req.body.description) {
+    values.description = req.body.description;
+  }
+
+  if (req.body.address) {
+    values.address = req.body.address;
+  }
+
+  if (req.body.lat && req.body.lng) {
+    values.location = {
+      lat: req.body.lat,
+      lng: req.body.lng,
+    };
+  }
+
+  const shop = new Shop(values);
 
   try {
     await shop.save();
