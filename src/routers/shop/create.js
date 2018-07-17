@@ -1,9 +1,15 @@
+import multer from 'multer';
 import { Router } from 'express';
+
+import { uploadDir } from 'Root/config';
+import storage from 'Root/utils/storage';
 
 import Shop from 'Root/models/Shop';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
+
+const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
 const reqs = requirements(
   {
@@ -36,8 +42,9 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/create', reqs, async (req, res) => {
+router.post('/shop/create', upload.single('photo'), reqs, async (req, res) => {
   const values = {
+    photos: [],
     name: req.body.name,
     minimumOrderPrice: req.body.minimumOrderPrice,
     maximumDeliveryTime: req.body.maximumDeliveryTime,
@@ -57,6 +64,11 @@ router.post('/shop/create', reqs, async (req, res) => {
       lng: req.body.lng,
     };
   }
+
+  if (req.file) {
+    values.photos.push(req.file.filename);
+  }
+
 
   const shop = new Shop(values);
 
