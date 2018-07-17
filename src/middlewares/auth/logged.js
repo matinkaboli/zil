@@ -1,10 +1,10 @@
 import jwt from 'Root/utils/jwt';
 
-export default (req, res, next) => {
-  const id = jwt.verify(req.headers['x-access-token'])._id;
+export default async (req, res, next) => {
+  const token = await jwt.verify(req.headers['x-access-token']);
 
-  if (id) {
-    req.user = id;
+  if (token) {
+    req.user = token._id;
 
     return next();
   }
