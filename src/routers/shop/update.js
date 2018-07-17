@@ -30,6 +30,14 @@ const reqs = requirements(
     value: 'description',
     required: false,
   },
+  {
+    value: 'minimumOrderPrice',
+    required: true,
+  },
+  {
+    value: 'maximumDeliveryTime',
+    required: true,
+  },
 );
 
 router.post('/shop/update', reqs, async (req, res) => {
@@ -44,11 +52,32 @@ router.post('/shop/update', reqs, async (req, res) => {
       });
     }
 
-    const values = ['lng', 'lat', 'name', 'address', 'description'];
+    if (req.body.lat) {
+      shop.location.lat = req.body.lat;
+    }
 
+    if (req.body.lng) {
+      shop.location.lng = req.body.lng;
+    }
 
-    for (const value of values) {
-      shop[value] = req.body[value] || shop[value] || '';
+    if (req.body.name) {
+      shop.name = req.body.name;
+    }
+
+    if (req.body.address) {
+      shop.address = req.body.address;
+    }
+
+    if (req.body.description) {
+      shop.description = req.body.description;
+    }
+
+    if (req.body.minimumOrderPrice) {
+      shop.minimumOrderPrice = req.body.minimumOrderPrice;
+    }
+
+    if (req.body.maximumDeliveryTime) {
+      shop.maximumDeliveryTime = req.body.maximumDeliveryTime;
     }
 
     await shop.save();
