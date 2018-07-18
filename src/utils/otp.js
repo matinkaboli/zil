@@ -3,7 +3,10 @@ import crypto from 'crypto';
 
 import { otpSecret } from 'Root/config';
 
-authenticator.options = { crypto };
+authenticator.options = {
+  crypto,
+  step: 240,
+};
 
 class OTP {
   constructor(secret) {
@@ -11,7 +14,14 @@ class OTP {
   }
 
   generate() {
-    return authenticator.generate(this.secret + authenticator.generateSecret());
+    return authenticator.generate(this.secret);
+  }
+
+  verify(token) {
+    return authenticator.verify({
+      token,
+      secret: this.secret,
+    });
   }
 }
 
