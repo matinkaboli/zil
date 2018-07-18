@@ -1,9 +1,7 @@
 import { Router } from 'express';
 
 import User from 'Root/models/User';
-import Code from 'Root/models/Code';
 import login from 'Root/middlewares/auth/login';
-import randomNumber from 'Root/utils/randomNumber';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -24,20 +22,7 @@ router.post('/user/resend', login, reqs, async (req, res) => {
     });
   }
 
-  const code = await Code.findOne({ user: user._id });
-
-  if (code) {
-    code.remove();
-  }
-
-  const newCode = new Code({
-    user: user._id,
-    code: randomNumber(),
-  });
-
   try {
-    await newCode.save();
-
     return res.json({
       statusCode: 200,
       description: 'The verification link has been sent to user\'s email',

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
+import otp from 'Root/utils/otp';
 import jwt from 'Root/utils/jwt';
 import User from 'Root/models/User';
-import Code from 'Root/models/Code';
 import Attempt from 'Root/models/Attempt';
 import login from 'Root/middlewares/auth/login';
 import requirements from 'Root/middlewares/requirements';
@@ -32,16 +32,6 @@ router.post('/user/login', login, reqs, async (req, res) => {
       });
     }
 
-    const code = await Code.findOne({ user: user._id });
-
-    if (!code) {
-      return res.json({
-        entity: 'code',
-        statusCode: 404,
-        description: 'Code not found.',
-      });
-    }
-
     let attempt = await Attempt.findOne({ user: user._id });
 
     if (!attempt) {
@@ -63,15 +53,13 @@ router.post('/user/login', login, reqs, async (req, res) => {
       });
     }
 
-    if (req.body.code !== code.code) {
+    if (!otp.verify(req.body.code)) {
       return res.json({
         entity: 'code',
         statusCode: 498,
         description: 'Code is not valid.',
       });
     }
-
-    code.remove();
 
     return res.json({
       statusCode: 200,

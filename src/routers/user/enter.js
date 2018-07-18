@@ -1,11 +1,10 @@
 import fetch from 'node-fetch';
 import { Router } from 'express';
 
+import otp from 'Root/utils/otp';
 import { sms } from 'Root/config';
 import User from 'Root/models/User';
-import Code from 'Root/models/Code';
 import login from 'Root/middlewares/auth/login';
-import randomNumber from 'Root/utils/randomNumber';
 import validatePhone from 'Root/utils/validate/phone';
 import requirements from 'Root/middlewares/requirements';
 
@@ -30,8 +29,6 @@ router.post('/user/enter', login, reqs, async (req, res) => {
 
     let user = await User.findOne({ phone: req.body.phone });
 
-    const rand = randomNumber();
-
     if (!user) {
       isUserNew = true;
 
@@ -42,25 +39,15 @@ router.post('/user/enter', login, reqs, async (req, res) => {
       await user.save();
     }
 
-    let code = await Code.findOne({ user: user._id });
-
-    if (!code) {
-      code = new Code({
-        code: rand,
-        user: user._id,
-      });
-
-      await code.save();
-    }
-
     await fetch(
-      `https://api.kavenegar.com/v1/${sms.apiKey}/sms/send.json`,
+      `https://api.kavenegar.com/v1/${sms.apiKey}/verify/lookup.json`,
       {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
+          template: sms.template,
+          token: otp.generate(),
           receptor: req.body.phone,
-          message: `${sms.messageTemplate}${rand}`,
         }),
       },
     );
@@ -76,7 +63,7 @@ router.post('/user/enter', login, reqs, async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error,
+      error: error.message,
       statusCode: 520,
       description: 'Unrecognizable error happened',
     });
