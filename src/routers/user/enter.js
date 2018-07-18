@@ -1,5 +1,7 @@
+import fetch from 'node-fetch';
 import { Router } from 'express';
 
+import { sms } from 'Root/config';
 import User from 'Root/models/User';
 import Code from 'Root/models/Code';
 import login from 'Root/middlewares/auth/login';
@@ -15,66 +17,70 @@ const reqs = requirements({
 });
 
 router.post('/user/enter', login, reqs, async (req, res) => {
-  if (!validatePhone(req.body.phone)) {
-    return res.json({
-      entity: 'phone',
-      statusCode: 422,
-      description: 'Phone is not valid. It must be 10 digits.',
-    });
-  }
+  try {
+    if (!validatePhone(req.body.phone)) {
+      return res.json({
+        entity: 'phone',
+        statusCode: 422,
+        description: 'Phone is not valid. It must be 10 digits.',
+      });
+    }
 
-  let isUserNew = false;
+    let isUserNew = false;
 
-  let user = await User.findOne({ phone: req.body.phone });
+    let user = await User.findOne({ phone: req.body.phone });
 
-  const rand = randomNumber();
+    const rand = randomNumber();
 
-  if (!user) {
-    isUserNew = true;
+    if (!user) {
+      isUserNew = true;
 
-    user = new User({
-      phone: req.body.phone,
-    });
+      user = new User({
+        phone: req.body.phone,
+      });
 
-    try {
       await user.save();
-    } catch (error) {
-      return res.json({
-        error,
-        statusCode: 520,
-        description: 'Unrecognizable error happened',
-      });
     }
-  }
 
-  let code = await Code.findOne({ user: user._id });
+    let code = await Code.findOne({ user: user._id });
 
-  if (!code) {
-    code = new Code({
-      code: rand,
-      user: user._id,
-    });
+    if (!code) {
+      code = new Code({
+        code: rand,
+        user: user._id,
+      });
 
-    try {
       await code.save();
-    } catch (error) {
-      return res.json({
-        error,
-        statusCode: 520,
-        description: 'Unrecognizable error happened',
-      });
     }
+
+    await fetch(
+      `https://api.kavenegar.com/v1/${sms.apiKey}/sms/send.json`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+          receptor: req.body.phone,
+          message: `${sms.messageTemplate}${rand}`,
+        }),
+      },
+    );
+
+    const description = isUserNew ?
+      'User created and the verification code has been sent to his number' :
+      'The verification code has been sent to his number';
+
+    return res.json({
+      isUserNew,
+      description,
+      statusCode: 200,
+    });
+  } catch (error) {
+    return res.json({
+      error,
+      statusCode: 520,
+      description: 'Unrecognizable error happened',
+    });
   }
-
-  const description = isUserNew ?
-    'User created and the verification code has been sent to his number' :
-    'The verification code has been sent to his number';
-
-  return res.json({
-    isUserNew,
-    description,
-    statusCode: 200,
-  });
 });
 
 export default router;
