@@ -1,4 +1,4 @@
-import Product from 'Root/models/Product';
+import Shelf from 'Root/models/Shelf';
 
 export default async (parent, args) => {
   const query = {};
@@ -11,7 +11,7 @@ export default async (parent, args) => {
     query._id = args._id;
   }
 
-  const product = await Product.findOne(query);
+  const product = await Shelf.findOne(query);
 
   return product;
 };

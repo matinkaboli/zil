@@ -1,10 +1,10 @@
 import { GraphQLID, GraphQLString } from 'graphql';
 
-import ProductType from 'Root/graphql/types/Product';
+import ShelfType from 'Root/graphql/types/Shelf';
 import resolve from './resolve';
 
 export default {
-  type: ProductType,
+  type: ShelfType,
   args: {
     _id: {
       type: GraphQLID,

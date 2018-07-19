@@ -1,9 +1,9 @@
 import user from './user';
 import shop from './shop';
-import product from './product';
+import shelf from './shelf';
 
 export default [
   user,
   shop,
-  product,
+  shelf,
 ];

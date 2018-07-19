@@ -1,6 +1,6 @@
 import page from 'Root/utils/page';
 import search from 'Root/utils/search';
-import Product from 'Root/models/Product';
+import Product from 'Root/models/Shelf';
 
 export default async (parent, args) => {
   const query = {
@@ -10,12 +10,12 @@ export default async (parent, args) => {
 
   if (args.page) {
     const [skip, limit] = page(args.page);
-    const products = await Product.find(query).skip(skip).limit(limit);
+    const shelfs = await Product.find(query).skip(skip).limit(limit);
 
-    return products;
+    return shelfs;
   }
 
-  const products = await Product.find(query);
+  const shelfs = await Product.find(query);
 
-  return products;
+  return shelfs;
 };

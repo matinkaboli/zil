@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export default mongoose.model('Product', Schema({
+export default mongoose.model('Shelf', Schema({
   name: {
     trim: true,
     type: String,

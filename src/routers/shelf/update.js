@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import Product from 'Root/models/Product';
+import Shelf from 'Root/models/Shelf';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -32,11 +32,11 @@ const reqs = requirements(
   },
 );
 
-router.post('/product/update', reqs, async (req, res) => {
+router.post('/shelf/update', reqs, async (req, res) => {
   try {
-    const product = await Product.findById(req.body._id);
+    const shelf = await Shelf.findById(req.body._id);
 
-    if (!product) {
+    if (!shelf) {
       return res.json({
         statusCode: 404,
         entity: 'product',
@@ -53,10 +53,10 @@ router.post('/product/update', reqs, async (req, res) => {
     ];
 
     for (const value of values) {
-      product[value] = req.body[value] || values[value] || '';
+      shelf[value] = req.body[value] || values[value] || '';
     }
 
-    await product.save();
+    await shelf.save();
 
     return res.json({
       statusCode: 200,

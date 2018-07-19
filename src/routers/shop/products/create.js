@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import Shop from 'Root/models/Shop';
-import Product from 'Root/models/Product';
+import Shelf from 'Root/models/Shelf';
 import ProductInShop from 'Root/models/ProductInShop';
 import requirements from 'Root/middlewares/requirements';
 
@@ -26,11 +26,11 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/product/create', reqs, async (req, res) => {
+router.post('/shop/shelf/create', reqs, async (req, res) => {
   try {
-    const product = await Product.findById(req.body.productID);
+    const shelf = await Shelf.findById(req.body.productID);
 
-    if (!product) {
+    if (!shelf) {
       return res.json({
         statusCode: 404,
         entity: 'product',

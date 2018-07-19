@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
-import Product from 'Root/models/Product';
+import Shelf from 'Root/models/Shelf';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -33,8 +33,8 @@ const reqs = requirements(
   },
 );
 
-router.post('/product/create', upload.single('photo'), reqs, async (req, res) => {
-  const productValues = {
+router.post('/shelf/create', upload.single('photo'), reqs, async (req, res) => {
+  const values = {
     name: req.body.name,
   };
 
@@ -42,18 +42,18 @@ router.post('/product/create', upload.single('photo'), reqs, async (req, res) =>
 
   for (const optionalValue of optionalValues) {
     if (req.body[optionalValue]) {
-      productValues[optionalValue] = req.body[optionalValue];
+      values[optionalValue] = req.body[optionalValue];
     }
   }
 
   if (req.file) {
-    productValues.photo = req.file.filename;
+    values.photo = req.file.filename;
   }
 
-  const product = new Product(productValues);
+  const shelf = new Shelf(values);
 
   try {
-    await product.save();
+    await shelf.save();
 
     return res.json({
       statusCode: 201,

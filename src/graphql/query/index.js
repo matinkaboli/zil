@@ -1,20 +1,20 @@
 import { GraphQLObjectType } from 'graphql';
 
-import oneShop from './shop/one';
-import oneUser from './user/one';
+import shop from './shop/one';
+import user from './user/one';
 import myShops from './shop/mine';
-import manyUsers from './user/many';
-import oneProduct from './product/one';
-import manyProducts from './product/many';
+import users from './user/many';
+import shelf from './shelf/one';
+import shelfs from './shelf/many';
 
 export default new GraphQLObjectType({
   name: 'Query',
   fields: {
-    shop: oneShop,
-    user: oneUser,
-    users: manyUsers,
-    product: oneProduct,
-    products: manyProducts,
+    shop,
+    user,
+    users,
+    shelf,
+    shelfs,
     myShops,
   },
 });

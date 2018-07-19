@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import Product from 'Root/models/Product';
+import Shelf from 'Root/models/Shelf';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -10,11 +10,11 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/product/delete', reqs, async (req, res) => {
+router.post('/shelf/delete', reqs, async (req, res) => {
   try {
-    const product = await Product.findById(req.body._id);
+    const shelf = await Shelf.findById(req.body._id);
 
-    if (!product) {
+    if (!shelf) {
       return res.json({
         statusCode: 404,
         entity: 'product',
@@ -22,7 +22,7 @@ router.post('/product/delete', reqs, async (req, res) => {
       });
     }
 
-    await product.remove();
+    await shelf.remove();
 
     return res.json({
       statusCode: 200,
