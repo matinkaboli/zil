@@ -43,8 +43,8 @@ app.use(bodyParser.json({ limit: 10000000 }));
 app.use('/graphql', (req, res) =>
   graphql({
     schema,
-    graphiql: true,
     context: { req, res },
+    graphiql: process.env.NODE_ENV === 'development',
   })(req, res));
 
 // REST API

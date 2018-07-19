@@ -6,5 +6,5 @@ gulp prod
 rm -rf node_modules
 npm install --production
 pm2 kill
-pm2 start build/app.js
+cross-env NODE_ENV=development pm2 start build/app.js
 echo "Done."
