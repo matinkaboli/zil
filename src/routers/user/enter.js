@@ -50,8 +50,8 @@ router.post('/user/enter', login, reqs, async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error: error.message,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened',
     });
   }

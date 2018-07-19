@@ -1,8 +1,8 @@
 const fetch = require('../../utils/fetch');
 
-describe('POST /product/create', () => {
+describe('POST /shelf/create', () => {
   test('With correct information', () => {
-    fetch('/product/create', {
+    fetch('/shelf/create', {
       name: 'Glass',
       isbn: '123-456-789-0',
       description: 'This is a Glass',
