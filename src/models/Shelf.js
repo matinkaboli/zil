@@ -17,6 +17,11 @@ export default mongoose.model('Shelf', Schema({
     type: String,
     maxlength: 150,
   },
+  verified: {
+    trim: true,
+    type: Boolean,
+    default: false,
+  },
   expiration: {
     trim: true,
     type: String,
