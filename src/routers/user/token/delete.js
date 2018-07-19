@@ -17,8 +17,8 @@ router.post('/user/token/delete', logged, async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened',
     });
   }

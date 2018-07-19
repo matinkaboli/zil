@@ -39,33 +39,41 @@ router.post('/shelf/update', reqs, async (req, res) => {
     if (!shelf) {
       return res.json({
         statusCode: 404,
-        entity: 'product',
-        description: 'Product not found.',
+        entity: 'shelf',
+        description: 'Shelf not found.',
       });
     }
 
-    const values = [
-      'name',
-      'isbn',
-      'expiration',
-      'description',
-      'manufacturer',
-    ];
+    if (req.body.isbn) {
+      shelf.isbn = req.body.isbn;
+    }
 
-    for (const value of values) {
-      shelf[value] = req.body[value] || values[value] || '';
+    if (req.body.name) {
+      shelf.name = req.body.name;
+    }
+
+    if (req.body.expiration) {
+      shelf.expiration = req.body.expiration;
+    }
+
+    if (req.body.description) {
+      shelf.description = req.body.description;
+    }
+
+    if (req.body.manufacturer) {
+      shelf.manufacturer = req.body.manufacturer;
     }
 
     await shelf.save();
 
     return res.json({
       statusCode: 200,
-      description: 'Product has been updated successfully.',
+      description: 'Shelf has been updated successfully.',
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }

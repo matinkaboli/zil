@@ -1,9 +1,9 @@
 import multer from 'multer';
 import { Router } from 'express';
 
+import Shelf from 'Root/models/Shelf';
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
-import Shelf from 'Root/models/Shelf';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -38,16 +38,24 @@ router.post('/shelf/create', upload.single('photo'), reqs, async (req, res) => {
     name: req.body.name,
   };
 
-  const optionalValues = ['isbn', 'expiration', 'manufacturer', 'description'];
-
-  for (const optionalValue of optionalValues) {
-    if (req.body[optionalValue]) {
-      values[optionalValue] = req.body[optionalValue];
-    }
+  if (req.body.isbn) {
+    values.isbn = req.body.isbn;
   }
 
   if (req.file) {
     values.photo = req.file.filename;
+  }
+
+  if (req.body.expiration) {
+    values.expiration = req.body.expiration;
+  }
+
+  if (req.body.description) {
+    values.description = req.body.description;
+  }
+
+  if (req.body.manufacturer) {
+    values.manufacturer = req.body.manufacturer;
   }
 
   const shelf = new Shelf(values);
@@ -57,12 +65,12 @@ router.post('/shelf/create', upload.single('photo'), reqs, async (req, res) => {
 
     return res.json({
       statusCode: 201,
-      description: 'Product has been created successfully.',
+      description: 'Shelf has been created successfully.',
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }

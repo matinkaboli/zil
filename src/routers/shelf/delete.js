@@ -17,8 +17,8 @@ router.post('/shelf/delete', reqs, async (req, res) => {
     if (!shelf) {
       return res.json({
         statusCode: 404,
-        entity: 'product',
-        description: 'Product not found.',
+        entity: 'shelf',
+        description: 'Shelf not found.',
       });
     }
 
@@ -26,12 +26,12 @@ router.post('/shelf/delete', reqs, async (req, res) => {
 
     return res.json({
       statusCode: 200,
-      description: 'The product has been deleted successfully.',
+      description: 'Shelf has been deleted successfully.',
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }
