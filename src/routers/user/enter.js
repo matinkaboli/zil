@@ -39,7 +39,7 @@ router.post('/user/enter', login, reqs, async (req, res) => {
       await user.save();
     }
 
-    await fetch(
+    fetch(
       `https://api.kavenegar.com/v1/${sms.apiKey}/verify/lookup.json`,
       {
         method: 'POST',

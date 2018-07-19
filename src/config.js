@@ -2,8 +2,8 @@ import { resolve } from 'path';
 
 export default {
   sms: {
-    apiKey: process.env.SMS_API_KEY || '345271454776727A622B384B53382B323356507233673D3D',
     template: process.env.SMS_TEMPLATE || 'Hyper',
+    apiKey: process.env.SMS_API_KEY || '345271454776727A622B384B53382B323356507233673D3D',
   },
   port: process.env.PORT || '8080',
   uploadDir: resolve(__dirname, 'static/uploads'),
