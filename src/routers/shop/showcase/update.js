@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import ProductInShop from 'Root/models/ProductInShop';
+import Showcase from 'Root/models/Showcase';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -20,11 +20,11 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/product/update', reqs, async (req, res) => {
+router.post('/shop/showcase/update', reqs, async (req, res) => {
   try {
-    const productInShop = await ProductInShop.findById(req.body._id);
+    const showcase = await Showcase.findById(req.body._id);
 
-    if (!productInShop) {
+    if (!showcase) {
       return res.json({
         statusCode: 404,
         entity: 'productInShop',
@@ -33,23 +33,23 @@ router.post('/shop/product/update', reqs, async (req, res) => {
     }
 
     if (req.body.price) {
-      productInShop.price = req.body.price;
+      showcase.price = req.body.price;
     }
 
     if (req.body.discountedPrice) {
-      productInShop.discountedPrice = req.body.discountedPrice;
+      showcase.discountedPrice = req.body.discountedPrice;
     }
 
-    await productInShop.save();
+    await showcase.save();
 
     return res.json({
       statusCode: 200,
-      description: 'Product in shop has been updated successfully.',
+      description: 'Showcase has been updated successfully.',
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }

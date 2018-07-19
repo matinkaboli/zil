@@ -2,14 +2,14 @@ import { Router } from 'express';
 
 import Shop from 'Root/models/Shop';
 import Shelf from 'Root/models/Shelf';
-import ProductInShop from 'Root/models/ProductInShop';
+import Showcase from 'Root/models/Showcase';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'productID',
+    value: 'shelfID',
     required: true,
   },
   {
@@ -26,15 +26,15 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/shelf/create', reqs, async (req, res) => {
+router.post('/shop/showcase/create', reqs, async (req, res) => {
   try {
-    const shelf = await Shelf.findById(req.body.productID);
+    const shelf = await Shelf.findById(req.body.shelfID);
 
     if (!shelf) {
       return res.json({
         statusCode: 404,
-        entity: 'product',
-        description: 'Product not found',
+        entity: 'shelf',
+        description: 'Shelf not found',
       });
     }
 
@@ -49,27 +49,27 @@ router.post('/shop/shelf/create', reqs, async (req, res) => {
     }
 
     const values = {
-      shop: req.body.shopID,
-      product: req.body.productID,
       price: req.body.price,
+      shop: req.body.shopID,
+      shelf: req.body.shelfID,
     };
 
     if (req.body.discountedPrice) {
       values.discountedPrice = req.body.discountedPrice;
     }
 
-    const newProductInShop = new ProductInShop(values);
+    const newShowcase = new Showcase(values);
 
-    await newProductInShop.save();
+    await newShowcase.save();
 
     return res.json({
       statusCode: 201,
-      description: 'Product has been created in the shop successfully.',
+      description: 'Showcase has been created in the shop successfully.',
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }

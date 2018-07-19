@@ -1,11 +1,11 @@
 import createShop from './create';
 import deleteShop from './delete';
 import updateShop from './update';
-import shopProducts from './products';
+import showcase from './showcase';
 
 export default [
+  showcase,
   createShop,
   deleteShop,
   updateShop,
-  shopProducts,
 ];

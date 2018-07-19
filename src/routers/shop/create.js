@@ -1,10 +1,9 @@
 import multer from 'multer';
 import { Router } from 'express';
 
+import Shop from 'Root/models/Shop';
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
-
-import Shop from 'Root/models/Shop';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -50,12 +49,16 @@ router.post('/shop/create', upload.single('photo'), reqs, async (req, res) => {
     maximumDeliveryTime: req.body.maximumDeliveryTime,
   };
 
-  if (req.body.description) {
-    values.description = req.body.description;
+  if (req.file) {
+    values.photos.push(req.file.filename);
   }
 
   if (req.body.address) {
     values.address = req.body.address;
+  }
+
+  if (req.body.description) {
+    values.description = req.body.description;
   }
 
   if (req.body.lat && req.body.lng) {
@@ -64,11 +67,6 @@ router.post('/shop/create', upload.single('photo'), reqs, async (req, res) => {
       lng: req.body.lng,
     };
   }
-
-  if (req.file) {
-    values.photos.push(req.file.filename);
-  }
-
 
   const shop = new Shop(values);
 
@@ -81,8 +79,8 @@ router.post('/shop/create', upload.single('photo'), reqs, async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }

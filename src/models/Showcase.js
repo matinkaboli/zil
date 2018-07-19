@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export default mongoose.model('ProductInShop', Schema({
+export default mongoose.model('Showcase', Schema({
   shop: {
     trim: true,
     ref: 'Shop',
@@ -13,7 +13,7 @@ export default mongoose.model('ProductInShop', Schema({
     maxlength: 30,
     required: true,
   },
-  product: {
+  shelf: {
     trim: true,
     ref: 'Product',
     required: true,

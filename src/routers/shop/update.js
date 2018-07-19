@@ -88,8 +88,8 @@ router.post('/shop/update', reqs, async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened.',
     });
   }
