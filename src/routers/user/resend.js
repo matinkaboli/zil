@@ -3,6 +3,7 @@ import { Router } from 'express';
 import User from 'Root/models/User';
 import verifySms from 'Root/utils/sms/verify';
 import login from 'Root/middlewares/auth/login';
+import validatePhone from 'Root/utils/validate/phone';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -14,6 +15,14 @@ const reqs = requirements({
 
 router.post('/user/resend', login, reqs, async (req, res) => {
   try {
+    if (!validatePhone(req.body.phone)) {
+      return res.json({
+        entity: 'phone',
+        statusCode: 422,
+        description: 'Phone is not valid. It must be 10 digits.',
+      });
+    }
+
     const user = await User.findOne({ phone: req.body.phone });
 
     if (!user) {
@@ -32,8 +41,8 @@ router.post('/user/resend', login, reqs, async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error,
       statusCode: 520,
+      error: error.message,
       description: 'Unrecognizable error happened',
     });
   }
