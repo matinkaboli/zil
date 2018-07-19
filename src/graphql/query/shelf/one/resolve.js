@@ -1,7 +1,9 @@
 import Shelf from 'Root/models/Shelf';
 
 export default async (parent, args) => {
-  const query = {};
+  const query = {
+    verified: true,
+  };
 
   if (args.isbn) {
     query.isbn = args.isbn;
