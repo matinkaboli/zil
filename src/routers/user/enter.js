@@ -1,9 +1,7 @@
-import fetch from 'node-fetch';
 import { Router } from 'express';
 
-import otp from 'Root/utils/otp';
-import { sms } from 'Root/config';
 import User from 'Root/models/User';
+import verifySms from 'Root/utils/sms/verify';
 import login from 'Root/middlewares/auth/login';
 import validatePhone from 'Root/utils/validate/phone';
 import requirements from 'Root/middlewares/requirements';
@@ -39,18 +37,7 @@ router.post('/user/enter', login, reqs, async (req, res) => {
       await user.save();
     }
 
-    fetch(
-      `https://api.kavenegar.com/v1/${sms.apiKey}/verify/lookup.json`,
-      {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify({
-          template: sms.template,
-          token: otp.generate(),
-          receptor: req.body.phone,
-        }),
-      },
-    );
+    await verifySms(req.body.phone);
 
     const description = isUserNew ?
       'User created and the verification code has been sent to his number' :
