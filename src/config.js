@@ -2,7 +2,7 @@ import { resolve } from 'path';
 
 export default {
   sms: {
-    template: process.env.SMS_TEMPLATE || 'Hyper',
+    template: process.env.SMS_TEMPLATE || 'hyper',
     apiKey: process.env.SMS_API_KEY || '345271454776727A622B384B53382B323356507233673D3D',
   },
   port: process.env.PORT || '8080',

@@ -4,6 +4,7 @@ import otp from 'Root/utils/otp';
 import { sms } from 'Root/config';
 
 export default receptor => new Promise((resolve, reject) => {
+  console.log(`+98${receptor}`);
   fetch(
     `https://api.kavenegar.com/v1/${sms.apiKey}/verify/lookup.json`,
     {
