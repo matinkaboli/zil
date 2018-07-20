@@ -4,6 +4,7 @@ import { Router } from 'express';
 import Shop from 'Root/models/Shop';
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
+import logged from 'Root/middlewares/auth/logged';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -41,9 +42,10 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/create', upload.single('photo'), reqs, async (req, res) => {
+router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, res) => {
   const values = {
     photos: [],
+    admin: req.user,
     name: req.body.name,
     minimumOrderPrice: req.body.minimumOrderPrice,
     maximumDeliveryTime: req.body.maximumDeliveryTime,

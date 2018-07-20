@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import Shop from 'Root/models/Shop';
+import logged from 'Root/middlewares/auth/logged';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -10,9 +11,12 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/shop/delete', reqs, async (req, res) => {
+router.post('/shop/delete', logged, reqs, async (req, res) => {
   try {
-    const shop = await Shop.findById(req.body._id);
+    const shop = await Shop.findOne({
+      admin: req.user,
+      _id: req.body._id,
+    });
 
     if (!shop) {
       return res.json({
