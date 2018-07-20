@@ -18,6 +18,9 @@ export default receptor => new Promise((resolve, reject) => {
     },
   )
     .then(res => res.json())
-    .then(data => resolve(data))
+    .then(data => {
+      console.log(data);
+      resolve(data);
+    })
     .catch(error => reject(error));
 });
