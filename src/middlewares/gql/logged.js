@@ -2,6 +2,10 @@ import Token from 'Root/models/Token';
 import jwt from 'Root/utils/jwt';
 
 export default token => new Promise(async (resolve, reject) => {
+  if (!token) {
+    return reject();
+  }
+
   const t = await jwt.verify(token);
 
   if (!t) {

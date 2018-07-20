@@ -6,7 +6,7 @@ import checkStatus from 'Root/utils/checkstatus';
 
 export default receptor => new Promise((resolve, reject) => {
   const token = otp.generate();
-  const body = `token=${token}&template=${sms.template}&receptor=${receptor}`;
+  const body = `token=${token}&template=${sms.template}&receptor=+98${receptor}`;
 
   fetch(
     `https://api.kavenegar.com/v1/${sms.apiKey}/verify/lookup.json`,

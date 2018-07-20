@@ -2,9 +2,8 @@ import Shop from 'Root/models/Shop';
 import logged from 'Root/middlewares/gql/logged';
 
 export default async (parent, args, context) => {
-  logged(context.req.headers['x-access-token']).then(async _id => {
-    const shop = await Shop.find({ admin: _id });
+  const _id = await logged(context.req.headers['x-access-token']);
+  const shop = await Shop.find({ admin: _id }).populate('admin').exec();
 
-    return shop;
-  }).catch(() => null);
+  return shop;
 };
