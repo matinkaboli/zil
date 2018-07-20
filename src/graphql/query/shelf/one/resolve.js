@@ -2,7 +2,7 @@ import Shelf from 'Root/models/Shelf';
 
 export default async (parent, args) => {
   const query = {
-    verified: true,
+    // verified: true,
   };
 
   if (args.isbn) {
