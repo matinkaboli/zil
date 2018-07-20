@@ -10,7 +10,7 @@ export default mongoose.model('Shop', Schema({
   admin: {
     trim: true,
     ref: 'User',
-    required: false,
+    required: true,
     type: Schema.Types.ObjectId,
   },
   phone: {
