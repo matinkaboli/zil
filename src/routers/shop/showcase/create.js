@@ -3,6 +3,7 @@ import { Router } from 'express';
 import Shop from 'Root/models/Shop';
 import Shelf from 'Root/models/Shelf';
 import Showcase from 'Root/models/Showcase';
+import logged from 'Root/middlewares/auth/logged';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -26,7 +27,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/showcase/create', reqs, async (req, res) => {
+router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.body.shelfID);
 
@@ -38,7 +39,10 @@ router.post('/shop/showcase/create', reqs, async (req, res) => {
       });
     }
 
-    const shop = await Shop.findById(req.body.shopID);
+    const shop = await Shop.findOne({
+      admin: req.user,
+      _id: req.body.shopID,
+    });
 
     if (!shop) {
       return res.json({
