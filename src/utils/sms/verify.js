@@ -2,25 +2,26 @@ import fetch from 'node-fetch';
 
 import otp from 'Root/utils/otp';
 import { sms } from 'Root/config';
+import checkStatus from 'Root/utils/checkstatus';
 
 export default receptor => new Promise((resolve, reject) => {
-  console.log(`+98${receptor}`);
+  const token = otp.generate();
+  const body = `token=${token}&template=${sms.template}&receptor=${receptor}`;
+
   fetch(
     `https://api.kavenegar.com/v1/${sms.apiKey}/verify/lookup.json`,
     {
+      body,
+      mode: 'cors',
       method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify({
-        token: otp.generate(),
-        template: sms.template,
-        receptor: `+98${receptor}`,
-      }),
+      headers: {
+        'Content-Length': `${body.length}`,
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
     },
   )
+    .then(checkStatus)
     .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      resolve(data);
-    })
+    .then(data => resolve(data))
     .catch(error => reject(error));
 });

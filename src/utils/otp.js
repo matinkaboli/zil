@@ -14,7 +14,7 @@ class OTP {
   }
 
   generate() {
-    return authenticator.generate(this.secret);
+    return authenticator.generate(this.secret).toString();
   }
 
   verify(token) {
