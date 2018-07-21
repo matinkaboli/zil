@@ -17,7 +17,7 @@ export default mongoose.model('Attempt', Schema({
     trim: true,
     type: Date,
     required: true,
+    expires: 60 * 30,
     default: Date.now,
-    expires: 60 * 60 * 24,
   },
 }));

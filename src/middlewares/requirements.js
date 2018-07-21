@@ -6,7 +6,7 @@ export default (...requirements) => (req, res, next) => {
       return res.json({
         statusCode: 417,
         requirement: requirement.value,
-        description: `The server needs a value named ${requirement.value} but the client did not send it.`,
+        description: `The server needs a value named *${requirement.value}* but the client did not send it.`,
       });
     }
 
