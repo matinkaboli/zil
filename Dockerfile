@@ -12,6 +12,8 @@ COPY src /app/src
 COPY webpack /app/webpack
 
 RUN npm run prod
+RUN rm -rf node_modules
+RUN npm install --production
 
 ENV NODE_ENV=production
 
