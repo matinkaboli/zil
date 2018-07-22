@@ -13,12 +13,6 @@ export default mongoose.model('Shop', Schema({
     required: true,
     type: Schema.Types.ObjectId,
   },
-  phone: {
-    trim: true,
-    ref: 'User',
-    required: false,
-    type: Schema.Types.String,
-  },
   photos: [{
     trim: true,
     type: String,
@@ -71,4 +65,6 @@ export default mongoose.model('Shop', Schema({
     maxlength: 5,
     required: true,
   },
+}, {
+  usePushEach: true,
 }));

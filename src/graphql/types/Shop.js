@@ -30,14 +30,8 @@ export default new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
-    phone: {
-      type: GraphQLString,
-    },
     photos: {
       type: new GraphQLList(GraphQLString),
-    },
-    avatar: {
-      type: GraphQLString,
     },
     admin: {
       type: UserType,
