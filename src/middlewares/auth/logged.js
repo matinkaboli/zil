@@ -10,6 +10,7 @@ export default async (req, res, next) => {
   }
 
   return res.json({
+    entity: 'token',
     statusCode: 401,
     description: 'JWT token is missing or wrong or expired.',
   });
