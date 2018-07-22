@@ -10,11 +10,11 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'shelfID',
+    value: 'shelf_id',
     required: true,
   },
   {
-    value: 'shopID',
+    value: 'shop_id',
     required: true,
   },
   {
@@ -29,7 +29,7 @@ const reqs = requirements(
 
 router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
   try {
-    const shelf = await Shelf.findById(req.body.shelfID);
+    const shelf = await Shelf.findById(req.body.shelf_id);
 
     if (!shelf) {
       return res.json({
@@ -41,7 +41,7 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
 
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shopID,
+      _id: req.body.shop_id,
     });
 
     if (!shop) {
@@ -54,8 +54,8 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
 
     const values = {
       price: req.body.price,
-      shop: req.body.shopID,
-      shelf: req.body.shelfID,
+      shop: req.body.shop_id,
+      shelf: req.body.shelf_id,
     };
 
     if (req.body.discountedPrice) {
