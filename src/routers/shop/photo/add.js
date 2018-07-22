@@ -33,8 +33,8 @@ router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req,
 
     if (!req.file) {
       return res.json({
-        entity: 'photo',
-        statusCode: 404,
+        statusCode: 417,
+        requirement: 'photo',
         description: 'The server needs a photo, but the client did not send it',
       });
     }
