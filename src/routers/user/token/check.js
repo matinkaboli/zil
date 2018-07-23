@@ -22,7 +22,7 @@ router.post('/user/token/check', logged, reqs, async (req, res) => {
     });
   }
 
-  if (user._id !== req.user) {
+  if (user._id.toString() !== req.user) {
     return res.json({
       entity: 'user',
       statusCode: 401,
