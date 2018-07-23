@@ -76,6 +76,7 @@ router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, re
     await shop.save();
 
     return res.json({
+      _id: shop._id,
       statusCode: 201,
       description: 'Shop has been created successfully.',
     });
