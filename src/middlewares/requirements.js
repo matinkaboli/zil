@@ -1,4 +1,4 @@
-import sanitize from 'mongo-sanitize';
+import check from 'Root/utils/check';
 
 export default (...requirements) => (req, res, next) => {
   for (const requirement of requirements) {
@@ -6,15 +6,11 @@ export default (...requirements) => (req, res, next) => {
       return res.json({
         statusCode: 417,
         requirement: requirement.value,
-        description: `The server needs a value named *${requirement.value}* but the client did not send it.`,
+        description: `The server needs parameter *${requirement.value}* to be sent from the client.`,
       });
     }
 
-    const value = sanitize(req.body[requirement.value]);
-
-    if (typeof value === 'object') {
-      req.body[requirement.value] = JSON.stringify(value);
-    }
+    req.body[requirement.value] = check(req.body[requirement.value]);
   }
 
   return next();
