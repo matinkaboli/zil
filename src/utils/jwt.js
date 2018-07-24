@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+
 import { jwtKey } from 'Root/config';
 import Token from 'Root/models/Token';
 

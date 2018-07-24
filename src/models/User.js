@@ -17,6 +17,12 @@ export default mongoose.model('User', Schema({
     ref: 'Shop',
     type: Schema.Types.ObjectId,
   }],
+  score: {
+    trim: true,
+    default: 10,
+    type: Number,
+    required: true,
+  },
   verified: {
     trim: true,
     type: Boolean,

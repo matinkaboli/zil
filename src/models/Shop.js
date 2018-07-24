@@ -53,6 +53,18 @@ export default mongoose.model('Shop', Schema({
     type: String,
     maxlength: 500,
   },
+  showcaseCount: {
+    trim: true,
+    default: 0,
+    type: Number,
+    required: true,
+  },
+  followersCount: {
+    default: 0,
+    trim: true,
+    type: Number,
+    required: true,
+  },
   minimumOrderPrice: {
     trim: true,
     type: Number,

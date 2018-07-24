@@ -44,15 +44,16 @@ const reqs = requirements(
 
 router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, res) => {
   const values = {
-    photos: [],
     admin: req.user,
+    showcaseCount: 0,
+    followersCount: 0,
     name: req.body.name,
     minimumOrderPrice: req.body.minimumOrderPrice,
     maximumDeliveryTime: req.body.maximumDeliveryTime,
   };
 
   if (req.file) {
-    values.photos.push(req.file.filename);
+    values.photos = [req.file.filename];
   }
 
   if (req.body.address) {
