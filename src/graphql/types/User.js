@@ -1,8 +1,7 @@
 import {
   GraphQLID,
-  GraphQLList,
+  GraphQLInt,
   GraphQLString,
-  GraphQLBoolean,
   GraphQLObjectType,
 } from 'graphql';
 
@@ -12,20 +11,23 @@ export default new GraphQLObjectType({
     _id: {
       type: GraphQLID,
     },
+    role: {
+      type: GraphQLInt,
+    },
     name: {
       type: GraphQLString,
+    },
+    score: {
+      type: GraphQLInt,
     },
     phone: {
       type: GraphQLString,
     },
-    verified: {
-      type: GraphQLBoolean,
-    },
     createdAt: {
       type: GraphQLString,
     },
-    shops: {
-      type: new GraphQLList(GraphQLID),
+    passwordHint: {
+      type: GraphQLString,
     },
   }),
 });
