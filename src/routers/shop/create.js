@@ -44,6 +44,7 @@ const reqs = requirements(
 
 router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, res) => {
   const values = {
+    photos: [],
     admin: req.user,
     showcaseCount: 0,
     followersCount: 0,
@@ -53,7 +54,7 @@ router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, re
   };
 
   if (req.file) {
-    values.photos = [req.file.filename];
+    values.photos.push(req.file.filename);
   }
 
   if (req.body.address) {

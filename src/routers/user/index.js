@@ -3,6 +3,7 @@ import loginUser from './login';
 import enterPhone from './enter';
 import resendCode from './resend';
 import deleteUser from './delete';
+import settingUser from './setting';
 
 export default [
   loginUser,
@@ -10,4 +11,5 @@ export default [
   enterPhone,
   resendCode,
   deleteUser,
+  settingUser,
 ];
