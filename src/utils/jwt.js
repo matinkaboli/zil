@@ -12,7 +12,7 @@ class JWT {
     try {
       const sign = jwt.sign(data, this.key);
 
-      let token = await Token.findOne({ token: sign });
+      let token = await Token.findOne({ user: data._id });
 
       if (!token) {
         token = new Token({
@@ -21,9 +21,11 @@ class JWT {
         });
 
         await token.save();
+
+        return sign;
       }
 
-      return sign;
+      return token.token;
     } catch (error) {
       return null;
     }

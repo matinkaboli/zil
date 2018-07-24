@@ -5,7 +5,7 @@ import { otpSecret } from 'Root/config';
 
 authenticator.options = {
   crypto,
-  step: 240,
+  step: 1000,
 };
 
 class OTP {
