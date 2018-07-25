@@ -57,15 +57,22 @@ router.post('/user/login', login, reqs, async (req, res) => {
       return res.json({
         entity: 'code',
         statusCode: 498,
-        description: 'Code is not valid.',
+        description: 'Code is invalid.',
       });
     }
 
-    return res.json({
+    const response = {
       statusCode: 200,
-      token: await jwt.sign({ _id: user._id }),
-      description: 'User has been successfully logged in.',
-    });
+      description: 'Code is valid.',
+    };
+
+    if (user.password) {
+      response.password = true;
+    } else {
+      response.token = await jwt.sign({ _id: user._id });
+    }
+
+    return res.json(response);
   } catch (error) {
     return res.json({
       statusCode: 520,
