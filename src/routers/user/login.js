@@ -63,12 +63,11 @@ router.post('/user/login', login, reqs, async (req, res) => {
 
     const response = {
       statusCode: 200,
+      password: !!user.password,
       description: 'Code is valid.',
     };
 
-    if (user.password) {
-      response.password = true;
-    } else {
+    if (!user.password) {
       response.token = await jwt.sign({ _id: user._id });
     }
 
