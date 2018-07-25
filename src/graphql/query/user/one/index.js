@@ -9,6 +9,9 @@ export default {
     _id: {
       type: GraphQLID,
     },
+    phone: {
+      type: GraphQLID,
+    },
   },
   resolve,
 };

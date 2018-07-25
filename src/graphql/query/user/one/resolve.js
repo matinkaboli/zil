@@ -1,9 +1,19 @@
 import User from 'Root/models/User';
 
 export default async (parent, args) => {
-  const user = await User.findById(args._id).lean();
+  let user;
 
-  user.hasPassword = !!user.password;
+  if (args.id) {
+    user = await User.findById(args._id).lean();
+  } else if (args.phone) {
+    user = await User.findOne({ phone: args.phone }).lean();
+  }
 
-  return user;
+  if (user) {
+    user.hasPassword = !!user.password;
+
+    return user;
+  }
+
+  return null;
 };
