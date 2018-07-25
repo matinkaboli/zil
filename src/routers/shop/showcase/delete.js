@@ -48,6 +48,10 @@ router.post('/shop/showcase/delete', logged, reqs, async (req, res) => {
 
     await showcase.remove();
 
+    shop.showcaseCount -= 1;
+
+    shop.save();
+
     return res.json({
       statusCode: 200,
       description: 'Showcase has been deleted successfully.',

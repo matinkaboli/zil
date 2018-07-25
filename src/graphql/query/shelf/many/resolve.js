@@ -3,9 +3,7 @@ import search from 'Root/utils/search';
 import Shelf from 'Root/models/Shelf';
 
 export default async (parent, args) => {
-  const query = {
-    // verified: true,
-  };
+  const query = {};
 
   if (args.name) {
     query.name = search(args.name);

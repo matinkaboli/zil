@@ -10,13 +10,13 @@ import resolve from './resolve';
 export default {
   type: new GraphQLList(ShelfType),
   args: {
-    manufacturer: {
-      type: GraphQLString,
-    },
     page: {
       type: GraphQLInt,
     },
     name: {
+      type: GraphQLString,
+    },
+    manufacturer: {
       type: GraphQLString,
     },
   },

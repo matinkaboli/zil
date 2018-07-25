@@ -66,6 +66,10 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
 
     await newShowcase.save();
 
+    shop.showcaseCount += 1;
+
+    shop.save();
+
     return res.json({
       statusCode: 201,
       description: 'Showcase has been created in the shop successfully.',

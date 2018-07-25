@@ -67,12 +67,12 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
       name: req.body.name,
     };
 
-    if (req.body.isbn) {
-      Shelfvalues.isbn = req.body.isbn;
-    }
-
     if (req.file) {
       Shelfvalues.photo = req.file.filename;
+    }
+
+    if (req.body.isbn) {
+      Shelfvalues.isbn = req.body.isbn;
     }
 
     if (req.body.expiration) {
@@ -89,7 +89,7 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
 
     const shelf = new Shelf(Shelfvalues);
 
-    await shelf.save();
+    shelf.save();
 
     const showcaseValues = {
       shelf: shelf._id,
@@ -104,6 +104,10 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     const showcase = new Showcase(showcaseValues);
 
     await showcase.save();
+
+    shop.showcaseCount += 1;
+
+    await shop.save();
 
     return res.json({
       statusCode: 201,

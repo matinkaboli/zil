@@ -16,16 +16,16 @@ export default new GraphQLObjectType({
     isbn: {
       type: GraphQLString,
     },
-    expiration: {
+    photo: {
       type: GraphQLString,
     },
-    manufacturer: {
+    expiration: {
       type: GraphQLString,
     },
     description: {
       type: GraphQLString,
     },
-    photo: {
+    manufacturer: {
       type: GraphQLString,
     },
   }),
