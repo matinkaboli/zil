@@ -46,6 +46,7 @@ router.post('/user/enter', login, reqs, async (req, res) => {
     return res.json({
       isUserNew,
       description,
+      _id: user._id,
       statusCode: 200,
     });
   } catch (error) {

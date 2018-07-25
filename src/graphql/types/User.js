@@ -2,6 +2,7 @@ import {
   GraphQLID,
   GraphQLInt,
   GraphQLString,
+  GraphQLBoolean,
   GraphQLObjectType,
 } from 'graphql';
 
@@ -25,6 +26,9 @@ export default new GraphQLObjectType({
     },
     createdAt: {
       type: GraphQLString,
+    },
+    hasPassword: {
+      type: GraphQLBoolean,
     },
     passwordHint: {
       type: GraphQLString,
