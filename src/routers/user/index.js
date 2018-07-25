@@ -4,6 +4,7 @@ import enterPhone from './enter';
 import resendCode from './resend';
 import deleteUser from './delete';
 import settingUser from './setting';
+import passwordUser from './password';
 
 export default [
   loginUser,
@@ -12,4 +13,5 @@ export default [
   resendCode,
   deleteUser,
   settingUser,
+  passwordUser,
 ];

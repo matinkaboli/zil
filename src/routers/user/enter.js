@@ -44,7 +44,10 @@ router.post('/user/enter', login, reqs, async (req, res) => {
       'The verification code has been sent to his number';
 
     return res.json({
-      isUserNew,
+      user: {
+        new: isUserNew,
+        password: !!user.password,
+      },
       description,
       statusCode: 200,
     });
