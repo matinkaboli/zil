@@ -12,7 +12,7 @@ const router = new Router();
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
 const reqs = requirements({
-  value: 'shop_id',
+  value: 'shopId',
   required: true,
 });
 
@@ -20,7 +20,7 @@ router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req,
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shop_id,
+      _id: req.body.shopId,
     });
 
     if (!shop) {

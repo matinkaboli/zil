@@ -10,15 +10,15 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'new_password',
+    value: 'newPassword',
     required: true,
   },
   {
-    value: 'old_password',
+    value: 'oldPassword',
     required: false,
   },
   {
-    value: 'password_hint',
+    value: 'passwordHint',
     required: false,
   },
 );
@@ -36,7 +36,7 @@ router.post('/user/setting/password', logged, reqs, async (req, res) => {
     }
 
     if (user.password) {
-      if (!req.body.old_password) {
+      if (!req.body.oldPassword) {
         return res.json({
           statusCode: 417,
           requirement: 'old_password',
@@ -44,7 +44,7 @@ router.post('/user/setting/password', logged, reqs, async (req, res) => {
         });
       }
 
-      if (hmac(req.body.old_password, hashKey) !== user.password) {
+      if (hmac(req.body.oldPassword, hashKey) !== user.password) {
         return res.json({
           statusCode: 401,
           entity: 'old_password',
@@ -53,10 +53,10 @@ router.post('/user/setting/password', logged, reqs, async (req, res) => {
       }
     }
 
-    user.password = hmac(req.body.new_password, hashKey);
+    user.password = hmac(req.body.newPassword, hashKey);
 
-    if (req.body.password_hint) {
-      user.passwordHint = req.body.password_hint;
+    if (req.body.passwordHint) {
+      user.passwordHint = req.body.passwordHint;
     }
 
     await user.save();

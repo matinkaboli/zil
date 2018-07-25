@@ -12,7 +12,7 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'password',
+    value: 'code',
     required: true,
   },
   {
@@ -20,7 +20,7 @@ const reqs = requirements(
     required: true,
   },
   {
-    value: 'code',
+    value: 'password',
     required: true,
   },
 );

@@ -11,11 +11,11 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'phone',
+    value: 'code',
     required: true,
   },
   {
-    value: 'code',
+    value: 'phone',
     required: true,
   },
 );

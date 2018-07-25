@@ -24,11 +24,11 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'manufacturer',
+    value: 'description',
     required: false,
   },
   {
-    value: 'description',
+    value: 'manufacturer',
     required: false,
   },
 );

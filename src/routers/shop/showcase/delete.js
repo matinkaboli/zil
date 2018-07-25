@@ -9,11 +9,11 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'shop_id',
+    value: 'shopId',
     required: true,
   },
   {
-    value: 'showcase_id',
+    value: 'showcaseId',
     required: true,
   },
 );
@@ -22,7 +22,7 @@ router.post('/shop/showcase/delete', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shop_id,
+      _id: req.body.shopId,
     });
 
     if (!shop) {
@@ -35,7 +35,7 @@ router.post('/shop/showcase/delete', logged, reqs, async (req, res) => {
 
     const showcase = await Showcase.findById({
       shop: shop._id,
-      _id: req.body.showcase_id,
+      _id: req.body.showcaseId,
     });
 
     if (!showcase) {

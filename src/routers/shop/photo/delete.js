@@ -12,7 +12,7 @@ const reqs = requirements(
     required: true,
   },
   {
-    value: 'shop_id',
+    value: 'shopId',
     required: true,
   },
 );
@@ -21,7 +21,7 @@ router.post('/shop/photo/delete', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shop_id,
+      _id: req.body.shopId,
     });
 
     if (!shop) {

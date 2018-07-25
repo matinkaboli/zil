@@ -23,11 +23,15 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'expiration',
-    required: false,
+    value: 'price',
+    required: true,
   },
   {
-    value: 'manufacturer',
+    value: 'shopId',
+    required: true,
+  },
+  {
+    value: 'expiration',
     required: false,
   },
   {
@@ -35,12 +39,8 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'shop_id',
-    required: true,
-  },
-  {
-    value: 'price',
-    required: true,
+    value: 'manufacturer',
+    required: false,
   },
   {
     value: 'discountedPrice',
@@ -51,7 +51,7 @@ const reqs = requirements(
 router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async (req, res) => {
   try {
     const shop = await Shop.find({
-      _id: req.body.shop_id,
+      _id: req.body.shopId,
       admin: req.user,
     });
 
@@ -94,7 +94,7 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     const showcaseValues = {
       shelf: shelf._id,
       price: req.body.price,
-      shop: req.body.shop_id,
+      shop: req.body.shopId,
     };
 
     if (req.body.discountedPrice) {
