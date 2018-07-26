@@ -15,12 +15,12 @@ export default async (parent, args) => {
 
   if (args.page) {
     const [skip, limit] = page(args.page);
-    const shelfs = await Shelf.find(query).skip(skip).limit(limit);
+    const shelves = await Shelf.find(query).skip(skip).limit(limit);
 
-    return shelfs;
+    return shelves;
   }
 
-  const shelfs = await Shelf.find(query);
+  const shelves = await Shelf.find(query);
 
-  return shelfs;
+  return shelves;
 };

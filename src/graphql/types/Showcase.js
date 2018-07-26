@@ -1,4 +1,9 @@
-import { GraphQLInt, GraphQLString, GraphQLObjectType } from 'graphql';
+import {
+  GraphQLID,
+  GraphQLInt,
+  GraphQLString,
+  GraphQLObjectType,
+} from 'graphql';
 
 import ShowType from './Shop';
 import ShelfType from './Shelf';
@@ -6,6 +11,9 @@ import ShelfType from './Shelf';
 export default new GraphQLObjectType({
   name: 'Showcase',
   fields: () => ({
+    _id: {
+      type: GraphQLID,
+    },
     shop: {
       type: ShowType,
     },
