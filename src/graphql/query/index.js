@@ -3,7 +3,7 @@ import { GraphQLObjectType } from 'graphql';
 import shop from './shop/one';
 import user from './user/one';
 import shelf from './shelf/one';
-import shelfs from './shelf/many';
+import shelves from './shelf/many';
 import myShops from './shop/mine';
 
 export default new GraphQLObjectType({
@@ -12,7 +12,7 @@ export default new GraphQLObjectType({
     shop,
     user,
     shelf,
-    shelfs,
+    shelves,
     myShops,
   },
 });
