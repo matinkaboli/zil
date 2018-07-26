@@ -6,6 +6,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import graphql from 'express-graphql';
+import graphqlDepthLimit from 'graphql-depth-limit';
 
 import schema from './graphql';
 import routers from './routers';
@@ -44,6 +45,7 @@ app.use('/graphql', (req, res) =>
   graphql({
     schema,
     context: { req, res },
+    validationRules: [graphqlDepthLimit(5)],
     graphiql: process.env.NODE_ENV === 'development',
   })(req, res));
 
