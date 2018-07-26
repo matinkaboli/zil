@@ -31,6 +31,7 @@ router.post('/user/token/check', logged, reqs, async (req, res) => {
   }
 
   return res.json({
+    _id: user._id,
     statusCode: 200,
     description: 'JWT token is correct.',
   });
