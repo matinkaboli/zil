@@ -15,7 +15,7 @@ export default mongoose.model('Showcase', Schema({
   },
   shelf: {
     trim: true,
-    ref: 'Product',
+    ref: 'Shelf',
     required: true,
     type: Schema.Types.ObjectId,
   },

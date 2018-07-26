@@ -6,12 +6,20 @@ export default async (parent, args) => {
 
   if (args.page) {
     const [skip, limit] = page(args.page);
-    const showcases = await Showcase.find(query).skip(skip).limit(limit);
+    const showcases = await Showcase
+      .find(query)
+      .populate('shelf')
+      .skip(skip)
+      .limit(limit)
+      .exec();
 
     return showcases;
   }
 
-  const showcases = await Showcase.find(query);
+  const showcases = await Showcase
+    .find(query)
+    .populate('shelf')
+    .exec();
 
   return showcases;
 };
