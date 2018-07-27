@@ -15,8 +15,7 @@ router.post('/shelf/delete', reqs, async (req, res) => {
     const shelf = await Shelf.findById(req.body._id);
 
     if (!shelf) {
-      return res.json({
-        statusCode: 404,
+      return res.status(404).json({
         entity: 'shelf',
         description: 'Shelf not found.',
       });
@@ -24,13 +23,11 @@ router.post('/shelf/delete', reqs, async (req, res) => {
 
     await shelf.remove();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'Shelf has been deleted successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

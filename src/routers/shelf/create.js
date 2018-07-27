@@ -63,13 +63,11 @@ router.post('/shelf/create', upload.single('photo'), reqs, async (req, res) => {
   try {
     await shelf.save();
 
-    return res.json({
-      statusCode: 201,
+    return res.status(201).json({
       description: 'Shelf has been created successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });
