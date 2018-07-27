@@ -8,13 +8,11 @@ export default async (req, res, next) => {
       return next();
     }
 
-    return res.json({
-      statusCode: 403,
+    return res.status(403).json({
       description: 'You don\'t have permission to do this.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 403,
+    return res.status(403).json({
       description: 'You don\'t have permission to do this.',
     });
   }

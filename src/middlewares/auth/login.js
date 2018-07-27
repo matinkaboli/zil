@@ -5,8 +5,7 @@ export default async (req, res, next) => {
     return next();
   }
 
-  return res.json({
-    statusCode: 401,
+  return res.status(401).json({
     description: 'You cannot do that while you have logged in.',
   });
 };
