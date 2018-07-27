@@ -1,10 +1,12 @@
 import 'babel-polyfill';
 import { join } from 'path';
 import morgan from 'morgan';
+import helmet from 'helmet';
 import process from 'process';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import graphql from 'express-graphql';
 import graphqlDepthLimit from 'graphql-depth-limit';
 
@@ -27,6 +29,12 @@ mongoose.connection.on('disconnected', () => {
 
 const app = express();
 
+// Gzip Compression
+app.use(compression());
+
+// Helmet
+app.use(helmet());
+
 // Static Files
 app.use('/static', express.static(join(__dirname, './static')));
 
@@ -36,9 +44,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Body Parser
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: 10000000 }));
-
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // GraphQL API
 app.use('/graphql', (req, res) =>
@@ -53,6 +60,22 @@ app.use('/graphql', (req, res) =>
 for (const router of routers) {
   app.use(router);
 }
+
+// 404 Not Found
+app.use((req, res) => {
+  res.status(404).send();
+});
+
+// Handle Error
+app.use((error, req, res, next) => {
+  if (error instanceof SyntaxError) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+
+  return next();
+});
 
 // Port
 app.listen(port);
