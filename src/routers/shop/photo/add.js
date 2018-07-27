@@ -24,16 +24,14 @@ router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req,
     });
 
     if (!shop) {
-      return res.json({
+      return res.status(404).json({
         entity: 'shop',
-        statusCode: 404,
         description: 'Shop not found.',
       });
     }
 
     if (!req.file) {
-      return res.json({
-        statusCode: 417,
+      return res.status(417).json({
         requirement: 'photo',
         description: 'The server needs a photo, but the client did not send it',
       });
@@ -43,13 +41,11 @@ router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req,
 
     await shop.save();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'Photo has been successfully added to the shop.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

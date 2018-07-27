@@ -77,14 +77,12 @@ router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, re
   try {
     await shop.save();
 
-    return res.json({
+    return res.status(201).json({
       _id: shop._id,
-      statusCode: 201,
       description: 'Shop has been created successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

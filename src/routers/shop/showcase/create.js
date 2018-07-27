@@ -32,8 +32,7 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     const shelf = await Shelf.findById(req.body.shelfId);
 
     if (!shelf) {
-      return res.json({
-        statusCode: 404,
+      return res.status(404).json({
         entity: 'shelf',
         description: 'Shelf not found',
       });
@@ -45,9 +44,8 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     });
 
     if (!shop) {
-      return res.json({
+      return res.status(404).json({
         entity: 'shop',
-        statusCode: 404,
         description: 'Shop not found',
       });
     }
@@ -70,13 +68,11 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
 
     shop.save();
 
-    return res.json({
-      statusCode: 201,
+    return res.status(201).json({
       description: 'Showcase has been created in the shop successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

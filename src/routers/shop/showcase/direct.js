@@ -56,9 +56,8 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     });
 
     if (!shop) {
-      return res.json({
+      return res.status(404).json({
         entity: 'shop',
-        statusCode: 404,
         description: 'Shop not found.',
       });
     }
@@ -109,13 +108,11 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
 
     await shop.save();
 
-    return res.json({
-      statusCode: 201,
+    return res.status(201).json({
       description: 'Showcase has been created',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

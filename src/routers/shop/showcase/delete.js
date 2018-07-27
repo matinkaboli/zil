@@ -26,9 +26,8 @@ router.post('/shop/showcase/delete', logged, reqs, async (req, res) => {
     });
 
     if (!shop) {
-      return res.json({
+      return res.status(404).json({
         entity: 'shop',
-        statusCode: 404,
         description: 'Shop not found.',
       });
     }
@@ -39,8 +38,7 @@ router.post('/shop/showcase/delete', logged, reqs, async (req, res) => {
     });
 
     if (!showcase) {
-      return res.json({
-        statusCode: 404,
+      return res.status(404).json({
         entity: 'showcase',
         description: 'Showcase not found.',
       });
@@ -52,13 +50,11 @@ router.post('/shop/showcase/delete', logged, reqs, async (req, res) => {
 
     shop.save();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'Showcase has been deleted successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

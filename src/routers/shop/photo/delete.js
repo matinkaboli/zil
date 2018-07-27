@@ -25,17 +25,15 @@ router.post('/shop/photo/delete', logged, reqs, async (req, res) => {
     });
 
     if (!shop) {
-      return res.json({
+      return res.status(404).json({
         entity: 'shop',
-        statusCode: 404,
         description: 'Shop not found.',
       });
     }
 
     if (!shop.includes(req.body.photo)) {
-      return res.json({
+      return res.status(404).json({
         entity: 'photo',
-        statusCode: 404,
         description: 'Photo not found',
       });
     }
@@ -44,13 +42,11 @@ router.post('/shop/photo/delete', logged, reqs, async (req, res) => {
 
     await shop.save();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'Photo has been deleted successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });
