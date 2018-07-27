@@ -28,25 +28,22 @@ router.post('/user/setting/password', logged, reqs, async (req, res) => {
     const user = await User.findById(req.user);
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         entity: 'user',
-        statusCode: 404,
         description: 'User not found.',
       });
     }
 
     if (user.password) {
       if (!req.body.oldPassword) {
-        return res.json({
-          statusCode: 417,
+        return res.status(417).json({
           requirement: 'old_password',
           description: 'The server needs a value named *old_password* but the client did not send it.',
         });
       }
 
       if (hmac(req.body.oldPassword, hashKey) !== user.password) {
-        return res.json({
-          statusCode: 401,
+        return res.status(401).json({
           entity: 'old_password',
           description: 'Old password does not match.',
         });
@@ -61,13 +58,11 @@ router.post('/user/setting/password', logged, reqs, async (req, res) => {
 
     await user.save();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'User\'s password has been changed successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

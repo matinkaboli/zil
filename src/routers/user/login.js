@@ -25,9 +25,8 @@ router.post('/user/login', login, reqs, async (req, res) => {
     const user = await User.findOne({ phone: req.body.phone });
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         entity: 'user',
-        statusCode: 404,
         description: 'User not found.',
       });
     }
@@ -47,22 +46,19 @@ router.post('/user/login', login, reqs, async (req, res) => {
     attempt.save();
 
     if (attempt.attempts > 10) {
-      return res.json({
-        statusCode: 429,
+      return res.status(429).json({
         description: 'Too many requests to log in. Wait for 1 hour.',
       });
     }
 
     if (!otp.verify(req.body.code)) {
-      return res.json({
+      return res.status(498).json({
         entity: 'code',
-        statusCode: 498,
         description: 'Code is invalid.',
       });
     }
 
     const response = {
-      statusCode: 200,
       password: !!user.password,
       description: 'Code is valid.',
     };
@@ -71,10 +67,9 @@ router.post('/user/login', login, reqs, async (req, res) => {
       response.token = await jwt.sign({ _id: user._id });
     }
 
-    return res.json(response);
+    return res.status(200).json(response);
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened',
     });

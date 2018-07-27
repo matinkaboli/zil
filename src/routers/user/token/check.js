@@ -15,24 +15,21 @@ router.post('/user/token/check', logged, reqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {
-    return res.json({
+    return res.status(404).json({
       entity: 'user',
-      statusCode: 404,
       description: 'User not found.',
     });
   }
 
   if (user._id.toString() !== req.user) {
-    return res.json({
+    return res.status(401).json({
       entity: 'user',
-      statusCode: 401,
       description: 'You do not have the right token.',
     });
   }
 
-  return res.json({
+  return res.status(200).json({
     _id: user._id,
-    statusCode: 200,
     description: 'JWT token is correct.',
   });
 });

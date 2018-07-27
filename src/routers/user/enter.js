@@ -16,9 +16,8 @@ const reqs = requirements({
 router.post('/user/enter', login, reqs, async (req, res) => {
   try {
     if (!validatePhone(req.body.phone)) {
-      return res.json({
+      return res.status(422).json({
         entity: 'phone',
-        statusCode: 422,
         description: 'Phone is not valid. It must be 10 digits.',
       });
     }
@@ -43,15 +42,13 @@ router.post('/user/enter', login, reqs, async (req, res) => {
       'User created and the verification code has been sent to his number' :
       'The verification code has been sent to his number';
 
-    return res.json({
+    return res.status(200).json({
       isUserNew,
       description,
       _id: user._id,
-      statusCode: 200,
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened',
     });

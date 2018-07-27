@@ -16,9 +16,8 @@ const reqs = requirements({
 router.post('/user/resend', login, reqs, async (req, res) => {
   try {
     if (!validatePhone(req.body.phone)) {
-      return res.json({
+      return res.status(422).json({
         entity: 'phone',
-        statusCode: 422,
         description: 'Phone is not valid. It must be 10 digits.',
       });
     }
@@ -26,22 +25,19 @@ router.post('/user/resend', login, reqs, async (req, res) => {
     const user = await User.findOne({ phone: req.body.phone });
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         entity: 'user',
-        statusCode: 404,
         description: 'User not found.',
       });
     }
 
     await verifySms(req.body.phone);
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'The verification link has been sent to user\'s phone number',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened',
     });

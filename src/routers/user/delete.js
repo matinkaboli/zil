@@ -11,9 +11,8 @@ router.post('/user/delete', logged, async (req, res) => {
     const user = await User.findById(req.user);
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         entity: 'user',
-        statusCode: 404,
         description: 'User not found',
       });
     }
@@ -26,13 +25,11 @@ router.post('/user/delete', logged, async (req, res) => {
 
     await user.remove();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'User has been deleted successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened',
     });

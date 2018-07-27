@@ -30,37 +30,32 @@ router.post('/user/password', login, reqs, async (req, res) => {
     const user = await User.findOne({ phone: req.body.phone });
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         entity: 'user',
-        statusCode: 404,
         description: 'User not found.',
       });
     }
 
     if (!otp.verify(req.body.code)) {
-      return res.json({
+      return res.status(498).json({
         entity: 'code',
-        statusCode: 498,
         description: 'Code is invalid.',
       });
     }
 
     if (hmac(req.body.password, hashKey) !== user.password) {
-      return res.json({
-        statusCode: 401,
+      return res.status(401).json({
         entity: 'password',
         description: 'Password is incorrect.',
       });
     }
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'Password is correct.',
       token: await jwt.sign({ _id: user._id }),
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened',
     });

@@ -16,9 +16,8 @@ router.post('/user/setting/name', logged, reqs, async (req, res) => {
     const user = await User.findById(req.user);
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         entity: 'user',
-        statusCode: 404,
         description: 'User not found',
       });
     }
@@ -27,13 +26,11 @@ router.post('/user/setting/name', logged, reqs, async (req, res) => {
 
     await user.save();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'User\' name has been changed successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
     });

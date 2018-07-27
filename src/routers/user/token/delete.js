@@ -11,13 +11,11 @@ router.post('/user/token/delete', logged, async (req, res) => {
 
     await token.remove();
 
-    return res.json({
-      statusCode: 200,
+    return res.status(200).json({
       description: 'JWT token has been deleted successfully.',
     });
   } catch (error) {
-    return res.json({
-      statusCode: 520,
+    return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened',
     });
