@@ -38,11 +38,6 @@ export default mongoose.model('Shop', Schema({
       required: false,
     },
   },
-  followers: [{
-    trim: true,
-    ref: 'User',
-    type: Schema.Types.ObjectId,
-  }],
   createdAt: {
     trim: true,
     type: Date,
