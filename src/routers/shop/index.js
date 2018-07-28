@@ -3,6 +3,7 @@ import createShop from './create';
 import deleteShop from './delete';
 import updateShop from './update';
 import showcase from './showcase';
+import followShop from './follow';
 
 export default [
   showcase,
@@ -10,4 +11,5 @@ export default [
   createShop,
   deleteShop,
   updateShop,
+  followShop,
 ];
