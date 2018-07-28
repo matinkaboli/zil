@@ -29,6 +29,11 @@ export default mongoose.model('Order', Schema({
       type: String,
       required: true,
     },
+    time: {
+      trim: true,
+      type: String,
+      required: true,
+    },
   },
   createdAt: {
     trim: true,

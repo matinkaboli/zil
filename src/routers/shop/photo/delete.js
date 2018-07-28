@@ -8,11 +8,11 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: 'photo',
+    value: '_id',
     required: true,
   },
   {
-    value: 'shopId',
+    value: 'photo',
     required: true,
   },
 );
@@ -21,7 +21,7 @@ router.post('/shop/photo/delete', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shopId,
+      _id: req.body._id,
     });
 
     if (!shop) {
