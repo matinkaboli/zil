@@ -12,7 +12,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/shop/follow/create', logged, reqs, async (req, res) => {
+router.post('/shop/follow/delete', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findById(req.body._id);
 
@@ -23,25 +23,25 @@ router.post('/shop/follow/create', logged, reqs, async (req, res) => {
       });
     }
 
-    let follow = await Follow.findOne({
+    const follow = await Follow.findOne({
       user: req.user,
       shop: shop._id,
     });
 
     if (!follow) {
-      follow = new Follow({
-        user: req.user,
-        shop: shop._id,
+      return res.status(404).json({
+        entity: 'follow',
+        description: 'Follow not found.',
       });
-
-      shop.followersCount += 1;
-
-      shop.save();
-      await follow.save();
     }
 
-    return res.status(201).json({
-      description: 'User followed the shop.',
+    shop.followersCount -= 1;
+
+    shop.save();
+    await follow.remove();
+
+    return res.status(200).json({
+      description: 'User unfollowed the shop.',
     });
   } catch (error) {
     return res.status(520).json({
