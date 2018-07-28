@@ -2,27 +2,16 @@ import {
   GraphQLID,
   GraphQLInt,
   GraphQLList,
-  GraphQLFloat,
   GraphQLString,
   GraphQLObjectType,
 } from 'graphql';
 
 import UserType from './User';
 import ShowcaseType from './Showcase';
+import LocationType from './Location';
 import showcaseResolve from './resolves/showcase';
 import showcasesResolve from './resolves/showcases';
 
-const LocationType = new GraphQLObjectType({
-  name: 'Location',
-  fields: () => ({
-    lat: {
-      type: GraphQLFloat,
-    },
-    lng: {
-      type: GraphQLFloat,
-    },
-  }),
-});
 
 export default new GraphQLObjectType({
   name: 'Shop',

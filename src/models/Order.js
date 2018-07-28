@@ -13,6 +13,23 @@ export default mongoose.model('Order', Schema({
     required: true,
     type: Schema.Types.ObjectId,
   },
+  delivery: {
+    lat: {
+      trim: true,
+      type: Number,
+      required: true,
+    },
+    lng: {
+      trim: true,
+      type: Number,
+      required: true,
+    },
+    address: {
+      trim: true,
+      type: String,
+      required: true,
+    },
+  },
   createdAt: {
     trim: true,
     type: Date,
