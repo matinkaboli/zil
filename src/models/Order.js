@@ -13,6 +13,13 @@ export default mongoose.model('Order', Schema({
     required: true,
     type: Schema.Types.ObjectId,
   },
+  status: {
+    trim: true,
+    default: 0,
+    type: Number,
+    required: true,
+    enum: [0, 1, 2],
+  },
   delivery: {
     lat: {
       trim: true,
