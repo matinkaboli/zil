@@ -33,7 +33,7 @@ router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req,
     if (!req.file) {
       return res.status(417).json({
         requirement: 'photo',
-        description: 'The server needs a photo, but the client did not send it',
+        description: 'The server needs a photo, but the client did not send it.',
       });
     }
 
@@ -42,7 +42,7 @@ router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req,
     await shop.save();
 
     return res.status(200).json({
-      description: 'Photo has been successfully added to the shop.',
+      description: 'Photo has been added to the shop successfully.',
     });
   } catch (error) {
     return res.status(520).json({

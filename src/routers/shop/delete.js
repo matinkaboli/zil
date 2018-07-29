@@ -21,7 +21,7 @@ router.post('/shop/delete', logged, reqs, async (req, res) => {
     if (!shop) {
       return res.status(404).json({
         entity: 'shop',
-        description: 'Shop not found',
+        description: 'Shop not found.',
       });
     }
 

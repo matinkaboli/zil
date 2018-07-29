@@ -18,7 +18,7 @@ router.post('/user/setting/name', logged, reqs, async (req, res) => {
     if (!user) {
       return res.status(404).json({
         entity: 'user',
-        description: 'User not found',
+        description: 'User not found.',
       });
     }
 

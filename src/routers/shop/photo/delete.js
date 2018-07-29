@@ -34,7 +34,7 @@ router.post('/shop/photo/delete', logged, reqs, async (req, res) => {
     if (!shop.includes(req.body.photo)) {
       return res.status(404).json({
         entity: 'photo',
-        description: 'Photo not found',
+        description: 'Photo not found.',
       });
     }
 

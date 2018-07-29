@@ -34,7 +34,7 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     if (!shelf) {
       return res.status(404).json({
         entity: 'shelf',
-        description: 'Shelf not found',
+        description: 'Shelf not found.',
       });
     }
 
@@ -46,7 +46,7 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     if (!shop) {
       return res.status(404).json({
         entity: 'shop',
-        description: 'Shop not found',
+        description: 'Shop not found.',
       });
     }
 

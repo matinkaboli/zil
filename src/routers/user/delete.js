@@ -13,7 +13,7 @@ router.post('/user/delete', logged, async (req, res) => {
     if (!user) {
       return res.status(404).json({
         entity: 'user',
-        description: 'User not found',
+        description: 'User not found.',
       });
     }
 
@@ -31,7 +31,7 @@ router.post('/user/delete', logged, async (req, res) => {
   } catch (error) {
     return res.status(520).json({
       error: error.message,
-      description: 'Unrecognizable error happened',
+      description: 'Unrecognizable error happened.',
     });
   }
 });

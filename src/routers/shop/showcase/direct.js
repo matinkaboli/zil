@@ -109,7 +109,7 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     await shop.save();
 
     return res.status(201).json({
-      description: 'Showcase has been created',
+      description: 'Showcase has been created successfully.',
     });
   } catch (error) {
     return res.status(520).json({

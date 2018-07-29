@@ -34,12 +34,12 @@ router.post('/user/resend', login, reqs, async (req, res) => {
     await verifySms(req.body.phone);
 
     return res.status(200).json({
-      description: 'The verification link has been sent to user\'s phone number',
+      description: 'The verification link has been sent to user\'s phone number.',
     });
   } catch (error) {
     return res.status(520).json({
       error: error.message,
-      description: 'Unrecognizable error happened',
+      description: 'Unrecognizable error happened.',
     });
   }
 });
