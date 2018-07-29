@@ -3,6 +3,7 @@ import {
   GraphQLInt,
   GraphQLList,
   GraphQLString,
+  GraphQLBoolean,
   GraphQLObjectType,
 } from 'graphql';
 
@@ -13,6 +14,7 @@ import LocationType from './Location';
 import showcaseResolve from './resolves/showcase';
 import showcasesResolve from './resolves/showcases';
 import followersResolve from './resolves/followers';
+import isFollowedResolve from './resolves/is-followed';
 
 export default new GraphQLObjectType({
   name: 'Shop',
@@ -46,6 +48,15 @@ export default new GraphQLObjectType({
       },
       resolve: followersResolve,
       type: new GraphQLList(FollowType),
+    },
+    isFollowed: {
+      args: {
+        _id: {
+          type: GraphQLID,
+        },
+      },
+      resolve: isFollowedResolve,
+      type: GraphQLBoolean,
     },
     showcases: {
       type: new GraphQLList(ShowcaseType),
