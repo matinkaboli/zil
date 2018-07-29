@@ -31,12 +31,12 @@ export default mongoose.model('Order', Schema({
       type: Number,
       required: true,
     },
-    address: {
+    time: {
       trim: true,
       type: String,
       required: true,
     },
-    time: {
+    address: {
       trim: true,
       type: String,
       required: true,
