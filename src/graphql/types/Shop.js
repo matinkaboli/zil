@@ -7,11 +7,12 @@ import {
 } from 'graphql';
 
 import UserType from './User';
+import FollowType from './Follow';
 import ShowcaseType from './Showcase';
 import LocationType from './Location';
 import showcaseResolve from './resolves/showcase';
 import showcasesResolve from './resolves/showcases';
-
+import followersResolve from './resolves/followers';
 
 export default new GraphQLObjectType({
   name: 'Shop',
@@ -38,7 +39,13 @@ export default new GraphQLObjectType({
       type: GraphQLString,
     },
     followers: {
-      type: new GraphQLList(GraphQLID),
+      args: {
+        page: {
+          type: GraphQLInt,
+        },
+      },
+      resolve: followersResolve,
+      type: new GraphQLList(FollowType),
     },
     showcases: {
       type: new GraphQLList(ShowcaseType),
