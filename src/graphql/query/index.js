@@ -5,6 +5,8 @@ import user from './user/one';
 import shelf from './shelf/one';
 import myShops from './shop/mine';
 import shelves from './shelf/many';
+import showcase from './showcase/one';
+import showcases from './showcase/many';
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -14,5 +16,7 @@ export default new GraphQLObjectType({
     shelf,
     shelves,
     myShops,
+    showcase,
+    showcases,
   },
 });
