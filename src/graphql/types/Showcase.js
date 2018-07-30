@@ -5,6 +5,7 @@ import {
   GraphQLObjectType,
 } from 'graphql';
 
+import shopResolve from './resolves/shop';
 import ShowType from './Shop';
 import ShelfType from './Shelf';
 
@@ -16,6 +17,7 @@ export default new GraphQLObjectType({
     },
     shop: {
       type: ShowType,
+      resolve: shopResolve,
     },
     price: {
       type: GraphQLInt,
