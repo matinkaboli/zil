@@ -9,6 +9,14 @@ const router = new Router();
 
 const reqs = requirements(
   {
+    value: 'name',
+    required: false,
+  },
+  {
+    value: 'isbn',
+    required: false,
+  },
+  {
     value: 'price',
     required: true,
   },
@@ -17,8 +25,20 @@ const reqs = requirements(
     required: true,
   },
   {
+    value: 'expiration',
+    required: false,
+  },
+  {
     value: 'showcaseId',
     required: true,
+  },
+  {
+    value: 'description',
+    required: false,
+  },
+  {
+    value: 'manufacturer',
+    required: false,
   },
   {
     value: 'discountedPrice',
@@ -52,8 +72,28 @@ router.post('/shop/showcase/update', logged, reqs, async (req, res) => {
       });
     }
 
+    if (req.body.name) {
+      showcase.shelf.name = req.body.name;
+    }
+
+    if (req.body.isbn) {
+      showcase.shelf.isbn = req.body.isbn;
+    }
+
     if (req.body.price) {
       showcase.price = req.body.price;
+    }
+
+    if (req.body.expiration) {
+      showcase.shelf.expiration = req.body.expiration;
+    }
+
+    if (req.body.description) {
+      showcase.shelf.description = req.body.description;
+    }
+
+    if (req.body.manufacturer) {
+      showcase.shelf.manufacturer = req.body.manufacturer;
     }
 
     if (req.body.discountedPrice) {

@@ -62,36 +62,36 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
       });
     }
 
-    const Shelfvalues = {
+    const shelfvalues = {
       name: req.body.name,
     };
 
     if (req.file) {
-      Shelfvalues.photo = req.file.filename;
+      shelfvalues.photo = req.file.filename;
     }
 
     if (req.body.isbn) {
-      Shelfvalues.isbn = req.body.isbn;
+      shelfvalues.isbn = req.body.isbn;
     }
 
     if (req.body.expiration) {
-      Shelfvalues.expiration = req.body.expiration;
+      shelfvalues.expiration = req.body.expiration;
     }
 
     if (req.body.description) {
-      Shelfvalues.description = req.body.description;
+      shelfvalues.description = req.body.description;
     }
 
     if (req.body.manufacturer) {
-      Shelfvalues.manufacturer = req.body.manufacturer;
+      shelfvalues.manufacturer = req.body.manufacturer;
     }
 
-    const shelf = new Shelf(Shelfvalues);
+    const shelf = new Shelf(shelfvalues);
 
     shelf.save();
 
     const showcaseValues = {
-      shelf: shelf._id,
+      shelf: shelfvalues,
       price: req.body.price,
       shop: req.body.shopId,
     };
@@ -102,11 +102,10 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
 
     const showcase = new Showcase(showcaseValues);
 
-    await showcase.save();
-
     shop.showcaseCount += 1;
 
-    await shop.save();
+    await showcase.save();
+    shop.save();
 
     return res.status(201).json({
       description: 'Showcase has been created successfully.',

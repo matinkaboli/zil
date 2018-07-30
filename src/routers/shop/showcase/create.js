@@ -53,8 +53,30 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     const values = {
       price: req.body.price,
       shop: req.body.shopId,
-      shelf: req.body.shelfId,
+      shelf: {
+        name: shelf.name,
+      },
     };
+
+    if (shelf.isbn) {
+      values.shelf.isbn = shelf.isbn;
+    }
+
+    if (shelf.photo) {
+      values.shelf.photo = shelf.photo;
+    }
+
+    if (shelf.expiration) {
+      values.shelf.expiration = shelf.expiration;
+    }
+
+    if (shelf.description) {
+      values.shelf.description = shelf.description;
+    }
+
+    if (shelf.manufacturer) {
+      values.shelf.manufacturer = shelf.manufacturer;
+    }
 
     if (req.body.discountedPrice) {
       values.discountedPrice = req.body.discountedPrice;
@@ -62,10 +84,9 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
 
     const newShowcase = new Showcase(values);
 
-    await newShowcase.save();
-
     shop.showcaseCount += 1;
 
+    await newShowcase.save();
     shop.save();
 
     return res.status(201).json({

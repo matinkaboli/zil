@@ -14,10 +14,37 @@ export default mongoose.model('Showcase', Schema({
     required: true,
   },
   shelf: {
-    trim: true,
-    ref: 'Shelf',
-    required: true,
-    type: Schema.Types.ObjectId,
+    name: {
+      trim: true,
+      type: String,
+      required: true,
+      maxlength: 100,
+    },
+    isbn: {
+      trim: true,
+      type: String,
+      maxlength: 50,
+    },
+    photo: {
+      trim: true,
+      type: String,
+      maxlength: 150,
+    },
+    expiration: {
+      trim: true,
+      type: String,
+      maxlength: 100,
+    },
+    description: {
+      trim: true,
+      type: String,
+      maxlength: 200,
+    },
+    manufacturer: {
+      trim: true,
+      type: String,
+      maxlength: 150,
+    },
   },
   createdAt: {
     trim: true,
