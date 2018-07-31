@@ -3,6 +3,7 @@ import { Router } from 'express';
 import Shop from 'Root/models/Shop';
 import Order from 'Root/models/Order';
 import Follow from 'Root/models/Follow';
+import OrderList from 'Root/models/OrderList';
 import logged from 'Root/middlewares/auth/logged';
 import requirements from 'Root/middlewares/requirements';
 
@@ -23,6 +24,10 @@ const reqs = requirements(
   },
   {
     value: 'time',
+    required: true,
+  },
+  {
+    value: 'items',
     required: true,
   },
   {
@@ -67,6 +72,40 @@ router.post('/order/create', logged, reqs, async (req, res) => {
     });
 
     await order.save();
+
+    const { items } = JSON.parse(req.body.items);
+
+    for (const i of items) {
+      if (!i.count || Number.isNaN(i.count)) {
+        return res.status(417).json({
+          requirement: 'count',
+          description: 'The server needs parameter *count* to be sent from the client.',
+        });
+      }
+
+      if (!i.price || Number.isNaN(i.price)) {
+        return res.status(417).json({
+          requirement: 'price',
+          description: 'The server needs parameter *price* to be sent from the client.',
+        });
+      }
+
+      if (!i.showcase) {
+        return res.status(417).json({
+          requirement: 'showcase',
+          description: 'The server needs parameter *showcasex* to be sent from the client.',
+        });
+      }
+
+      const orderList = new OrderList({
+        count: i.count,
+        price: i.price,
+        order: order._id,
+        showcase: i.showcase,
+      });
+
+      orderList.save();
+    }
 
     return res.status(201).json({
       description: 'Order has been created successfully.',
