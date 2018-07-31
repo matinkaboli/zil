@@ -6,7 +6,9 @@ import resolve from './resolve';
 export default {
   type: ShowcaseType,
   args: {
-    shopId: GraphQLID,
+    shopId: {
+      type: GraphQLID,
+    },
   },
   resolve,
 };
