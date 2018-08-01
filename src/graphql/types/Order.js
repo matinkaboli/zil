@@ -9,6 +9,7 @@ import UserType from './User';
 import ShopType from './Shop';
 import DeliveryType from './Delivery';
 import OrderListType from './OrderList';
+import orderListResolve from './resolves/order/order-list';
 
 export default new GraphQLObjectType({
   name: 'Order',
@@ -31,11 +32,12 @@ export default new GraphQLObjectType({
     createdAt: {
       type: GraphQLString,
     },
-    orderList: {
-      type: OrderListType,
-    },
     orderLists: {
       type: OrderListType,
+      args: {
+        page: GraphQLInt,
+      },
+      resolve: orderListResolve,
     },
   }),
 });

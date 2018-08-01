@@ -6,6 +6,7 @@ import {
 
 import OrderType from './Order';
 import ShowcaseType from './Showcase';
+import orderResolve from './resolves/order-list/order';
 import showcaseResolve from './resolves/order-list/showcase';
 
 export default new GraphQLObjectType({
@@ -16,6 +17,7 @@ export default new GraphQLObjectType({
     },
     order: {
       type: OrderType,
+      resolve: orderResolve,
     },
     count: {
       type: GraphQLInt,
