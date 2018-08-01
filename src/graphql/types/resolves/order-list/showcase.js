@@ -1,7 +1,7 @@
 import Showcase from 'Root/models/Showcase';
 
 export default async parent => {
-  console.log(parent);
-  
-  return null;
+  const showcase = await Showcase.findById(parent.showcase);
+
+  return showcase;
 };

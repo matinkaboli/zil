@@ -6,7 +6,7 @@ import {
 
 import OrderType from './Order';
 import ShowcaseType from './Showcase';
-import showcaseResolve from './resolves/order/showcase';
+import showcaseResolve from './resolves/order-list/showcase';
 
 export default new GraphQLObjectType({
   name: 'OrderList',
