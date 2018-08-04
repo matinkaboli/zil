@@ -67,15 +67,9 @@ app.use((req, res) => {
 });
 
 // Handle Error
-app.use((error, req, res, next) => {
-  if (error instanceof SyntaxError) {
-    return res.status(400).json({
-      error: error.message,
-    });
-  }
-
-  return next();
-});
+app.use((error, req, res, next) => res.status(500).json({
+  error: error.message,
+}));
 
 // Port
 app.listen(port);

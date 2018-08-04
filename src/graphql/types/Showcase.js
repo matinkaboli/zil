@@ -6,7 +6,7 @@ import {
   GraphQLObjectType,
 } from 'graphql';
 
-import shopResolve from './resolves/shop';
+import shopResolve from './resolves/showcase/shop';
 import ShowType from './Shop';
 import ShelfType from './Shelf';
 

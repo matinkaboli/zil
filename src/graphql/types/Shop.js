@@ -11,10 +11,10 @@ import UserType from './User';
 import FollowType from './Follow';
 import ShowcaseType from './Showcase';
 import LocationType from './Location';
-import showcaseResolve from './resolves/showcase';
-import showcasesResolve from './resolves/showcases';
-import followersResolve from './resolves/followers';
-import isFollowedResolve from './resolves/is-followed';
+import showcaseResolve from './resolves/shop/showcase';
+import showcasesResolve from './resolves/shop/showcases';
+import followersResolve from './resolves/shop/followers';
+import isFollowedResolve from './resolves/shop/is-followed';
 
 export default new GraphQLObjectType({
   name: 'Shop',
