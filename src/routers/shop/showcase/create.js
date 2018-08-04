@@ -11,7 +11,7 @@ const router = new Router();
 const reqs = requirements(
   {
     value: 'price',
-    required: true,
+    required: false,
   },
   {
     value: 'shopId',
@@ -51,12 +51,15 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     }
 
     const values = {
-      price: req.body.price,
       shop: req.body.shopId,
       shelf: {
         name: shelf.name,
       },
     };
+
+    if (req.body.price) {
+      values.price = req.body.price;
+    }
 
     if (shelf.isbn) {
       values.shelf.isbn = shelf.isbn;

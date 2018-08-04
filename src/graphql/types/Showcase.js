@@ -2,6 +2,7 @@ import {
   GraphQLID,
   GraphQLInt,
   GraphQLString,
+  GraphQLBoolean,
   GraphQLObjectType,
 } from 'graphql';
 
@@ -27,6 +28,9 @@ export default new GraphQLObjectType({
     },
     createdAt: {
       type: GraphQLString,
+    },
+    available: {
+      type: GraphQLBoolean,
     },
     discountedPrice: {
       type: GraphQLInt,

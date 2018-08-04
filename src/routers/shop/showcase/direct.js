@@ -24,7 +24,7 @@ const reqs = requirements(
   },
   {
     value: 'price',
-    required: true,
+    required: false,
   },
   {
     value: 'shopId',

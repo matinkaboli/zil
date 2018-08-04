@@ -11,7 +11,6 @@ export default mongoose.model('Showcase', Schema({
     trim: true,
     type: Number,
     maxlength: 30,
-    required: true,
   },
   shelf: {
     name: {
@@ -45,6 +44,12 @@ export default mongoose.model('Showcase', Schema({
       type: String,
       maxlength: 150,
     },
+  },
+  available: {
+    trim: true,
+    type: Boolean,
+    required: true,
+    default: false,
   },
   createdAt: {
     trim: true,
