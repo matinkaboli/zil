@@ -7,12 +7,6 @@ export default mongoose.model('OrderList', Schema({
     required: true,
     type: Schema.Types.ObjectId,
   },
-  showcase: {
-    trim: true,
-    required: true,
-    ref: 'Showcase',
-    type: Schema.Types.ObjectId,
-  },
   count: {
     default: 1,
     trim: true,
@@ -23,5 +17,11 @@ export default mongoose.model('OrderList', Schema({
     trim: true,
     type: Number,
     required: true,
+  },
+  showcase: {
+    trim: true,
+    required: true,
+    ref: 'Showcase',
+    type: Schema.Types.ObjectId,
   },
 }));

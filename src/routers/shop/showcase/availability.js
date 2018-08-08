@@ -24,7 +24,10 @@ const reqs = requirements(
 
 router.post('/shop/showcase/availability', logged, reqs, async (req, res) => {
   try {
-    const shop = await Shop.findById(req.body.shopId);
+    const shop = await Shop.findOne({
+      admin: req.user,
+      _id: req.body.shopId,
+    });
 
     if (!shop) {
       return res.status(404).json({
@@ -35,7 +38,6 @@ router.post('/shop/showcase/availability', logged, reqs, async (req, res) => {
 
     const showcase = await Showcase.findOne({
       shop: shop._id,
-      admin: req.user,
       _id: req.body.showcaseId,
     });
 
