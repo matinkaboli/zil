@@ -4,6 +4,7 @@ import deleteShop from './delete';
 import updateShop from './update';
 import showcase from './showcase';
 import followShop from './follow';
+import checkUsername from './checkUsername';
 
 export default [
   showcase,
@@ -12,4 +13,5 @@ export default [
   deleteShop,
   updateShop,
   followShop,
+  checkUsername,
 ];

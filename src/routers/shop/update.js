@@ -28,6 +28,10 @@ const reqs = requirements(
     required: false,
   },
   {
+    value: 'username',
+    required: false,
+  },
+  {
     value: 'description',
     required: false,
   },
@@ -69,6 +73,10 @@ router.post('/shop/update', logged, reqs, async (req, res) => {
 
     if (req.body.address) {
       shop.address = req.body.address;
+    }
+
+    if (req.body.username) {
+      shop.username = req.body.username;
     }
 
     if (req.body.description) {
