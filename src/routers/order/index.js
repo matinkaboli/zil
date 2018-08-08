@@ -1,7 +1,7 @@
 import orderCreate from './create';
-import orderCancel from './cancel';
+import orderStatus from './status';
 
 export default [
   orderCreate,
-  orderCancel,
+  orderStatus,
 ];
