@@ -27,8 +27,10 @@ export default mongoose.model('Shop', Schema({
   username: {
     trim: true,
     type: String,
+    unique: true,
     required: true,
     maxlength: 100,
+    lowercase: true,
   },
   location: {
     lat: {
