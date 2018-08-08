@@ -24,7 +24,7 @@ export default new GraphQLObjectType({
       type: UserType,
     },
     status: {
-      type: GraphQLInt,
+      type: GraphQLString,
     },
     delivery: {
       type: DeliveryType,
