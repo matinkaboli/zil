@@ -8,7 +8,7 @@ export default async (parent, args) => {
   }
 
   if (args.username) {
-    query.username = args.username;
+    query.username = args.username.toLowerCase();
   }
 
   const shop = await Shop.findOne(query).populate('admin').exec();
