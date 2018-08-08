@@ -19,7 +19,10 @@ const reqs = requirements(
 
 router.post('/order/status', logged, reqs, async (req, res) => {
   try {
-    const order = await Order.findById(req.body._id);
+    const order = await Order.findOne({
+      user: req.user,
+      _id: req.body._id,
+    });
 
     if (!order) {
       return res.status(404).json({
