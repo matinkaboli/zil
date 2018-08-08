@@ -90,7 +90,7 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     shop.showcaseCount += 1;
 
     await newShowcase.save();
-    shop.save();
+    await shop.save();
 
     return res.status(201).json({
       description: 'Showcase has been created in the shop successfully.',

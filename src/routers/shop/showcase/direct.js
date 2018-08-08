@@ -88,7 +88,7 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
 
     const shelf = new Shelf(shelfvalues);
 
-    shelf.save();
+    await shelf.save();
 
     const showcaseValues = {
       shelf: shelfvalues,
@@ -105,7 +105,7 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     shop.showcaseCount += 1;
 
     await showcase.save();
-    shop.save();
+    await shop.save();
 
     return res.status(201).json({
       description: 'Showcase has been created successfully.',
