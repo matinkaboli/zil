@@ -2,6 +2,7 @@ import multer from 'multer';
 import { Router } from 'express';
 
 import Shop from 'Root/models/Shop';
+import Follow from 'Root/models/Follow';
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
 import logged from 'Root/middlewares/auth/logged';
@@ -74,8 +75,14 @@ router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, re
 
   const shop = new Shop(values);
 
+  const follow = new Follow({
+    user: req.user,
+    shop: shop._id,
+  });
+
   try {
     await shop.save();
+    await follow.save();
 
     return res.status(201).json({
       _id: shop._id,
