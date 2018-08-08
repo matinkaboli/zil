@@ -60,9 +60,9 @@ router.post('/order/create', logged, reqs, async (req, res) => {
     }
 
     const order = new Order({
-      status: 0,
       user: req.user,
       shop: req.body._id,
+      status: 'in process',
       delivery: {
         lat: req.body.lat,
         lng: req.body.lng,

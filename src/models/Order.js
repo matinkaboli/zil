@@ -16,9 +16,9 @@ export default mongoose.model('Order', Schema({
   status: {
     trim: true,
     default: 0,
-    type: Number,
+    type: String,
     required: true,
-    enum: [0, 1, 2],
+    enum: ['deleted', 'canceled', 'completed', 'in process'],
   },
   delivery: {
     lat: {

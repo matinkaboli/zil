@@ -6,12 +6,18 @@ import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements({
-  value: '_id',
-  required: true,
-});
+const reqs = requirements(
+  {
+    value: '_id',
+    required: true,
+  },
+  {
+    value: 'status',
+    required: true,
+  },
+);
 
-router.post('/order/cancel', logged, reqs, async (req, res) => {
+router.post('/order/status', logged, reqs, async (req, res) => {
   try {
     const order = await Order.findById(req.body._id);
 
@@ -22,12 +28,12 @@ router.post('/order/cancel', logged, reqs, async (req, res) => {
       });
     }
 
-    order.status = 3;
+    order.status = req.body.status;
 
     await order.save();
 
     return res.status(200).json({
-      description: 'Order has been canceled successfully.',
+      description: 'The status of order has been changed successfully.',
     });
   } catch (error) {
     return res.status(520).json({
