@@ -34,6 +34,9 @@ export default new GraphQLObjectType({
     address: {
       type: GraphQLString,
     },
+    username: {
+      type: GraphQLString,
+    },
     location: {
       type: LocationType,
     },

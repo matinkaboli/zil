@@ -1,7 +1,17 @@
 import Shop from 'Root/models/Shop';
 
 export default async (parent, args) => {
-  const shop = await Shop.findById(args._id).populate('admin').exec();
+  const query = {};
+
+  if (args._id) {
+    query._id = args._id;
+  }
+
+  if (args.username) {
+    query.username = args.username;
+  }
+
+  const shop = await Shop.findOne(query).populate('admin').exec();
 
   return shop;
 };
