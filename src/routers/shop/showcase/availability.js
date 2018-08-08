@@ -48,7 +48,7 @@ router.post('/shop/showcase/availability', logged, reqs, async (req, res) => {
       });
     }
 
-    if (!showcase.price || !showcase.discountedPrice) {
+    if (!showcase.price && !showcase.discountedPrice) {
       return res.status(401).json({
         description: 'The showcase does not have price or discountedPrice.',
       });
