@@ -1,9 +1,14 @@
+import multer from 'multer';
 import { Router } from 'express';
 
 import Shelf from 'Root/models/Shelf';
+import { uploadDir } from 'Root/config';
+import storage from 'Root/utils/storage';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
+
+const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
 const reqs = requirements(
   {
@@ -32,7 +37,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shelf/update', reqs, async (req, res) => {
+router.post('/shelf/update', reqs, upload.single('photo'), async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.body._id);
 
@@ -49,6 +54,10 @@ router.post('/shelf/update', reqs, async (req, res) => {
 
     if (req.body.name) {
       shelf.name = req.body.name;
+    }
+
+    if (req.file) {
+      shelf.photo = req.file.filename;
     }
 
     if (req.body.expiration) {
