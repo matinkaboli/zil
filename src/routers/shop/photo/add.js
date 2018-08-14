@@ -16,7 +16,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/shop/photo/add', logged, reqs, upload.single('photo'), async (req, res) => {
+router.post('/shop/photo/add', logged, upload.single('photo'), reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
