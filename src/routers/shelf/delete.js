@@ -6,7 +6,7 @@ import requirements from 'Root/middlewares/requirements';
 const router = new Router();
 
 const reqs = requirements({
-  type: '_id',
+  value: '_id',
   required: true,
 });
 
