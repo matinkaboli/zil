@@ -8,9 +8,11 @@ import {
 } from 'graphql';
 
 import UserType from './User';
+import OrderType from './Order';
 import FollowType from './Follow';
 import ShowcaseType from './Showcase';
 import LocationType from './Location';
+import ordersResolve from './resolves/shop/orders';
 import showcaseResolve from './resolves/shop/showcase';
 import showcasesResolve from './resolves/shop/showcases';
 import followersResolve from './resolves/shop/followers';
@@ -30,6 +32,13 @@ export default new GraphQLObjectType({
     },
     photos: {
       type: new GraphQLList(GraphQLString),
+    },
+    orders: {
+      type: new GraphQLList(OrderType),
+      args: {
+        page: GraphQLInt,
+      },
+      resolve: ordersResolve,
     },
     address: {
       type: GraphQLString,
