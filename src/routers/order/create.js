@@ -104,7 +104,7 @@ router.post('/order/create', logged, reqs, async (req, res) => {
         showcase: i.showcase,
       });
 
-      orderList.save();
+      await orderList.save();
     }
 
     return res.status(201).json({
