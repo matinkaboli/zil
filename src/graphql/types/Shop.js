@@ -36,7 +36,9 @@ export default new GraphQLObjectType({
     orders: {
       type: new GraphQLList(OrderType),
       args: {
-        page: GraphQLInt,
+        page: {
+          type: GraphQLInt,
+        },
       },
       resolve: ordersResolve,
     },
