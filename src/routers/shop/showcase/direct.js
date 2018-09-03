@@ -43,16 +43,16 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'discountedPrice',
+    value: 'discountedPrice', 
     required: false,
   },
 );
 
 router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async (req, res) => {
   try {
-    const shop = await Shop.find({
-      _id: req.body.shopId,
+    const shop = await Shop.findOne({
       admin: req.user,
+      _id: req.body.shopId,
     });
 
     if (!shop) {
@@ -103,6 +103,8 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     const showcase = new Showcase(showcaseValues);
 
     shop.showcaseCount += 1;
+
+    console.log(shop);
 
     await showcase.save();
     await shop.save();
