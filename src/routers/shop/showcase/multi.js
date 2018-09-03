@@ -45,7 +45,7 @@ router.post('/shop/showcase/multi', logged, reqs, async (req, res) => {
       const values = {
         shop: shop._id,
         shelf: {
-          name: shelf.name,
+          name: checkShelf.name,
         },
       };
 

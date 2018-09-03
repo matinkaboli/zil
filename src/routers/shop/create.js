@@ -81,6 +81,8 @@ router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, re
   });
 
   try {
+    shop.followersCount += 1;
+
     await shop.save();
     await follow.save();
 
