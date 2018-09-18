@@ -53,6 +53,7 @@ router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
     const values = {
       shop: req.body.shopId,
       shelf: {
+        _id: shelf._id,
         name: shelf.name,
       },
     };
