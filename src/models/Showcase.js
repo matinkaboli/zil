@@ -13,6 +13,12 @@ export default mongoose.model('Showcase', Schema({
     maxlength: 30,
   },
   shelf: {
+    _id: {
+      trim: true,
+      type: String,
+      required: true,
+      maxlength: 100,
+    },
     name: {
       trim: true,
       type: String,
