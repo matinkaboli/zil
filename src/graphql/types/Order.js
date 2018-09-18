@@ -9,6 +9,7 @@ import UserType from './User';
 import ShopType from './Shop';
 import DeliveryType from './Delivery';
 import OrderListType from './OrderList';
+import shopResolve from './resolves/order/shop';
 import orderListResolve from './resolves/order/order-list';
 
 export default new GraphQLObjectType({
@@ -19,6 +20,7 @@ export default new GraphQLObjectType({
     },
     shop: {
       type: ShopType,
+      resolve: shopResolve,
     },
     user: {
       type: UserType,
