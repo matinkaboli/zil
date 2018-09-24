@@ -1,4 +1,9 @@
-import { GraphQLID, GraphQLInt, GraphQLList } from 'graphql';
+import {
+  GraphQLID,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLString,
+} from 'graphql';
 
 import OrderType from 'Root/graphql/types/Order';
 import resolve from './resolve';
@@ -14,6 +19,9 @@ export default {
     },
     user: {
       type: GraphQLID,
+    },
+    status: {
+      type: GraphQLString,
     },
   },
   resolve,

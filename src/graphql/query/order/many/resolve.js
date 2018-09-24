@@ -8,6 +8,10 @@ export default async (parent, args) => {
     query.user = args.user;
   }
 
+  if (args.status) {
+    query.status = args.status;
+  }
+
   if (args.page) {
     const [skip, limit] = page(args.page);
     const orders = await Order.find(query).skip(skip).limit(limit);
