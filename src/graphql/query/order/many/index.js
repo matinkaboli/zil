@@ -12,6 +12,9 @@ export default {
     page: {
       type: GraphQLInt,
     },
+    user: {
+      type: GraphQLID,
+    },
   },
   resolve,
 };

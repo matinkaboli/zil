@@ -93,7 +93,7 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       if (!i.showcase) {
         return res.status(417).json({
           requirement: 'showcase',
-          description: 'The server needs parameter *showcasex* to be sent from the client.',
+          description: 'The server needs parameter *showcase* to be sent from the client.',
         });
       }
 

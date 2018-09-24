@@ -1,6 +1,7 @@
 import {
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
   GraphQLString,
   GraphQLObjectType,
 } from 'graphql';
@@ -35,7 +36,7 @@ export default new GraphQLObjectType({
       type: GraphQLString,
     },
     orderLists: {
-      type: OrderListType,
+      type: new GraphQLList(OrderListType),
       args: {
         page: {
           type: GraphQLInt,

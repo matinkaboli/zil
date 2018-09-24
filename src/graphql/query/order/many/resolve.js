@@ -4,6 +4,10 @@ import Order from 'Root/models/Order';
 export default async (parent, args) => {
   const query = { shop: args.shop };
 
+  if (args.user) {
+    query.user = args.user;
+  }
+
   if (args.page) {
     const [skip, limit] = page(args.page);
     const orders = await Order.find(query).skip(skip).limit(limit);
