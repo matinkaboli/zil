@@ -10,7 +10,7 @@ export default {
     url: process.env.PUSHE_URL || 'https://panel.pushe.co/api/v1/notifications',
     token: process.env.PUSHE_TOKEN || '3352a7548b52f29b0bb3f46c37a75369fbf15165',
   },
-  port: process.env.PORT || '8000',
+  port: process.env.PORT || '8080',
   dbAddress: process.env.DB || 'mongodb://0.0.0.0/hyper',
   hashKey: process.env.HASH_KEY || '*wtt_a4pv[ZZSd,+8C8V',
   jwtKey: process.env.JWT_KEY || 'wdZ7:!RKkYB+g^Jnq-)Gb>9%QM',

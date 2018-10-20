@@ -72,4 +72,6 @@ app.use((error, req, res, next) => res.status(500).json({
 }));
 
 // Port
-app.listen(port);
+app.listen(port, () => {
+  console.log(`The server is running on port ${port}`);
+});
