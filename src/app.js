@@ -20,10 +20,12 @@ mongoose.Promise = global.Promise;
 mongoose.connect(dbAddress);
 
 mongoose.connection.on('error', () => {
+  console.log('Error occured in database.');
   process.exit(1);
 });
 
 mongoose.connection.on('disconnected', () => {
+  console.log('Error occured in database.');
   process.exit(1);
 });
 
