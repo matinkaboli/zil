@@ -26,6 +26,9 @@ export default new GraphQLObjectType({
     user: {
       type: UserType,
     },
+    factor: {
+      type: GraphQLInt,
+    },
     status: {
       type: GraphQLString,
     },
