@@ -59,9 +59,20 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       });
     }
 
+    const maxOrders = await Order.find().sort({ factor: -1 }).limit(1);
+    const lastOrder = maxOrders[0];
+    let lastFactor;
+
+    if (lastOrder) {
+      lastFactor = lastOrder.factor + 1;
+    } else {
+      lastFactor = 0;
+    }
+
     const order = new Order({
       user: req.user,
       shop: req.body._id,
+      factor: lastFactor,
       status: 'submitted',
       delivery: {
         lat: req.body.lat,
