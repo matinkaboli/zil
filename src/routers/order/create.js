@@ -1,10 +1,12 @@
 import { Router } from 'express';
 
 import Shop from 'Root/models/Shop';
+import pushe from 'Root/utils/pushe';
 import Order from 'Root/models/Order';
 import Follow from 'Root/models/Follow';
 import OrderList from 'Root/models/OrderList';
 import logged from 'Root/middlewares/auth/logged';
+import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
@@ -117,6 +119,22 @@ router.post('/order/create', logged, reqs, async (req, res) => {
 
       await orderList.save();
     }
+
+    const pusheBody = {
+      ...pusheBodyTemplate,
+      notification: {
+        title: 'New order',
+        content: 'You have a new order.',
+      },
+    };
+
+    pushe(pusheBody)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
     return res.status(201).json({
       description: 'Order has been created successfully.',
