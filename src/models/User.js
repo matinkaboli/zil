@@ -25,6 +25,12 @@ export default mongoose.model('User', Schema({
     type: Number,
     required: true,
   },
+  pusheId: {
+    trim: true,
+    type: String,
+    maxlength: 50,
+    required: true,
+  },
   password: {
     trim: true,
     type: String,
