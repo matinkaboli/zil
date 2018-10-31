@@ -8,10 +8,16 @@ import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements({
-  value: 'phone',
-  required: true,
-});
+const reqs = requirements(
+  {
+    value: 'phone',
+    required: true,
+  },
+  {
+    value: 'pusheId',
+    required: true,
+  },
+);
 
 router.post('/user/enter', login, reqs, async (req, res) => {
   try {
@@ -31,7 +37,12 @@ router.post('/user/enter', login, reqs, async (req, res) => {
 
       user = new User({
         phone: req.body.phone,
+        pusheId: req.body.pusheId,
       });
+
+      await user.save();
+    } else {
+      user.pusheId = req.body.pusheId;
 
       await user.save();
     }
