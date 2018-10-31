@@ -40,7 +40,7 @@ const reqs = requirements(
 
 router.post('/order/create', logged, reqs, async (req, res) => {
   try {
-    const shop = await Shop.findById(req.body._id);
+    const shop = await Shop.findById(req.body._id).populate('admin').exec();
 
     if (!shop) {
       return res.status(404).json({
@@ -122,6 +122,9 @@ router.post('/order/create', logged, reqs, async (req, res) => {
 
     const pusheBody = {
       ...pusheBodyTemplate,
+      filter: {
+        pushe_id: [shop.admin.pusheId],
+      },
       notification: {
         title: 'New order',
         content: 'You have a new order.',
