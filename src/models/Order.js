@@ -13,6 +13,12 @@ export default mongoose.model('Order', Schema({
     required: true,
     type: Schema.Types.ObjectId,
   },
+  admin: {
+    trim: true,
+    ref: 'User',
+    required: true,
+    type: Schema.Types.ObjectId,
+  },
   factor: {
     trim: true,
     type: Number,

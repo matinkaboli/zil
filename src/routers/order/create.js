@@ -143,6 +143,8 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       description: 'Order has been created successfully.',
     });
   } catch (error) {
+    console.log(error);
+
     return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
