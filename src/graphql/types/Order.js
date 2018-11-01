@@ -10,6 +10,7 @@ import UserType from './User';
 import ShopType from './Shop';
 import DeliveryType from './Delivery';
 import OrderListType from './OrderList';
+import userResolve from './resolves/order/user';
 import shopResolve from './resolves/order/shop';
 import orderListResolve from './resolves/order/order-list';
 
@@ -25,6 +26,7 @@ export default new GraphQLObjectType({
     },
     user: {
       type: UserType,
+      resolve: userResolve,
     },
     factor: {
       type: GraphQLInt,

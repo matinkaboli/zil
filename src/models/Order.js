@@ -29,7 +29,7 @@ export default mongoose.model('Order', Schema({
     default: 0,
     type: String,
     required: true,
-    enum: ['send', 'approved', 'submitted', 'cancelled', 'delivered'],
+    enum: ['sent', 'approved', 'submitted', 'cancelled', 'delivered'],
   },
   delivery: {
     lat: {
