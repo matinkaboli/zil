@@ -42,8 +42,6 @@ router.post('/order/create', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findById(req.body._id).populate('admin').exec();
 
-    console.log(shop);
-
     if (!shop) {
       return res.status(404).json({
         entity: 'shop',
@@ -123,20 +121,12 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       },
     };
 
-    pushe(pusheBody)
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    pushe(pusheBody).catch(() => {});
 
     return res.status(201).json({
       description: 'Order has been created successfully.',
     });
   } catch (error) {
-    console.log(error);
-
     return res.status(520).json({
       error: error.message,
       description: 'Unrecognizable error happened.',
