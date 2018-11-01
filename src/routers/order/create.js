@@ -121,6 +121,10 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       filter: {
         pushe_id: [shop.admin.pusheId],
       },
+      action: {
+        action_type: 'T',
+        url: 'ShowcaseActivity.java',
+      },
       notification: {
         led_on: 500,
         visibility: true,
