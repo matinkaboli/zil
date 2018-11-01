@@ -5,9 +5,10 @@ import pushe from 'Root/utils/pushe';
 import Order from 'Root/models/Order';
 import Follow from 'Root/models/Follow';
 import OrderList from 'Root/models/OrderList';
+import pusheTypes from 'Root/utils/pushe/types';
 import logged from 'Root/middlewares/auth/logged';
-import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 import requirements from 'Root/middlewares/requirements';
+import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
 const router = new Router();
 
@@ -110,14 +111,29 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       await orderList.save();
     }
 
+    const pendingOrders = await Order.find({ shop: req.body._id });
+
     const pusheBody = {
       ...pusheBodyTemplate,
+      data: {
+        delay_while_idle: false,
+      },
       filter: {
         pushe_id: [shop.admin.pusheId],
       },
       notification: {
-        title: 'New order',
-        content: 'You have a new order.',
+        led_on: 500,
+        visibility: true,
+        wake_screen: true,
+        title: 'سفارش جدید',
+        led_color: '-16711936',
+        notif_icon: 'shopping basket',
+        content: `${pendingOrders.length} سفارش برای فروشگاه شما وجود دارد.`,
+      },
+      custom_content: {
+        shopId: shop._id,
+        orderId: order._id,
+        type: pusheTypes.order.submitted,
       },
     };
 
