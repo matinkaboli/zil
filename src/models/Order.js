@@ -22,7 +22,7 @@ export default mongoose.model('Order', Schema({
   factor: {
     trim: true,
     type: Number,
-    required: true,
+    required: false,
   },
   status: {
     trim: true,
