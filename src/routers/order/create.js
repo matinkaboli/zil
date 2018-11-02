@@ -111,7 +111,10 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       await orderList.save();
     }
 
-    const pendingOrders = await Order.find({ shop: req.body._id });
+    const pendingOrders = await Order.find({
+      shop: req.body._id,
+      status: { $in: ['approved', 'submitted', 'cancelled'] },
+    });
 
     const pusheBody = {
       ...pusheBodyTemplate,
