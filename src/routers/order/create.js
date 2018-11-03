@@ -4,6 +4,7 @@ import Shop from 'Root/models/Shop';
 import pushe from 'Root/utils/pushe';
 import Order from 'Root/models/Order';
 import Follow from 'Root/models/Follow';
+import Showcase from 'Root/models/Showcase';
 import OrderList from 'Root/models/OrderList';
 import pusheTypes from 'Root/utils/pushe/types';
 import logged from 'Root/middlewares/auth/logged';
@@ -87,13 +88,6 @@ router.post('/order/create', logged, reqs, async (req, res) => {
         });
       }
 
-      if (!i.price || Number.isNaN(i.price)) {
-        return res.status(417).json({
-          requirement: 'price',
-          description: 'The server needs parameter *price* to be sent from the client.',
-        });
-      }
-
       if (!i.showcase) {
         return res.status(417).json({
           requirement: 'showcase',
@@ -101,11 +95,21 @@ router.post('/order/create', logged, reqs, async (req, res) => {
         });
       }
 
+      const showcase = await Showcase.findById(i.showcase);
+
+      if (!showcase) {
+        return res.json(404).json({
+          _id: i.showcase,
+          entity: 'showcase',
+          description: 'Showcase not found.',
+        });
+      }
+
       const orderList = new OrderList({
         count: i.count,
-        price: i.price,
         order: order._id,
         showcase: i.showcase,
+        price: showcase.discountedPrice ? showcase.discountedPrice : showcase.price,
       });
 
       await orderList.save();
