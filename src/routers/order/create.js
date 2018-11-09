@@ -148,7 +148,11 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       },
     };
 
-    pushe(pusheBody).catch(() => {});
+    pushe(pusheBody)
+      .then(() => {
+      })
+      .catch(() => {
+      });
 
     return res.status(201).json({
       description: 'Order has been created successfully.',

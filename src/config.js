@@ -6,7 +6,7 @@ export default {
     apiKey: process.env.SMS_API_KEY || '345271454776727A622B384B53382B323356507233673D3D',
   },
   pushe: {
-    app: process.env.PUSHE_APP || 'com.hyper.app',
+    app: process.env.PUSHE_APP || 'com.hamed.hyper',
     url: process.env.PUSHE_URL || 'https://panel.pushe.co/api/v1/notifications',
     token: process.env.PUSHE_TOKEN || '3352a7548b52f29b0bb3f46c37a75369fbf15165',
   },
