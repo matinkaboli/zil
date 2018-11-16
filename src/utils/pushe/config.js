@@ -4,8 +4,8 @@ export default {
   body: {
     applications: [pushe.app],
     action: {
-      url: '',
-      action_type: 'A',
+      url: 'sms:شماره پیامک?body=متن پیام',
+      action_type: 'U',
     },
   },
 };
