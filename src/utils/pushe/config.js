@@ -4,7 +4,7 @@ export default {
   body: {
     applications: [pushe.app],
     action: {
-      url: pushe.app,
+      url: '',
       action_type: 'A',
     },
   },

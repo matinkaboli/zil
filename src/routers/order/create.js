@@ -8,7 +8,6 @@ import Showcase from 'Root/models/Showcase';
 import OrderList from 'Root/models/OrderList';
 import pusheTypes from 'Root/utils/pushe/types';
 import logged from 'Root/middlewares/auth/logged';
-import { pushe as pusheConfig } from 'Root/config';
 import requirements from 'Root/middlewares/requirements';
 import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
