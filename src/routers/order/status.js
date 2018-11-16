@@ -88,10 +88,6 @@ router.post('/order/status', logged, reqs, async (req, res) => {
       filter: {
         pushe_id: [order.user.pusheId],
       },
-      action: {
-        action_type: 'T',
-        url: 'ShowcaseActivity.java',
-      },
       notification: {
         title,
         content,

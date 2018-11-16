@@ -8,6 +8,7 @@ import Showcase from 'Root/models/Showcase';
 import OrderList from 'Root/models/OrderList';
 import pusheTypes from 'Root/utils/pushe/types';
 import logged from 'Root/middlewares/auth/logged';
+import { pushe as pusheConfig } from 'Root/config';
 import requirements from 'Root/middlewares/requirements';
 import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
@@ -120,8 +121,6 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       status: { $in: ['approved', 'submitted', 'cancelled'] },
     });
 
-    console.log(pendingOrders);
-
     const pusheBody = {
       ...pusheBodyTemplate,
       data: {
@@ -129,10 +128,6 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       },
       filter: {
         pushe_id: [shop.admin.pusheId],
-      },
-      action: {
-        action_type: 'A',
-        url: 'com.hamed.hyper',
       },
       notification: {
         led_on: 500,

@@ -4,7 +4,6 @@ import { pushe } from 'Root/config';
 import checkStatus from 'Root/utils/checkstatus';
 
 export default (body) => new Promise((resolve, reject) => {
-  console.log(body);
   fetch(pushe.url, {
     method: 'POST',
     body: JSON.stringify(body),
