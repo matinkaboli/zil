@@ -104,6 +104,8 @@ router.post('/order/status', logged, reqs, async (req, res) => {
       },
     };
 
+    console.log(pusheBody);
+
     pushe(pusheBody).catch(() => {});
 
     return res.status(200).json({
