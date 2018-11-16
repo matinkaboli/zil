@@ -120,6 +120,8 @@ router.post('/order/create', logged, reqs, async (req, res) => {
       status: { $in: ['approved', 'submitted', 'cancelled'] },
     });
 
+    console.log(pendingOrders);
+
     const pusheBody = {
       ...pusheBodyTemplate,
       data: {
@@ -129,8 +131,8 @@ router.post('/order/create', logged, reqs, async (req, res) => {
         pushe_id: [shop.admin.pusheId],
       },
       action: {
-        action_type: 'T',
-        url: 'ShowcaseActivity.java',
+        action_type: 'A',
+        url: 'com.hamed.hyper',
       },
       notification: {
         led_on: 500,
@@ -149,7 +151,8 @@ router.post('/order/create', logged, reqs, async (req, res) => {
     };
 
     pushe(pusheBody)
-      .then(() => {
+      .then((data) => {
+        console.log(data);
       })
       .catch(() => {
       });
