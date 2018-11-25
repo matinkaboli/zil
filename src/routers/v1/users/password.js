@@ -10,7 +10,7 @@ import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'code',
     required: true,
@@ -21,7 +21,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.patch('/users/:userPhone/password', login, reqs, async (req, res) => {
+router.patch('/users/:userPhone/password', login, bodyReqs, async (req, res) => {
   try {
     const user = await User.findOne({ phone: req.params.userPhone });
 

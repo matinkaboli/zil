@@ -8,7 +8,7 @@ import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'newPassword',
     required: true,
@@ -23,7 +23,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.patch('/users/setting/password', logged, reqs, async (req, res) => {
+router.patch('/users/setting/password', logged, bodyReqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 

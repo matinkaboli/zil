@@ -6,7 +6,7 @@ import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'lat',
     required: true,
@@ -41,7 +41,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.patch('v1/shops/:shopId', logged, reqs, async (req, res) => {
+router.patch('v1/shops/:shopId', logged, bodyReqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,

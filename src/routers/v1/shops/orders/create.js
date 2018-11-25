@@ -13,7 +13,7 @@ import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
 const router = new Router();
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'lat',
     required: true,
@@ -36,7 +36,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.post('v1/shops/:id/orders', logged, reqs, async (req, res) => {
+router.post('v1/shops/:id/orders', logged, bodyReqs, async (req, res) => {
   try {
     const shop = await Shop.findById(req.params._id).populate('admin').exec();
 

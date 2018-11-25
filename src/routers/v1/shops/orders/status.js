@@ -9,12 +9,12 @@ import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
 const router = new Router();
 
-const reqs = bodyRequirements({
+const bodyReqs = bodyRequirements({
   value: 'status',
   required: true,
 });
 
-router.patch('v1/shops/:shopId/orders/:orderId/status', logged, reqs, async (req, res) => {
+router.patch('v1/shops/:shopId/orders/:orderId/status', logged, bodyReqs, async (req, res) => {
   try {
     const order = await Order
       .findOne({ admin: req.user, _id: req.params.orderId })

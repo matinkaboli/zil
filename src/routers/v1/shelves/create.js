@@ -10,7 +10,7 @@ const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'name',
     required: true,
@@ -33,7 +33,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.post('v1/shelves', upload.single('photo'), reqs, async (req, res) => {
+router.post('v1/shelves', upload.single('photo'), bodyReqs, async (req, res) => {
   const values = {
     name: req.body.name,
   };

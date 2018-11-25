@@ -10,7 +10,7 @@ const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'name',
     required: true,
@@ -33,7 +33,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.patch('v1/shelves/:shelfId', reqs, upload.single('photo'), async (req, res) => {
+router.patch('v1/shelves/:shelfId', bodyReqs, upload.single('photo'), async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.params.shelfId);
 

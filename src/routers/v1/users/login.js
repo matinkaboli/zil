@@ -9,7 +9,7 @@ import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = bodyRequirements(
+const bodyReqs = bodyRequirements(
   {
     value: 'code',
     required: true,
@@ -20,7 +20,7 @@ const reqs = bodyRequirements(
   },
 );
 
-router.post('/users/login', login, reqs, async (req, res) => {
+router.post('/users/login', login, bodyReqs, async (req, res) => {
   try {
     const user = await User.findOne({ phone: req.body.phone });
 

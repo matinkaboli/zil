@@ -6,12 +6,12 @@ import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = bodyRequirements({
+const bodyReqs = bodyRequirements({
   value: 'name',
   required: true,
 });
 
-router.patch('/users/settings/name', logged, reqs, async (req, res) => {
+router.patch('/users/settings/name', logged, bodyReqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 
