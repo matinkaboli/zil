@@ -14,10 +14,6 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'shopId',
-    required: true,
-  },
-  {
     value: 'shelfId',
     required: true,
   },
@@ -27,31 +23,31 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/showcase/create', logged, reqs, async (req, res) => {
+router.post('/shops/:shopId/showcases/', logged, reqs, async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.body.shelfId);
 
     if (!shelf) {
       return res.status(404).json({
-        entity: 'shelf',
+        entity: 'shelves',
         description: 'Shelf not found.',
       });
     }
 
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shopId,
+      _id: req.params.shopId,
     });
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
 
     const values = {
-      shop: req.body.shopId,
+      shop: shop._id,
       shelf: {
         _id: shelf._id,
         name: shelf.name,

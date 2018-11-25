@@ -30,7 +30,7 @@ router.delete('/shops/:shopId/photo/:photoId', logged, async (req, res) => {
 
     await shop.save();
 
-    return res.status(204).json({
+    return res.status(200).json({
       description: 'Photo has been deleted successfully.',
     });
   } catch (error) {
