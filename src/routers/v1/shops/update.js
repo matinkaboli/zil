@@ -8,10 +8,6 @@ const router = new Router();
 
 const reqs = requirements(
   {
-    value: '_id',
-    required: true,
-  },
-  {
     value: 'lat',
     required: true,
   },
@@ -45,16 +41,16 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/update', logged, reqs, async (req, res) => {
+router.patch('/shops/:shopId', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body._id,
+      _id: req.params.shopId,
     });
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
