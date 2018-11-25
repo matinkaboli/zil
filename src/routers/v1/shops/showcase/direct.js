@@ -27,10 +27,6 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'shopId',
-    required: true,
-  },
-  {
     value: 'expiration',
     required: false,
   },
@@ -48,16 +44,16 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async (req, res) => {
+router.post('/shops/:shopId/showcases/direct', logged, upload.single('photo'), reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body.shopId,
+      _id: req.params.shopId,
     });
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
@@ -93,7 +89,7 @@ router.post('/shop/showcase/direct', logged, upload.single('photo'), reqs, async
     const showcaseValues = {
       shelf: shelfvalues,
       price: req.body.price,
-      shop: req.body.shopId,
+      shop: req.params.shopId,
     };
 
     if (req.body.discountedPrice) {

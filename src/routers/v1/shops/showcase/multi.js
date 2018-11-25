@@ -8,24 +8,18 @@ import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements(
-  {
-    value: '_id',
-    required: true,
-  },
-  {
-    value: 'shelves',
-    required: true,
-  },
-);
+const reqs = requirements({
+  value: 'shelves',
+  required: true,
+});
 
-router.post('/shop/showcase/multi', logged, reqs, async (req, res) => {
+router.post('/shops/:shopId/showcases/multi', logged, reqs, async (req, res) => {
   try {
-    const shop = await Shop.findById(req.body._id);
+    const shop = await Shop.findById(req.params.shopId);
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop is not found.',
       });
     }
@@ -37,7 +31,7 @@ router.post('/shop/showcase/multi', logged, reqs, async (req, res) => {
 
       if (!checkShelf) {
         return res.status(404).json({
-          entity: 'shelf',
+          entity: 'shelves',
           description: 'Shelf is not found',
         });
       }

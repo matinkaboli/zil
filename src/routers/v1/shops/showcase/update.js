@@ -21,16 +21,8 @@ const reqs = requirements(
     required: false,
   },
   {
-    value: 'shopId',
-    required: true,
-  },
-  {
     value: 'expiration',
     required: false,
-  },
-  {
-    value: 'showcaseId',
-    required: true,
   },
   {
     value: 'description',
@@ -46,7 +38,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/showcase/update', logged, reqs, async (req, res) => {
+router.patch('/shops/:shopId/showcases/:showcaseId', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
@@ -55,19 +47,19 @@ router.post('/shop/showcase/update', logged, reqs, async (req, res) => {
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
 
     const showcase = await Showcase.findById({
-      shop: shop._id,
-      _id: req.body.showcaseId,
+      shop: req.params.shopId,
+      _id: req.params.showcaseId,
     });
 
     if (!showcase) {
       return res.status(404).json({
-        entity: 'showcase',
+        entity: 'showcases',
         description: 'Showcase not found.',
       });
     }
