@@ -4,11 +4,11 @@ import User from 'Root/models/User';
 import verifySms from 'Root/utils/sms/verify';
 import login from 'Root/middlewares/auth/login';
 import validatePhone from 'Root/utils/validate/phone';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = requirements(
+const reqs = bodyRequirements(
   {
     value: 'phone',
     required: true,

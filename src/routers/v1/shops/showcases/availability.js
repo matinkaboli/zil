@@ -3,11 +3,11 @@ import { Router } from 'express';
 import Shop from 'Root/models/Shop';
 import Showcase from 'Root/models/Showcase';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = requirements({
+const reqs = bodyRequirements({
   value: 'available',
   required: true,
 });

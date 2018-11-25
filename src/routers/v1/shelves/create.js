@@ -4,13 +4,13 @@ import { Router } from 'express';
 import Shelf from 'Root/models/Shelf';
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-const reqs = requirements(
+const reqs = bodyRequirements(
   {
     value: 'name',
     required: true,

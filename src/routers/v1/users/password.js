@@ -6,11 +6,11 @@ import hmac from 'Root/utils/hmac';
 import User from 'Root/models/User';
 import { hashKey } from 'Root/config';
 import login from 'Root/middlewares/auth/login';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = requirements(
+const reqs = bodyRequirements(
   {
     value: 'code',
     required: true,

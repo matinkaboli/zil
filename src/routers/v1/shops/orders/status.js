@@ -4,12 +4,12 @@ import Order from 'Root/models/Order';
 import pushe from 'Root/utils/pushe';
 import pusheTypes from 'Root/utils/pushe/types';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
 const router = new Router();
 
-const reqs = requirements({
+const reqs = bodyRequirements({
   value: 'status',
   required: true,
 });

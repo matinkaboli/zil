@@ -8,12 +8,12 @@ import Showcase from 'Root/models/Showcase';
 import OrderList from 'Root/models/OrderList';
 import pusheTypes from 'Root/utils/pushe/types';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 import { body as pusheBodyTemplate } from 'Root/utils/pushe/config';
 
 const router = new Router();
 
-const reqs = requirements(
+const reqs = bodyRequirements(
   {
     value: 'lat',
     required: true,

@@ -5,11 +5,11 @@ import jwt from 'Root/utils/jwt';
 import User from 'Root/models/User';
 import Attempt from 'Root/models/Attempt';
 import login from 'Root/middlewares/auth/login';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = requirements(
+const reqs = bodyRequirements(
   {
     value: 'code',
     required: true,

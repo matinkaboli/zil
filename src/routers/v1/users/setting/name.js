@@ -2,11 +2,11 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const reqs = requirements({
+const reqs = bodyRequirements({
   value: 'name',
   required: true,
 });

@@ -7,13 +7,13 @@ import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
 import Showcase from 'Root/models/Showcase';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-const reqs = requirements(
+const reqs = bodyRequirements(
   {
     value: 'name',
     required: true,
