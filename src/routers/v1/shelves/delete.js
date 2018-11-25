@@ -1,22 +1,16 @@
 import { Router } from 'express';
 
 import Shelf from 'Root/models/Shelf';
-import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements({
-  value: '_id',
-  required: true,
-});
-
-router.post('/shelf/delete', reqs, async (req, res) => {
+router.delete('/shelves/:shelfId', async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.body._id);
 
     if (!shelf) {
       return res.status(404).json({
-        entity: 'shelf',
+        entity: 'shelves',
         description: 'Shelf not found.',
       });
     }

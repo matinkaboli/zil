@@ -12,10 +12,6 @@ const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
 const reqs = requirements(
   {
-    value: '_id',
-    required: true,
-  },
-  {
     value: 'name',
     required: true,
   },
@@ -37,13 +33,13 @@ const reqs = requirements(
   },
 );
 
-router.post('/shelf/update', reqs, upload.single('photo'), async (req, res) => {
+router.patch('/shelves/:shelfId', reqs, upload.single('photo'), async (req, res) => {
   try {
-    const shelf = await Shelf.findById(req.body._id);
+    const shelf = await Shelf.findById(req.params.shelfId);
 
     if (!shelf) {
       return res.status(404).json({
-        entity: 'shelf',
+        entity: 'shelves',
         description: 'Shelf not found.',
       });
     }

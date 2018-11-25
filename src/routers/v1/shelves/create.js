@@ -33,7 +33,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shelf/create', upload.single('photo'), reqs, async (req, res) => {
+router.post('/shelves', upload.single('photo'), reqs, async (req, res) => {
   const values = {
     name: req.body.name,
   };
