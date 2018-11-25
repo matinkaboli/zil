@@ -7,8 +7,8 @@ export default {
   },
   pushe: {
     app: process.env.PUSHE_APP || 'com.hamed.hyper',
-    url: process.env.PUSHE_URL || 'https://panel.pushe.co/api/v1/notifications',
     token: process.env.PUSHE_TOKEN || '3352a7548b52f29b0bb3f46c37a75369fbf15165',
+    url: process.env.PUSHE_URL || 'http://api.pushe.co/v2/messaging/notifications/',
   },
   port: process.env.PORT || '8080',
   dbAddress: process.env.DB || 'mongodb://127.0.0.1/hyper',

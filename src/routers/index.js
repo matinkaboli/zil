@@ -1,13 +1,5 @@
-import user from './user';
-import shop from './shop';
-import shelf from './shelf';
-import order from './order';
-import testPush from './testPush';
+import v1 from './v1';
 
 export default [
-  user,
-  shop,
-  shelf,
-  order,
-  testPush,
+  v1,
 ];
