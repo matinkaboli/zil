@@ -5,27 +5,21 @@ import Shop from 'Root/models/Shop';
 import { uploadDir } from 'Root/config';
 import storage from 'Root/utils/storage';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-const reqs = requirements({
-  value: '_id',
-  required: true,
-});
-
-router.post('/shop/photo/add', logged, upload.single('photo'), reqs, async (req, res) => {
+router.post('/shops/:id/photo', logged, upload.single('photo'), async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body._id,
+      _id: req.params._id,
     });
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
@@ -41,7 +35,7 @@ router.post('/shop/photo/add', logged, upload.single('photo'), reqs, async (req,
 
     await shop.save();
 
-    return res.status(200).json({
+    return res.status(201).json({
       description: 'Photo has been added to the shop successfully.',
     });
   } catch (error) {
