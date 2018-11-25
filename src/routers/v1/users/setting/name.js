@@ -11,13 +11,13 @@ const reqs = requirements({
   required: true,
 });
 
-router.post('/user/setting/name', logged, reqs, async (req, res) => {
+router.patch('/users/settings/name', logged, reqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 
     if (!user) {
       return res.status(404).json({
-        entity: 'user',
+        entity: 'users',
         description: 'User not found.',
       });
     }

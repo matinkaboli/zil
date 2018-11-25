@@ -23,13 +23,13 @@ const reqs = requirements(
   },
 );
 
-router.post('/user/setting/password', logged, reqs, async (req, res) => {
+router.patch('/users/setting/password', logged, reqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 
     if (!user) {
       return res.status(404).json({
-        entity: 'user',
+        entity: 'users',
         description: 'User not found.',
       });
     }
@@ -37,14 +37,14 @@ router.post('/user/setting/password', logged, reqs, async (req, res) => {
     if (user.password) {
       if (!req.body.oldPassword) {
         return res.status(417).json({
-          requirement: 'old_password',
-          description: 'The server needs a value named *old_password* but the client did not send it.',
+          requirement: 'oldPassword',
+          description: 'The server needs a value named *oldPassword* but the client did not send it.',
         });
       }
 
       if (hmac(req.body.oldPassword, hashKey) !== user.password) {
         return res.status(401).json({
-          entity: 'old_password',
+          entity: 'oldPassword',
           description: 'Old password does not match.',
         });
       }

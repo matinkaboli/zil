@@ -4,34 +4,28 @@ import User from 'Root/models/User';
 import verifySms from 'Root/utils/sms/verify';
 import login from 'Root/middlewares/auth/login';
 import validatePhone from 'Root/utils/validate/phone';
-import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements({
-  value: 'phone',
-  required: true,
-});
-
-router.post('/user/resend', login, reqs, async (req, res) => {
+router.post('/users/:userPhone/resend', login, async (req, res) => {
   try {
-    if (!validatePhone(req.body.phone)) {
+    if (!validatePhone(req.params.userPhone)) {
       return res.status(422).json({
-        entity: 'phone',
+        entity: 'phones',
         description: 'Phone is not valid. It must be 10 digits.',
       });
     }
 
-    const user = await User.findOne({ phone: req.body.phone });
+    const user = await User.findOne({ phone: req.params.userPhone });
 
     if (!user) {
       return res.status(404).json({
-        entity: 'user',
+        entity: 'users',
         description: 'User not found.',
       });
     }
 
-    await verifySms(req.body.phone);
+    await verifySms(req.params.userPhone);
 
     return res.status(200).json({
       description: 'The verification link has been sent to user\'s phone number.',

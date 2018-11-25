@@ -6,13 +6,13 @@ import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
 
-router.post('/user/delete', logged, async (req, res) => {
+router.delete('/users', logged, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 
     if (!user) {
       return res.status(404).json({
-        entity: 'user',
+        entity: 'users',
         description: 'User not found.',
       });
     }

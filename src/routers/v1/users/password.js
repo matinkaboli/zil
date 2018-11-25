@@ -16,36 +16,32 @@ const reqs = requirements(
     required: true,
   },
   {
-    value: 'phone',
-    required: true,
-  },
-  {
     value: 'password',
     required: true,
   },
 );
 
-router.post('/user/password', login, reqs, async (req, res) => {
+router.patch('/users/:userPhone/password', login, reqs, async (req, res) => {
   try {
-    const user = await User.findOne({ phone: req.body.phone });
+    const user = await User.findOne({ phone: req.params.userPhone });
 
     if (!user) {
       return res.status(404).json({
-        entity: 'user',
+        entity: 'users',
         description: 'User not found.',
       });
     }
 
     if (!otp.verify(req.body.code)) {
       return res.status(498).json({
-        entity: 'code',
+        entity: 'codes',
         description: 'Code is invalid.',
       });
     }
 
     if (hmac(req.body.password, hashKey) !== user.password) {
       return res.status(401).json({
-        entity: 'password',
+        entity: 'passwords',
         description: 'Password is incorrect.',
       });
     }
