@@ -4,7 +4,7 @@ import Shelf from 'Root/models/Shelf';
 
 const router = new Router();
 
-router.delete('/shelves/:shelfId', async (req, res) => {
+router.delete('v1/shelves/:shelfId', async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.body._id);
 

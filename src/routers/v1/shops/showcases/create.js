@@ -23,7 +23,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shops/:shopId/showcases/', logged, reqs, async (req, res) => {
+router.post('v1/shops/:shopId/showcases/', logged, reqs, async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.body.shelfId);
 

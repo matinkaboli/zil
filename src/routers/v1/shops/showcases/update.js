@@ -38,7 +38,7 @@ const reqs = requirements(
   },
 );
 
-router.patch('/shops/:shopId/showcases/:showcaseId', logged, reqs, async (req, res) => {
+router.patch('v1/shops/:shopId/showcases/:showcaseId', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,

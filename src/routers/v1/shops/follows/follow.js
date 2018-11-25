@@ -6,9 +6,9 @@ import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
 
-router.post('/shops/:id/follow', logged, async (req, res) => {
+router.post('v1/shops/:shopId/follow', logged, async (req, res) => {
   try {
-    const shop = await Shop.findById(req.params.id);
+    const shop = await Shop.findById(req.params.shopId);
 
     if (!shop) {
       return res.status(404).json({

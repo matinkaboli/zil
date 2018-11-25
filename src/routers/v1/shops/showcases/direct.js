@@ -44,7 +44,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shops/:shopId/showcases/direct', logged, upload.single('photo'), reqs, async (req, res) => {
+router.post('v1/shops/:shopId/showcases/direct', logged, upload.single('photo'), reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,

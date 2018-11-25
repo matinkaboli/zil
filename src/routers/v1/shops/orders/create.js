@@ -36,7 +36,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shops/:id/orders', logged, reqs, async (req, res) => {
+router.post('v1/shops/:id/orders', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findById(req.params._id).populate('admin').exec();
 

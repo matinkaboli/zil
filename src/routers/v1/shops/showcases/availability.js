@@ -12,7 +12,7 @@ const reqs = requirements({
   required: true,
 });
 
-router.patch('/shops/:shopId/showcases/:showcaseId/availability', logged, reqs, async (req, res) => {
+router.patch('v1/shops/:shopId/showcases/:showcaseId/availability', logged, reqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
