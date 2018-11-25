@@ -43,7 +43,7 @@ const reqs = requirements(
   },
 );
 
-router.post('/shop/create', logged, upload.single('photo'), reqs, async (req, res) => {
+router.post('/shops', logged, upload.single('photo'), reqs, async (req, res) => {
   const values = {
     photos: [],
     admin: req.user,

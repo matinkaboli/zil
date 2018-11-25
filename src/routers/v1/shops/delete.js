@@ -2,25 +2,19 @@ import { Router } from 'express';
 
 import Shop from 'Root/models/Shop';
 import logged from 'Root/middlewares/auth/logged';
-import requirements from 'Root/middlewares/requirements';
 
 const router = new Router();
 
-const reqs = requirements({
-  value: '_id',
-  required: true,
-});
-
-router.post('/shop/delete', logged, reqs, async (req, res) => {
+router.delete('/shops/:shopId', logged, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.body._id,
+      _id: req.params.shopId,
     });
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
