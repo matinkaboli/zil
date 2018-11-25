@@ -1,7 +1,7 @@
-import POST from './POST';
-import DELETE from './DELETE';
+import follow from './follow';
+import unfollow from './unfollow';
 
 export default [
-  POST,
-  DELETE,
+  follow,
+  unfollow,
 ];
