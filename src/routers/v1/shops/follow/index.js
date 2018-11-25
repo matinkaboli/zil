@@ -1,7 +1,7 @@
-import createFollower from './create';
-import deleteFollower from './delete';
+import POST from './POST';
+import DELETE from './DELETE';
 
 export default [
-  createFollower,
-  deleteFollower,
+  POST,
+  DELETE,
 ];
