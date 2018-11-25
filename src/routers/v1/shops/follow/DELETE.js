@@ -12,7 +12,7 @@ router.delete('/shops/:id/follow', logged, async (req, res) => {
 
     if (!shop) {
       return res.status(404).json({
-        entity: 'shop',
+        entity: 'shops',
         description: 'Shop not found.',
       });
     }
@@ -23,15 +23,15 @@ router.delete('/shops/:id/follow', logged, async (req, res) => {
     });
 
     if (!follow) {
-      return res.status(404).json({
+      return res.status(400).json({
         entity: 'follow',
-        description: 'Follow not found.',
+        description: 'User has not followed the shop yet.',
       });
     }
 
     shop.followersCount -= 1;
 
-    shop.save();
+    await shop.save();
     await follow.remove();
 
     return res.status(200).json({
