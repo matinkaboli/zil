@@ -3,7 +3,7 @@ import Follow from 'Root/models/Follow';
 import logged from 'Root/middlewares/gql/logged';
 
 export default async (parent, args, context) => {
-  const _id = await logged(context.req.headers['x-access-token']);
+  const _id = await logged(context.req.headers.authorization);
 
   const query = { user: _id };
 

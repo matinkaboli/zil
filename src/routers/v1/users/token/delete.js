@@ -7,7 +7,7 @@ const router = new Router();
 
 router.delete('/users/tokens', logged, async (req, res) => {
   try {
-    const token = await Token.findOne({ token: req.headers['x-access-token'] });
+    const token = await Token.findOne({ token: req.headers.authorization });
 
     await token.remove();
 
