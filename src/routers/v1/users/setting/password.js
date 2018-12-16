@@ -23,7 +23,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.patch('/users/setting/password', logged, bodyReqs, async (req, res) => {
+router.patch('v1/users/setting/password', logged, bodyReqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 
@@ -43,9 +43,9 @@ router.patch('/users/setting/password', logged, bodyReqs, async (req, res) => {
       }
 
       if (hmac(req.body.oldPassword, hashKey) !== user.password) {
-        return res.status(401).json({
+        return res.status(400).json({
           entity: 'oldPassword',
-          description: 'Old password does not match.',
+          description: 'Old password is incorrect.',
         });
       }
     }
@@ -58,7 +58,7 @@ router.patch('/users/setting/password', logged, bodyReqs, async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({
+    return res.status(204).json({
       description: 'User\'s password has been changed successfully.',
     });
   } catch (error) {

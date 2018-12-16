@@ -20,7 +20,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.post('/users/login', login, bodyReqs, async (req, res) => {
+router.post('v1/users/login', login, bodyReqs, async (req, res) => {
   try {
     const user = await User.findOne({ phone: req.body.phone });
 
@@ -52,7 +52,7 @@ router.post('/users/login', login, bodyReqs, async (req, res) => {
     }
 
     if (!otp.verify(req.body.code)) {
-      return res.status(498).json({
+      return res.status(400).json({
         entity: 'code',
         description: 'Code is invalid.',
       });

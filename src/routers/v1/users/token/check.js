@@ -2,11 +2,17 @@ import { Router } from 'express';
 
 import User from 'Root/models/User';
 import logged from 'Root/middlewares/auth/logged';
+import bodyRequirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-router.post('/users/:userPhone/tokens/check', logged, async (req, res) => {
-  const user = await User.findOne({ phone: req.params.userPhone });
+const bodyReqs = bodyRequirements({
+  value: 'phone',
+  required: true,
+});
+
+router.post('v1/users/tokens/check', logged, bodyReqs, async (req, res) => {
+  const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {
     return res.status(404).json({

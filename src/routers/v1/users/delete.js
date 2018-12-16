@@ -6,7 +6,7 @@ import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
 
-router.delete('/users', logged, async (req, res) => {
+router.delete('v1/users', logged, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 
@@ -25,7 +25,7 @@ router.delete('/users', logged, async (req, res) => {
 
     await user.remove();
 
-    return res.status(200).json({
+    return res.status(204).json({
       description: 'User has been deleted successfully.',
     });
   } catch (error) {
