@@ -43,7 +43,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.post('v1/shops', logged, upload.single('photo'), bodyReqs, async (req, res) => {
+router.post('/v1/shops', logged, upload.single('photo'), bodyReqs, async (req, res) => {
   const values = {
     photos: [],
     admin: req.user,

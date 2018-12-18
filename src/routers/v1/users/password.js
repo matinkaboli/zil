@@ -25,7 +25,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.post('v1/users/password', login, bodyReqs, async (req, res) => {
+router.post('/v1/users/password', login, bodyReqs, async (req, res) => {
   try {
     const user = await User.findOne({ phone: req.body.phone });
 

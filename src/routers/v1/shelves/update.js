@@ -33,7 +33,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.patch('v1/shelves/:shelfId', bodyReqs, upload.single('photo'), async (req, res) => {
+router.patch('/v1/shelves/:shelfId', bodyReqs, upload.single('photo'), async (req, res) => {
   try {
     const shelf = await Shelf.findById(req.params.shelfId);
 

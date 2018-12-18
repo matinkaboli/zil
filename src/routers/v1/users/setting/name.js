@@ -11,7 +11,7 @@ const bodyReqs = bodyRequirements({
   required: true,
 });
 
-router.patch('v1/users/settings/name', logged, bodyReqs, async (req, res) => {
+router.patch('/v1/users/settings/name', logged, bodyReqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 

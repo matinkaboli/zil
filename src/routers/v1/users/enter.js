@@ -19,7 +19,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.post('v1/users/enter', login, bodyReqs, async (req, res) => {
+router.post('/v1/users/enter', login, bodyReqs, async (req, res) => {
   try {
     if (!validatePhone(req.body.phone)) {
       return res.status(422).json({

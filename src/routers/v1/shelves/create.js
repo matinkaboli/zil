@@ -33,7 +33,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.post('v1/shelves', upload.single('photo'), bodyReqs, async (req, res) => {
+router.post('/v1/shelves', upload.single('photo'), bodyReqs, async (req, res) => {
   const values = {
     name: req.body.name,
   };

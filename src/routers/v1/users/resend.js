@@ -12,7 +12,7 @@ const bodyReqs = bodyRequirements({
   required: true,
 });
 
-router.post('v1/users/resend', login, bodyReqs, async (req, res) => {
+router.post('/v1/users/resend', login, bodyReqs, async (req, res) => {
   try {
     const user = await User.findOne({ phone: req.body.phone });
 

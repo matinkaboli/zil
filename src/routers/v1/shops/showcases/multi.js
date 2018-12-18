@@ -13,7 +13,7 @@ const bodyReqs = bodyRequirements({
   required: true,
 });
 
-router.post('v1/shops/:shopId/showcases/multi', logged, bodyReqs, async (req, res) => {
+router.post('/v1/shops/:shopId/showcases/multi', logged, bodyReqs, async (req, res) => {
   try {
     const shop = await Shop.findById(req.params.shopId);
 

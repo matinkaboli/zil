@@ -23,7 +23,7 @@ const bodyReqs = bodyRequirements(
   },
 );
 
-router.patch('v1/users/setting/password', logged, bodyReqs, async (req, res) => {
+router.patch('/v1/users/setting/password', logged, bodyReqs, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 

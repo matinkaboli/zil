@@ -10,7 +10,7 @@ const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-router.post('v1/shops/:id/photo', logged, upload.single('photo'), async (req, res) => {
+router.post('/v1/shops/:id/photo', logged, upload.single('photo'), async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,

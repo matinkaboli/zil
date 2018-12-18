@@ -14,7 +14,7 @@ const bodyReqs = bodyRequirements({
   required: true,
 });
 
-router.patch('v1/shops/:shopId/orders/:orderId/status', logged, bodyReqs, async (req, res) => {
+router.patch('/v1/shops/:shopId/orders/:orderId/status', logged, bodyReqs, async (req, res) => {
   try {
     const order = await Order
       .findOne({ admin: req.user, _id: req.params.orderId })

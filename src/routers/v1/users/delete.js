@@ -6,7 +6,7 @@ import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
 
-router.delete('v1/users', logged, async (req, res) => {
+router.delete('/v1/users', logged, async (req, res) => {
   try {
     const user = await User.findById(req.user);
 

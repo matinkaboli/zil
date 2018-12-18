@@ -12,7 +12,7 @@ const bodyReqs = bodyRequirements({
   required: true,
 });
 
-router.patch('v1/shops/:shopId/showcases/:showcaseId/availability', logged, bodyReqs, async (req, res) => {
+router.patch('/v1/shops/:shopId/showcases/:showcaseId/availability', logged, bodyReqs, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,

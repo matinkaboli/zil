@@ -11,7 +11,7 @@ const bodyReqs = bodyRequirements({
   required: true,
 });
 
-router.post('v1/users/tokens/check', logged, bodyReqs, async (req, res) => {
+router.post('/v1/users/tokens/check', logged, bodyReqs, async (req, res) => {
   const user = await User.findOne({ phone: req.body.phone });
 
   if (!user) {

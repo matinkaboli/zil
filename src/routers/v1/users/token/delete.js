@@ -5,7 +5,7 @@ import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
 
-router.delete('v1/users/tokens', logged, async (req, res) => {
+router.delete('/v1/users/tokens', logged, async (req, res) => {
   try {
     const token = await Token.findOne({ token: req.headers.authorization });
 

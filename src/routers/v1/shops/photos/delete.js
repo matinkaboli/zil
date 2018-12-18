@@ -5,7 +5,7 @@ import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
 
-router.delete('v1/shops/:shopId/photo/:photoId', logged, async (req, res) => {
+router.delete('/v1/shops/:shopId/photo/:photoId', logged, async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
