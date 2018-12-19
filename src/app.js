@@ -17,7 +17,7 @@ import { port, dbAddress } from './config';
 // DB
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbAddress);
+mongoose.connect(dbAddress, { useNewUrlParser: true });
 
 mongoose.connection.on('error', () => {
   console.log('Error occured in database.');

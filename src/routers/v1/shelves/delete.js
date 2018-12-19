@@ -17,7 +17,7 @@ router.delete('/v1/shelves/:shelfId', async (req, res) => {
 
     await shelf.remove();
 
-    return res.status(200).json({
+    return res.status(204).json({
       description: 'Shelf has been deleted successfully.',
     });
   } catch (error) {
