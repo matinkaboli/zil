@@ -10,11 +10,11 @@ const router = new Router();
 
 const upload = multer({ dest: uploadDir, limits: 3000000, storage });
 
-router.post('/v1/shops/:id/photo', logged, upload.single('photo'), async (req, res) => {
+router.post('/v1/shops/:shopId/photo', logged, upload.single('photo'), async (req, res) => {
   try {
     const shop = await Shop.findOne({
       admin: req.user,
-      _id: req.params._id,
+      _id: req.params.shopId,
     });
 
     if (!shop) {
