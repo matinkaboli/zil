@@ -38,7 +38,7 @@ const bodyReqs = bodyRequirements(
 
 router.post('/v1/shops/:id/orders', logged, bodyReqs, async (req, res) => {
   try {
-    const shop = await Shop.findById(req.params._id).populate('admin').exec();
+    const shop = await Shop.findById(req.params.id).populate('admin').exec();
 
     if (!shop) {
       return res.status(404).json({
@@ -49,7 +49,7 @@ router.post('/v1/shops/:id/orders', logged, bodyReqs, async (req, res) => {
 
     const follow = await Follow.findOne({
       user: req.user,
-      shop: req.params._id,
+      shop: req.params.id,
     });
 
     if (!follow) {
@@ -61,7 +61,7 @@ router.post('/v1/shops/:id/orders', logged, bodyReqs, async (req, res) => {
 
     const order = new Order({
       user: req.user,
-      shop: req.params._id,
+      shop: req.params.id,
       status: 'submitted',
       admin: shop.admin._id,
       delivery: {
@@ -112,7 +112,7 @@ router.post('/v1/shops/:id/orders', logged, bodyReqs, async (req, res) => {
     }
 
     const pendingOrders = await Order.find({
-      shop: req.params._id,
+      shop: req.params.id,
       status: { $in: ['approved', 'submitted', 'cancelled'] },
     });
 
