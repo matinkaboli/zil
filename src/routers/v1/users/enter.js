@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
+import otp from 'Root/utils/otp';
 import User from 'Root/models/User';
-import verifySms from 'Root/utils/sms/verify';
 import login from 'Root/middlewares/auth/login';
 import validatePhone from 'Root/utils/validate/phone';
 import bodyRequirements from 'Root/middlewares/requirements/body';
@@ -47,13 +47,14 @@ router.post('/v1/users/enter', login, bodyReqs, async (req, res) => {
       await user.save();
     }
 
-    await verifySms(req.body.phone);
+    const token = otp.generate();
 
     const description = isUserNew ?
       'User created and the verification code has been sent to his number' :
       'The verification code has been sent to his number';
 
     return res.status(200).json({
+      token,
       isUserNew,
       description,
       _id: user._id,
