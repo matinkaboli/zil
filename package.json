@@ -1,7 +1,7 @@
 {
-  "name": "hyper",
+  "name": "zil",
   "version": "0.0.1",
-  "description": "Hyper API",
+  "description": "Zil API",
   "main": "build/app.js",
   "scripts": {
     "test": "jest",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/matinkaboli/hyper.git"
+    "url": "git+https://gitlab.com/matinkaboli/zil.git"
   },
   "keywords": [
     "hyper"
@@ -25,11 +25,7 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.3",
     "express": "^4.16.2",
-    "express-graphql": "^0.6.12",
-    "graphql": "^0.13.2",
-    "graphql-depth-limit": "^1.1.0",
     "helmet": "^3.13.0",
-    "jsonwebtoken": "^8.3.0",
     "mongo-sanitize": "^1.0.0",
     "mongoose": "^5.0.16",
     "morgan": "^1.9.0",

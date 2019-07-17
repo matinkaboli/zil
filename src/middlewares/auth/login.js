@@ -1,8 +1,7 @@
-import jwt from 'Root/utils/jwt';
 import pureToken from 'Root/utils/pureToken';
 
 export default async (req, res, next) => {
-  if (!await jwt.verify(pureToken(req.headers.authorization))) {
+  if (!await pureToken(req.headers.authorization)) {
     return next();
   }
 

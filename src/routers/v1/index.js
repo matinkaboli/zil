@@ -1,9 +1,7 @@
 import users from './users';
-import shops from './shops';
-import shelves from './shelves';
+import panel from './panel';
 
 export default [
   users,
-  shops,
-  shelves,
+  panel,
 ];

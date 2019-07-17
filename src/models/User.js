@@ -6,44 +6,36 @@ export default mongoose.model('User', Schema({
     type: String,
     maxlength: 100,
   },
-  role: {
-    trim: true,
-    default: 0,
-    type: Number,
-    enum: [0, 1],
-    required: true,
-  },
-  phone: {
+  email: {
     trim: true,
     type: String,
-    maxlength: 10,
+    unique: true,
+    maxlength: 150,
     required: true,
+    lowercase: true,
   },
-  score: {
-    trim: true,
-    default: 10,
-    type: Number,
-    required: true,
-  },
-  pusheId: {
+  apiKey: {
     trim: true,
     type: String,
-    maxlength: 50,
+    unique: true,
+    maxlength: 200,
     required: true,
+  },
+  balance: {
+    trim: true,
+    type: String,
+    default: '0',
+    maxlength: 100,
   },
   password: {
     trim: true,
     type: String,
     maxlength: 200,
+    required: true,
   },
   createdAt: {
     type: Date,
     required: true,
     default: Date.now,
-  },
-  passwordHint: {
-    trim: true,
-    type: String,
-    maxlength: 50,
   },
 }));

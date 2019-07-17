@@ -1,19 +1,6 @@
-import { resolve } from 'path';
-
 export default {
-  sms: {
-    template: process.env.SMS_TEMPLATE || 'hyper',
-    apiKey: process.env.SMS_API_KEY || '345271454776727A622B384B53382B323356507233673D3D',
-  },
-  pushe: {
-    app: process.env.PUSHE_APP || 'com.hamed.hyper',
-    token: process.env.PUSHE_TOKEN || '3352a7548b52f29b0bb3f46c37a75369fbf15165',
-    url: process.env.PUSHE_URL || 'http://api.pushe.co/v2/messaging/notifications/',
-  },
   port: process.env.PORT || '8080',
-  dbAddress: process.env.DB || 'mongodb://127.0.0.1/hyper',
-  hashKey: process.env.HASH_KEY || '*wtt_a4pv[ZZSd,+8C8V',
+  hashKey: 'bloo',
+  dbAddress: process.env.DB || 'mongodb://127.0.0.1/zil',
   jwtKey: process.env.JWT_KEY || 'wdZ7:!RKkYB+g^Jnq-)Gb>9%QM',
-  uploadDir: process.env.UPLOAD_DIR || resolve(__dirname, 'static/uploads'),
-  otpSecret: process.env.OTP_SECRET || 'X)npM&[E.fMATINKABOLI+ADaf^W/N!N6K!',
 };

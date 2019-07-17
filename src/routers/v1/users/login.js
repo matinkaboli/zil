@@ -1,28 +1,31 @@
 import { Router } from 'express';
 
-import otp from 'Root/utils/otp';
 import jwt from 'Root/utils/jwt';
+import hmac from 'Root/utils/hmac';
 import User from 'Root/models/User';
-import Attempt from 'Root/models/Attempt';
+import { hashKey } from 'Root/config';
 import login from 'Root/middlewares/auth/login';
-import bodyRequirements from 'Root/middlewares/requirements/body';
+import requirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
 
-const bodyReqs = bodyRequirements(
+const reqs = requirements(
   {
-    value: 'code',
+    value: 'email',
     required: true,
   },
   {
-    value: 'phone',
+    value: 'password',
     required: true,
   },
 );
 
-router.post('/v1/users/login', login, bodyReqs, async (req, res) => {
+router.post('/v1/users/login', login, reqs, async (req, res) => {
   try {
-    const user = await User.findOne({ phone: req.body.phone });
+    const user = await User.findOne({
+      email: req.body.email.toLowerCase(),
+      password: hmac(req.body.password, hashKey),
+    });
 
     if (!user) {
       return res.status(404).json({
@@ -31,43 +34,14 @@ router.post('/v1/users/login', login, bodyReqs, async (req, res) => {
       });
     }
 
-    let attempt = await Attempt.findOne({ user: user._id });
-
-    if (!attempt) {
-      attempt = new Attempt({
-        user: user._id,
-      });
-
-      await attempt.save();
-    }
-
-    attempt.attempts += 1;
-
-    attempt.save();
-
-    if (attempt.attempts > 10) {
-      return res.status(429).json({
-        description: 'Too many requests to log in. Wait for 1 hour.',
-      });
-    }
-
-    if (!otp.verify(req.body.code)) {
-      return res.status(400).json({
-        entity: 'code',
-        description: 'Code is invalid.',
-      });
-    }
-
-    const response = {
-      password: !!user.password,
-      description: 'Code is valid.',
-    };
-
-    if (!user.password) {
-      response.token = await jwt.sign({ _id: user._id });
-    }
-
-    return res.status(200).json(response);
+    return res.status(200).json({
+      data: {
+        email: user.email,
+        apiKey: user.apiKey,
+        balance: user.balance,
+        token: await jwt.sign({ _id: user._id }),
+      },
+    });
   } catch (error) {
     return res.status(520).json({
       error: error.message,

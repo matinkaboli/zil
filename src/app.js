@@ -7,10 +7,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import compression from 'compression';
-import graphql from 'express-graphql';
-import graphqlDepthLimit from 'graphql-depth-limit';
 
-import schema from './graphql';
 import routers from './routers';
 import { port, dbAddress } from './config';
 
@@ -48,15 +45,6 @@ if (process.env.NODE_ENV === 'development') {
 // Body Parser
 app.use(bodyParser.json({ limit: 10000000 }));
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// GraphQL API
-app.use('/graphql', (req, res) =>
-  graphql({
-    schema,
-    context: { req, res },
-    validationRules: [graphqlDepthLimit(5)],
-    graphiql: process.env.NODE_ENV === 'development',
-  })(req, res));
 
 // REST API
 for (const router of routers) {
