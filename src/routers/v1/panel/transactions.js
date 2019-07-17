@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import Payment from 'Root/modals/Payment';
+import Payment from 'Root/models/Payment';
 import logged from 'Root/middlewares/auth/logged';
 
 const router = new Router();
