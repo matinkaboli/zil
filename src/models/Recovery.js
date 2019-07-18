@@ -18,5 +18,5 @@ export default mongoose.model('Recovery', new Schema({
     type: Date,
     default: Date.now,
     expires: 60 * 60 * 5,
-  }
+  },
 }));
