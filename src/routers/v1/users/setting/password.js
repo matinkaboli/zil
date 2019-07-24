@@ -4,6 +4,7 @@ import hmac from 'Root/utils/hmac';
 import User from 'Root/models/User';
 import { hashKey } from 'Root/config';
 import logged from 'Root/middlewares/auth/logged';
+import validatePassword from 'Root/utils/validate/password';
 import requirements from 'Root/middlewares/requirements/body';
 
 const router = new Router();
@@ -34,6 +35,13 @@ router.patch('/v1/users/password', logged, reqs, async (req, res) => {
       return res.status(400).json({
         entity: 'oldPassword',
         description: 'Old password is incorrect.',
+      });
+    }
+
+    if (!validatePassword(req.body.newPassword)) {
+      return res.status(400).json({
+        entity: 'newPassword',
+        description: 'Password is invalid',
       });
     }
 
